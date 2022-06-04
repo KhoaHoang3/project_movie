@@ -1,0 +1,14 @@
+.movies {
+  padding-bottom: 5rem;
+  .background__image {
+    background-image: url('../../assets/img/background-movie.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    .background__black {
+      padding-top: 5rem;
+      padding-bottom: 5rem;
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+  }
+}

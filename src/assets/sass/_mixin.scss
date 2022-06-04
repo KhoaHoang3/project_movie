@@ -1,0 +1,23 @@
+@mixin render-text($fs, $fw, $c) {
+  font-size: $fs;
+  font-family: $fw;
+  color: $c;
+}
+
+@mixin render-button($fs, $c, $bg-color) {
+  width: 100%;
+  border-radius: 8px;
+  padding: $ptb $plr;
+  font-size: $fs;
+  color: $c;
+  background-color: $bg-color;
+  cursor: pointer;
+  opacity: 0.9;
+  transition: all 0.2 ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    opacity: 1;
+  }
+}

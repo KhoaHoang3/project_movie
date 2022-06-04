@@ -1,0 +1,12 @@
+@import './assets/sass/base';
+@import './assets/sass/reset';
+@import './assets/sass/variable';
+@import './assets/sass//mixin';
+
+//Component
+@import './component/Header/Header';
+@import './component/Carousel/Carousel';
+@import './component/MovieList/MovieList';
+
+//Page
+@import './page/HomeScreen/HomeScreen';

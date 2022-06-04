@@ -1,0 +1,65 @@
+.header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  padding: 1.5rem 3rem;
+  z-index: 1000000;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  .name {
+    h1 {
+      color: red;
+      margin-right: 5rem;
+    }
+  }
+  .nav_bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    a {
+      font-size: $fs-md;
+      margin-right: 2rem;
+      cursor: pointer;
+      text-decoration: none;
+      &::after {
+        content: '';
+        height: 0.15rem;
+        background-color: orange;
+        margin-top: 0.3rem;
+        width: 0%;
+        transition: 0.4s;
+      }
+      &:hover::after {
+        width: 100%;
+        display: block;
+      }
+    }
+  }
+  .buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .register {
+      color: white;
+      padding: 0.8rem 1rem;
+      font-size: $fs-sm;
+      background-color: transparent;
+      border: none;
+      &:hover {
+        color: orange;
+      }
+    }
+    .login {
+      padding: 0.8rem 1rem;
+      font-size: $fs-sm;
+      color: white;
+      background-color: transparent;
+      border: none;
+      &:hover {
+        color: orange;
+      }
+    }
+  }
+}

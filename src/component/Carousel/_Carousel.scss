@@ -1,0 +1,35 @@
+.carousel {
+  &:hover .trailer {
+    cursor: pointer;
+    transform: translateX(0);
+    overflow: hidden;
+  }
+  .trailer {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    transform: translateX(-100%);
+    transition: all 0.5s ease-in-out;
+    .trailer__icon {
+      color: white;
+      font-size: 12rem;
+      cursor: pointer;
+    }
+    .trailer__define {
+      font-size: 6rem;
+      font-weight: lighter;
+    }
+  }
+}
+
+.modal-dialog {
+  margin: auto;
+  max-width: 800px;
+  .modal-content {
+    border: none !important;
+    background: transparent !important;
+  }
+}
