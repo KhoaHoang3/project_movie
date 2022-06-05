@@ -1,0 +1,17 @@
+.container {
+  h1 {
+    text-align: center;
+    font-size: $fs-xl;
+    position: relative;
+    margin-bottom: 4rem;
+    &::after {
+      content: '';
+      height: 0.188rem;
+      background-color: orange;
+      display: block;
+      width: 33%;
+      position: absolute;
+      left: 33.5%;
+    }
+  }
+}

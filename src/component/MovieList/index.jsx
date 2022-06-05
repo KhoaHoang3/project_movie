@@ -59,7 +59,6 @@ export default function MovieList() {
   }, [dispatch]);
 
   const { listFilms } = useSelector(getListFilms);
-  console.log(listFilms);
   return (
     <div className="movie_tabs">
       <ul className="nav nav-pills mb-3">
@@ -97,14 +96,14 @@ export default function MovieList() {
                 .map((item, index) => {
                   return (
                     <div key={index} className="wrapper">
-                      <div class="card">
+                      <div className="card">
                         <img
                           width={380}
                           height={400}
                           src={item.hinhAnh}
                           alt=""
                         />
-                        <div class="descriptions">
+                        <div className="descriptions">
                           <h1>{item.tenPhim}</h1>
                           {item.moTa.length > 300 ? (
                             <p>{item.moTa.slice(0, 300)}...</p>
@@ -158,14 +157,14 @@ export default function MovieList() {
                 .map((item, index) => {
                   return (
                     <div key={index} className="wrapper">
-                      <div class="card">
+                      <div className="card">
                         <img
                           width={380}
                           height={400}
                           src={item.hinhAnh}
                           alt=""
                         />
-                        <div class="descriptions">
+                        <div className="descriptions">
                           <h1>{item.tenPhim}</h1>
                           {item.moTa.length > 300 ? (
                             <p>{item.moTa.slice(0, 300)}...</p>

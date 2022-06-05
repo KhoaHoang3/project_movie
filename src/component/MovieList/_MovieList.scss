@@ -5,8 +5,8 @@
     align-items: center;
     .nav-item {
       a {
-        color: white;
-        font-size: 1.3rem;
+        color: black;
+        font-size: $fs-xl;
         transition: all 0.5s;
         font-weight: 500;
         &:hover {
@@ -16,7 +16,7 @@
       }
       .nav-link.active {
         background-color: transparent;
-        font-size: 1.3rem;
+        font-size: $fs-xl;
         color: orange;
       }
     }
@@ -232,7 +232,7 @@
 .slick-dots li button:before {
   font-size: 1.25rem !important;
   opacity: 0.5 !important;
-  color: white !important;
+  color: black !important;
 }
 .slick-dots li.slick-active button:before {
   opacity: 1;

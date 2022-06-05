@@ -1,7 +1,16 @@
 import { ACCESSTOKEN, http, GROUPID } from '../../axios';
-import { getBannerURL, getListFilmURL } from '../../axios/apiURL';
+import {
+  getBannerURL,
+  getListFilmURL,
+  getTheaterInfo,
+  getTheaterShowtimeInfoURL,
+} from '../../axios/apiURL';
 import { getBannerFilms } from '../reducers/getBannerReducer';
 import { getListFilms } from '../reducers/getListFilmReducer';
+import {
+  theaterInfomation,
+  theaterShowtimeInfo,
+} from '../reducers/getTheaterInfoReducer';
 
 // Get banner film action
 
@@ -24,8 +33,34 @@ export const getListFilmAction = () => {
       const result = await http.get(
         `${getListFilmURL}?maNhom=${GROUPID}`
       );
-      console.log(result);
       const action = getListFilms(result.data.content);
+      dispatch(action);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+//Get theater information
+export const getTheaterInfoAction = () => {
+  return async (dispatch) => {
+    try {
+      const result = await http.get(getTheaterInfo);
+      const action = theaterInfomation(result.data.content);
+      dispatch(action);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const getTheaterShowtimeInfoAction = () => {
+  return async (dispatch) => {
+    try {
+      const result = await http.get(
+        `${getTheaterShowtimeInfoURL}?maNhom=${GROUPID}`
+      );
+      const action = theaterShowtimeInfo(result.data.content);
       dispatch(action);
     } catch (error) {
       console.log(error);

@@ -1,7 +1,9 @@
 import React from 'react';
 import Carouselll from '../../component/Carousel';
+import Footer from '../../component/Footer';
 import Header from '../../component/Header';
 import MovieList from '../../component/MovieList';
+import TheaterInfo from '../../component/TheaterInfo';
 
 export default function HomeScreen(props) {
   return (
@@ -20,6 +22,14 @@ export default function HomeScreen(props) {
             <MovieList />
           </div>
         </div>
+      </section>
+
+      <section className="theater">
+        <TheaterInfo />
+      </section>
+
+      <section className="footer">
+        <Footer />
       </section>
     </div>
   );
