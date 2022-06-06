@@ -1,0 +1,42 @@
+.film {
+  .film__detail {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 6rem;
+    .film__image {
+      display: flex;
+      justify-content: center;
+      img {
+        height: 25rem;
+        width: 20rem;
+      }
+    }
+    .film__info {
+      margin-left: 0.5rem;
+      h1 {
+        font-size: $fs-md;
+      }
+      p {
+        font-size: $fs-md;
+      }
+    }
+    .circle {
+      margin-left: 3rem;
+      position: relative;
+      h1 {
+        text-align: center;
+        font-size: $fs-md;
+        position: absolute;
+        top: -25%;
+        left: 24%;
+      }
+    }
+  }
+  .tabs {
+    display: flex;
+    align-items: center;
+    margin-top: 3rem;
+    margin-left: 10rem;
+  }
+}

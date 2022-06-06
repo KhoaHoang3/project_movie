@@ -11,6 +11,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation } from 'swiper';
 import { getListFilmAction } from '../../redux/thunk/actions';
 import { getListFilms } from '../../redux/selectors';
+import { NavLink } from 'react-router-dom';
 const { Meta } = Card;
 
 export default function MovieList() {
@@ -120,7 +121,19 @@ export default function MovieList() {
                             Xem trailer
                           </button>
 
-                          <button className="booking">Đặt vé</button>
+                          <NavLink to={`/detail/${item.maPhim}`}>
+                            <button
+                              onClick={() => {
+                                dispatch({
+                                  type: 'FILM_DETAIL',
+                                  data: item,
+                                });
+                              }}
+                              className="booking"
+                            >
+                              Đặt vé
+                            </button>
+                          </NavLink>
                         </div>
                       </div>
                     </div>
@@ -180,8 +193,19 @@ export default function MovieList() {
                             />
                             Xem trailer
                           </button>
-
-                          <button className="booking">Đặt vé</button>
+                          <NavLink to={`/detail/${item.maPhim}`}>
+                            <button
+                              onClick={() => {
+                                dispatch({
+                                  type: 'FILM_DETAIL',
+                                  data: item,
+                                });
+                              }}
+                              className="booking"
+                            >
+                              Đặt vé
+                            </button>
+                          </NavLink>
                         </div>
                       </div>
                     </div>

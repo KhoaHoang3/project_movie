@@ -1,7 +1,7 @@
 @import './assets/sass/base';
 @import './assets/sass/reset';
 @import './assets/sass/variable';
-@import './assets/sass//mixin';
+@import './assets/sass/mixin';
 
 //Component
 @import './component/Header/Header';
@@ -11,3 +11,4 @@
 @import './component/Footer/Footer';
 //Page
 @import './page/HomeScreen/HomeScreen';
+@import './page/Detail/Detail';

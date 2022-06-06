@@ -8,7 +8,6 @@ import { useSelector } from 'react-redux';
 
 export default function Footer() {
   const { theaterInfo } = useSelector(getTheaterInfo);
-  console.log(theaterInfo);
 
   return (
     <div className="footer_2">
