@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Button, Radio } from 'antd';
 import { VideoCameraOutlined } from '@ant-design/icons';
+import { NavLink } from 'react-router-dom';
 
 export default function Header() {
   return (
@@ -17,9 +18,15 @@ export default function Header() {
         <a className="text-white">Liên hệ</a>
       </div>
       <div className="buttons">
-        <button className="register" type="transparent" shape="round">
-          Đăng ký
-        </button>
+        <NavLink to={'/register'}>
+          <button
+            className="register"
+            type="transparent"
+            shape="round"
+          >
+            Đăng ký
+          </button>
+        </NavLink>
 
         <button className="login" type="transparent" shape="round">
           Đăng nhập

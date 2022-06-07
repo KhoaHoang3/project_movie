@@ -105,13 +105,17 @@ function TheaterInfo() {
                                 Giờ chiếu:
                               </p>
                               <div className="row">
-                                {film.lstLichChieuTheoPhim.map(
-                                  (date, index) => {
+                                {film.lstLichChieuTheoPhim
+                                  .slice(0, 12)
+                                  ?.map((date, index) => {
                                     return (
                                       <div className="col-2">
                                         <Tag
                                           className="time mb-2"
                                           color="green"
+                                          style={{
+                                            marginRight: '16rem',
+                                          }}
                                         >
                                           <NavLink
                                             className={''}
@@ -125,8 +129,7 @@ function TheaterInfo() {
                                         </Tag>
                                       </div>
                                     );
-                                  }
-                                )}
+                                  })}
                               </div>
                             </div>
                           </div>

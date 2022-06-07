@@ -1,0 +1,116 @@
+.register {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  background-image: url('../../assets/img/background_movie_2.jpg');
+  position: relative;
+
+  h1 {
+    text-align: center;
+  }
+  .background__form {
+    padding: 3rem 0;
+    background-color: white;
+    width: 40%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 2rem;
+    h1 {
+      color: #825af9;
+      font-size: $fs-md;
+    }
+    .register__fields {
+      .text-field {
+        position: relative;
+        margin-top: 2rem;
+        transform: translateX(25%);
+      }
+      .password_input {
+        position: relative;
+        .eye_icon {
+          color: black;
+          font-size: 2.5rem;
+          position: absolute;
+          left: 45%;
+          top: -26%;
+          opacity: 0.5;
+          cursor: pointer;
+          &:hover {
+            opacity: 1;
+          }
+        }
+      }
+      .confirm_password_input {
+        position: relative;
+        .eye_icon {
+          color: black;
+          font-size: 2.5rem;
+          position: fixed;
+          left: 45%;
+          top: -26%;
+          opacity: 0.5;
+          cursor: pointer;
+          &:hover {
+            opacity: 1;
+          }
+        }
+      }
+
+      .text-field label {
+        display: inline-block;
+        font-weight: 600;
+        cursor: pointer;
+        position: absolute;
+        top: 0;
+        left: 10px;
+        background-color: white;
+        padding: 1px 5px;
+        font-size: 12px;
+        transform: translateY(-50%);
+        color: #6a5af9;
+      }
+
+      .text-field input {
+        padding: 15px;
+        display: block;
+        width: 50%;
+        font-size: 14px;
+        border: 1px solid #6a5af9;
+        border-radius: 4px;
+        background-color: transparent;
+        color: black;
+      }
+
+      .button {
+        --color: #6a5af9;
+        font-family: 'Poppins', sans-serif;
+        color: white;
+        padding: 15px 30px;
+        width: 200px;
+        border-radius: 4px;
+        background-color: var(--color);
+        cursor: pointer;
+        font-weight: 500;
+        outline: none;
+        border: none;
+        font-size: 16px;
+        -webkit-transform-style: preserve-3d;
+        -moz-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+        transition: all 0.2s;
+        width: 50%;
+        transform: translateX(50%);
+        margin-top: 2rem;
+        opacity: 0.8;
+      }
+
+      .button:hover {
+        opacity: 1;
+      }
+    }
+  }
+}

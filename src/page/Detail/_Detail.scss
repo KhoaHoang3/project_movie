@@ -28,8 +28,11 @@
         text-align: center;
         font-size: $fs-md;
         position: absolute;
-        top: -25%;
-        left: 24%;
+        top: -12%;
+        left: 27%;
+      }
+      .point {
+        left: 4%;
       }
     }
   }
@@ -39,4 +42,9 @@
     margin-top: 3rem;
     margin-left: 10rem;
   }
+}
+
+//for ant design
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+  font-size: 1.2rem;
 }
