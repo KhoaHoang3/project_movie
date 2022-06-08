@@ -1,4 +1,4 @@
-.register {
+.login {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,12 +16,12 @@
     top: 50%;
     transform: translate(-50%, -50%);
     border-radius: 2rem;
-    .register__name {
+    .login__name {
       color: #825af9;
       font-size: 1.6rem;
       text-align: center;
     }
-    .register__fields {
+    .login__fields {
       .text-field {
         position: relative;
         margin-top: 2rem;
@@ -42,22 +42,6 @@
           }
         }
       }
-      .confirm_password_input {
-        position: relative;
-        .eye_icon {
-          color: black;
-          font-size: 2.5rem;
-          position: fixed;
-          left: 45%;
-          top: -22%;
-          opacity: 0.5;
-          cursor: pointer;
-          &:hover {
-            opacity: 1;
-          }
-        }
-      }
-
       .text-field label {
         display: inline-block;
         font-weight: 600;
@@ -83,7 +67,7 @@
         color: black;
       }
 
-      .submit__button {
+      .login__button {
         --color: #6a5af9;
         font-family: 'Poppins', sans-serif;
         color: white;
@@ -106,7 +90,7 @@
         opacity: 0.8;
       }
 
-      .submit__button:hover {
+      .login__button:hover {
         opacity: 1;
       }
     }

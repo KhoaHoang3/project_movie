@@ -4,3 +4,4 @@ export const getTheaterInfo = (state) => state.getTheaterInfo;
 export const getTheaterShowtimeInfo = (state) => state.getTheaterInfo;
 export const getFilmDetail = (state) => state.getFilmDetail;
 export const getEachFilmCalendar = (state) => state.getFilmCalendar;
+export const user = (state) => state.user;

@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Button, Radio } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Button, Radio, Modal } from 'antd';
 import { VideoCameraOutlined } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom';
 
@@ -20,7 +20,7 @@ export default function Header() {
       <div className="buttons">
         <NavLink to={'/register'}>
           <button
-            className="register"
+            className="register__button"
             type="transparent"
             shape="round"
           >
@@ -28,9 +28,15 @@ export default function Header() {
           </button>
         </NavLink>
 
-        <button className="login" type="transparent" shape="round">
-          Đăng nhập
-        </button>
+        <NavLink to={'/login'}>
+          <button
+            className="login__button"
+            type="transparent"
+            shape="round"
+          >
+            Đăng nhập
+          </button>
+        </NavLink>
       </div>
     </div>
   );

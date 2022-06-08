@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { ACCESSTOKEN, http, GROUPID } from '../../axios';
 import {
   getBannerURL,
@@ -5,6 +7,7 @@ import {
   getShowtimeEachFilmURL,
   getTheaterInfo,
   getTheaterShowtimeInfoURL,
+  userRegisterURL,
 } from '../../axios/apiURL';
 import { getBannerFilms } from '../reducers/getBannerReducer';
 import { getFilmCalendar } from '../reducers/getFilmCalendarReducer';
@@ -13,6 +16,7 @@ import {
   theaterInfomation,
   theaterShowtimeInfo,
 } from '../reducers/getTheaterInfoReducer';
+import { registerUserSuccess } from '../reducers/userReducer';
 
 // Get banner film action
 
@@ -83,6 +87,47 @@ export const getShowtimeEachFilmAction = (filmID) => {
       dispatch(action);
     } catch (error) {
       console.log(error);
+    }
+  };
+};
+
+//user register action
+export const userRegisterAction = (userInfo, navigate) => {
+  return async (dispatch) => {
+    try {
+      const result = await http.post(userRegisterURL, userInfo);
+
+      const { content } = result.data;
+
+      const { taiKhoan } = content;
+
+      dispatch(registerUserSuccess(taiKhoan));
+
+      toast.success(
+        'Đăng ký tài khoản thành công, web sẽ chuyển hướng bạn qua trang đăng nhập',
+        {
+          position: 'top-center',
+          autoClose: 1400,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        }
+      );
+      setTimeout(() => {
+        navigate('/login');
+      }, 2500);
+    } catch (error) {
+      toast.error(error.response.data.content, {
+        position: 'top-center',
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
 };

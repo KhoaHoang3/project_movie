@@ -1,11 +1,17 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import { CustomCard } from '@tsamantanis/react-glassmorphism';
 import '@tsamantanis/react-glassmorphism/dist/index.css';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
+import { http, ACCESSTOKEN } from '../../axios';
 import { Icon } from '@mui/material';
+import { userRegisterURL } from '../../axios/apiURL';
+import { toast } from 'react-toastify';
+import { userRegisterAction } from '../../redux/thunk/actions';
+import { useDispatch } from 'react-redux';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 function Register() {
   const schemaValidation = yup.object().shape({
@@ -16,55 +22,71 @@ function Register() {
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
         'Email không đúng định dạng !'
       ),
-    username: yup
+    taiKhoan: yup
       .string()
       .required('Vui lòng nhập tài khoản')
       .matches(
         /^.*(?=.{8,})(?=.*\d)/,
         'Tài khoản phải có ít nhất 8 kí tự và 1 chữ số !'
       ),
-    password: yup
+    matKhau: yup
       .string()
       .required('Vui lòng nhập mật khẩu')
       .matches(
         /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
         'Mật khẩu phải có ít nhất 8 kí tự, 1 kí tự in hoa, 1 chữ số và 1 kí tự đặc biệt'
       ),
-    confirmPassword: yup
+    xacMinhMatKhau: yup
       .string()
-      .required('Vui lòng xác minh lại mật khẩu')
-      .oneOf([yup.ref('password'), null], 'Mật khẩu không khớp !'),
+      .required('Vui lòng xác minh lại mật khẩu !')
+      .oneOf([yup.ref('matKhau'), null], 'Mật khẩu không khớp !'),
+    hoTen: yup.string().required('Vui lòng nhập họ tên !'),
   });
   const { register, handleSubmit, formState } = useForm({
     mode: 'all',
     resolver: yupResolver(schemaValidation),
   });
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { errors } = formState;
 
   const onSubmit = (data) => {
-    console.log(data);
+    const { taiKhoan, matKhau, email, hoTen } = data;
+    const actionRegister = userRegisterAction(
+      {
+        taiKhoan,
+        matKhau,
+        email,
+        hoTen,
+      },
+      navigate
+    );
+    dispatch(actionRegister);
   };
 
   const [type, setType] = useState('password');
-  const [iconEye, setIconEye] = useState(<EyeInvisibleOutlined />);
+  const [iconEye, setIconEye] = useState(
+    <EyeInvisibleOutlined style={{ paddingTop: '0' }} />
+  );
 
   const [typeConfirm, setTypeConfirm] = useState('password');
   const [iconEyeConfirm, setIconEyeConfirm] = useState(
-    <EyeInvisibleOutlined />
+    <EyeInvisibleOutlined style={{ paddingTop: '0' }} />
   );
 
-  const handleShowPassword = () => {
+  const handleShowPassword = useCallback(() => {
     if (type === 'password') {
-      setIconEye(<EyeOutlined />);
+      setIconEye(<EyeOutlined style={{ paddingTop: '0' }} />);
       setType('text');
     } else {
       setType('password');
-      setIconEye(<EyeInvisibleOutlined />);
+      setIconEye(
+        <EyeInvisibleOutlined style={{ paddingTop: '0' }} />
+      );
     }
-  };
+  }, [type]);
 
-  const handleShowPasswordConfirm = () => {
+  const handleShowPasswordConfirm = useCallback(() => {
     if (typeConfirm === 'password') {
       setIconEyeConfirm(<EyeOutlined />);
       setTypeConfirm('text');
@@ -72,25 +94,56 @@ function Register() {
       setTypeConfirm('password');
       setIconEyeConfirm(<EyeInvisibleOutlined />);
     }
-  };
+  }, [typeConfirm]);
 
   return (
     <div className="register">
       <CustomCard
         effectColor="white" // required
         color="#14AEFF" // default color is white
-        blur={25} // default blur value is 10px
+        blur={10} // default blur value is 10px
         borderRadius={0} // default border radius value is 10px
         style={{ width: '100%', height: '100%' }}
       >
         <div className="background__form">
-          <h1>ĐĂNG KÝ</h1>
+          <h1 className="register__name">ĐĂNG KÝ</h1>
 
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="register__fields"
             action=""
           >
+            {/* NAME */}
+            <div className="text-field">
+              <label htmlFor="hoTen">Họ tên</label>
+              <input
+                autoComplete="off"
+                type="text"
+                id="hoTen"
+                placeholder="Vui lòng nhập họ tên "
+                {...register('hoTen')}
+              />
+              {errors.hoTen && (
+                <p className="text-danger">{errors.hoTen.message}</p>
+              )}
+            </div>
+
+            {/* USERNAME */}
+            <div className="text-field">
+              <label htmlFor="taiKhoan">Tài khoản</label>
+              <input
+                autoComplete="off"
+                type="text"
+                id="taiKhoan"
+                placeholder="Vui lòng nhập tài khoản"
+                {...register('taiKhoan')}
+              />
+              {errors.taiKhoan && (
+                <p className="text-danger">
+                  {errors.taiKhoan.message}
+                </p>
+              )}
+            </div>
             {/* EMAIL */}
             <div className="text-field">
               <label htmlFor="email">Email</label>
@@ -102,43 +155,24 @@ function Register() {
                 {...register('email')}
               />
               {errors.email && (
-                <p className="text-danger mt-2">
-                  {errors.email.message}
-                </p>
-              )}
-            </div>
-
-            {/* USERNAME */}
-            <div className="text-field">
-              <label htmlFor="username">Tài khoản</label>
-              <input
-                autoComplete="off"
-                type="text"
-                id="username"
-                placeholder="Vui lòng nhập tài khoản"
-                {...register('username')}
-              />
-              {errors.username && (
-                <p className="text-danger mt-2">
-                  {errors.username.message}
-                </p>
+                <p className="text-danger">{errors.email.message}</p>
               )}
             </div>
 
             {/* PASSWORD */}
             <div className="text-field password_input">
-              <label htmlFor="password">Mật khẩu</label>
+              <label htmlFor="matKhau">Mật khẩu</label>
               <input
                 autoComplete="off"
                 type={type}
-                id="password"
+                id="matKhau"
                 placeholder="Vui lòng nhập mật khẩu"
-                {...register('password')}
+                {...register('matKhau')}
               />
 
-              {errors.password && (
-                <p className="text-danger mt-2">
-                  {errors.password.message}
+              {errors.matKhau && (
+                <p className="text-danger">
+                  {errors.matKhau.message}
                 </p>
               )}
               <span onClick={handleShowPassword} className="eye_icon">
@@ -152,13 +186,13 @@ function Register() {
               <input
                 autoComplete="off"
                 type={typeConfirm}
-                id="confirm_password"
+                id="xacMinhMatKhau"
                 placeholder="Vui lòng nhập lại mật khẩu"
-                {...register('confirmPassword')}
+                {...register('xacMinhMatKhau')}
               />
-              {errors.confirmPassword && (
-                <p className="text-danger mt-2">
-                  {errors.confirmPassword.message}
+              {errors.xacMinhMatKhau && (
+                <p className="text-danger">
+                  {errors.xacMinhMatKhau.message}
                 </p>
               )}
               <span
@@ -169,7 +203,7 @@ function Register() {
               </span>
             </div>
 
-            <button type="submit" className="button">
+            <button type="submit" className="submit__button">
               Gửi
             </button>
           </form>

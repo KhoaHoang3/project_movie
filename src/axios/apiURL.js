@@ -5,3 +5,4 @@ export const getTheaterShowtimeInfoURL =
   '/QuanLyRap/LayThongTinLichChieuHeThongRap';
 export const getShowtimeEachFilmURL =
   '/QuanLyRap/LayThongTinLichChieuPhim';
+export const userRegisterURL = 'QuanLyNguoiDung/DangKy';
