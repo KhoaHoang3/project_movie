@@ -41,6 +41,7 @@ function Register() {
       .required('Vui lòng xác minh lại mật khẩu !')
       .oneOf([yup.ref('matKhau'), null], 'Mật khẩu không khớp !'),
     hoTen: yup.string().required('Vui lòng nhập họ tên !'),
+    soDT: yup.string().required('Vui lòng nhập số điện thoại !'),
   });
   const { register, handleSubmit, formState } = useForm({
     mode: 'all',
@@ -156,6 +157,21 @@ function Register() {
               />
               {errors.email && (
                 <p className="text-danger">{errors.email.message}</p>
+              )}
+            </div>
+
+            {/* PHONE NUMBER */}
+            <div className="text-field">
+              <label htmlFor="soDT">Số điện thoại</label>
+              <input
+                autoComplete="off"
+                type="number"
+                id="soDT"
+                placeholder="Vui lòng nhập số điện thoại"
+                {...register('soDT')}
+              />
+              {errors.soDT && (
+                <p className="text-danger">{errors.soDT.message}</p>
               )}
             </div>
 

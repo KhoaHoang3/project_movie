@@ -63,3 +63,25 @@
     }
   }
 }
+
+.user {
+  padding-top: 1rem;
+}
+
+.logout__section {
+  position: relative;
+  .logout__button {
+    position: absolute;
+    right: -66%;
+    padding: 0.8rem 1rem;
+    font-size: $fs-sm;
+    color: white;
+    background-color: transparent;
+    margin-left: 1rem;
+    border: none;
+    top: 7%;
+    &:hover {
+      color: orange;
+    }
+  }
+}

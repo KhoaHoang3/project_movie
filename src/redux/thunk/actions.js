@@ -7,6 +7,7 @@ import {
   getShowtimeEachFilmURL,
   getTheaterInfo,
   getTheaterShowtimeInfoURL,
+  userLoginURL,
   userRegisterURL,
 } from '../../axios/apiURL';
 import { getBannerFilms } from '../reducers/getBannerReducer';
@@ -16,7 +17,10 @@ import {
   theaterInfomation,
   theaterShowtimeInfo,
 } from '../reducers/getTheaterInfoReducer';
-import { registerUserSuccess } from '../reducers/userReducer';
+import {
+  loginSuccess,
+  registerUserSuccess,
+} from '../reducers/userReducer';
 
 // Get banner film action
 
@@ -117,6 +121,46 @@ export const userRegisterAction = (userInfo, navigate) => {
       );
       setTimeout(() => {
         navigate('/login');
+      }, 2500);
+    } catch (error) {
+      toast.error(error.response.data.content, {
+        position: 'top-center',
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  };
+};
+
+// user login action
+
+export const userLoginAction = (userInfo, navigate) => {
+  return async (dispatch) => {
+    try {
+      const result = await http.post(userLoginURL, userInfo);
+
+      console.log(result);
+
+      const action = loginSuccess(result.data.content);
+      dispatch(action);
+      toast.success(
+        'Đăng nhập thành công, web sẽ chuyển hướng bạn qua trang chủ',
+        {
+          position: 'top-center',
+          autoClose: 1400,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        }
+      );
+      setTimeout(() => {
+        navigate('/');
       }, 2500);
     } catch (error) {
       toast.error(error.response.data.content, {

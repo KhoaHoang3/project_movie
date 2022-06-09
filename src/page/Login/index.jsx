@@ -4,27 +4,36 @@ import '@tsamantanis/react-glassmorphism/dist/index.css';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { user } from '../../redux/selectors';
+import { userLoginAction } from '../../redux/thunk/actions';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
   const schemaValidation = yup.object().shape({
     taiKhoan: yup.string().required('Vui lòng nhập tài khoản'),
     matKhau: yup.string().required('Vui lòng nhập mật khẩu'),
   });
-  const onSubmit = (data) => {
-    console.log(data);
-  };
+
   const { register, handleSubmit, formState } = useForm({
     mode: 'all',
     resolver: yupResolver(schemaValidation),
   });
-
   const { errors } = formState;
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const onSubmit = (data) => {
+    const { taiKhoan, matKhau } = data;
+    const actionLogin = userLoginAction(
+      { taiKhoan, matKhau },
+      navigate
+    );
+    dispatch(actionLogin);
+  };
 
   const userAccount = useSelector(user);
   const { taiKhoan } = userAccount;
-  console.log(taiKhoan);
   return (
     <div className="login">
       <CustomCard
@@ -50,6 +59,7 @@ export default function Login() {
                 type="text"
                 id="taiKhoan"
                 placeholder="Vui lòng nhập tài khoản"
+                defaultValue={taiKhoan}
                 {...register('taiKhoan')}
               />
               {errors.taiKhoan && (
