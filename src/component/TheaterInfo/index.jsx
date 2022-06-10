@@ -11,6 +11,7 @@ import {
 } from '../../redux/selectors';
 import { NavLink } from 'react-router-dom';
 import moment from 'moment';
+import { toast } from 'react-toastify';
 const { TabPane } = Tabs;
 
 function TheaterInfo() {
@@ -34,9 +35,38 @@ function TheaterInfo() {
     dispatch(actionThunk);
   }, [dispatch]);
 
+  // check user login or not
+  const renderCalendar = (maLichChieu, ngayChieuGioChieu) => {
+    if (localStorage.getItem('USER_LOGIN')) {
+      return (
+        <NavLink to={`/booking_ticket/${maLichChieu}`}>
+          {moment(ngayChieuGioChieu).format('DD.MM.YYYY hh:mm A')}
+        </NavLink>
+      );
+    } else {
+      return (
+        <NavLink
+          onClick={() => {
+            toast.error('Bạn phải đăng nhập để đặt vé !', {
+              position: 'top-center',
+              autoClose: 1000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              draggable: true,
+              progress: undefined,
+            });
+          }}
+          to={'/login'}
+        >
+          {moment(ngayChieuGioChieu).format('DD.MM.YYYY hh:mm A')}
+        </NavLink>
+      );
+    }
+  };
+
   return (
     <div className="container" style={{}}>
-      <h1>THÔNG TIN CÁC RẠP CHIẾU</h1>
+      <h1 className="theater__info">THÔNG TIN CÁC RẠP CHIẾU</h1>
       <Tabs tabPosition={tabPosition}>
         {theaterShowtime.map((item, index) => {
           return (
@@ -102,14 +132,14 @@ function TheaterInfo() {
                                 <p>{theater.diaChi}</p>
                               </div>
                               <p className="font-weight-bold">
-                                Giờ chiếu:
+                                Ngày và giờ chiếu:
                               </p>
                               <div className="row">
                                 {film.lstLichChieuTheoPhim
-                                  .slice(0, 12)
+                                  .slice(0, 6)
                                   ?.map((date, index) => {
                                     return (
-                                      <div className="col-2">
+                                      <div className="col-4">
                                         <Tag
                                           className="time mb-2"
                                           color="green"
@@ -117,15 +147,21 @@ function TheaterInfo() {
                                             marginRight: '16rem',
                                           }}
                                         >
-                                          <NavLink
+                                          {renderCalendar(
+                                            date.maLichChieu,
+                                            date.ngayChieuGioChieu
+                                          )}
+                                          {/* <NavLink
                                             className={''}
                                             key={index}
-                                            to={'/'}
+                                            to={'/booking_ticket/$'}
                                           >
                                             {moment(
                                               date.ngayChieuGioChieu
-                                            ).format('hh:mm A')}
-                                          </NavLink>
+                                            ).format(
+                                              'DD.MM.YYYY hh:mm A'
+                                            )}
+                                          </NavLink> */}
                                         </Tag>
                                       </div>
                                     );

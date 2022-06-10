@@ -7,3 +7,4 @@ export const getShowtimeEachFilmURL =
   '/QuanLyRap/LayThongTinLichChieuPhim';
 export const userRegisterURL = '/QuanLyNguoiDung/DangKy';
 export const userLoginURL = '/QuanLyNguoiDung/DangNhap';
+export const getBoxOfficeListURL = '/QuanLyDatVe/LayDanhSachPhongVe';

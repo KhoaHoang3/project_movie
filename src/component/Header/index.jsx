@@ -30,6 +30,8 @@ export default function Header() {
   const navigate = useNavigate();
   const userAccount = useSelector(user);
   const { hoTen } = userAccount;
+
+  //renderUI when user login or not
   const renderUI = () => {
     let user = {};
     if (localStorage.getItem('USER_LOGIN')) {
@@ -88,7 +90,9 @@ export default function Header() {
         </h1>
       </div>
       <div className="nav_bar">
-        <a className="text-white">Trang chủ</a>
+        <a className="text-white" href="/">
+          Trang chủ
+        </a>
         <a className="text-white">Cụm rạp</a>
         <a className="text-white">Tin tức</a>
         <a className="text-white">Liên hệ</a>

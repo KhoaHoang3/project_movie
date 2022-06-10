@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import getBannerReducer from './reducers/getBannerReducer';
+import getBoxOfficeReducer from './reducers/getBoxOfficeReducer';
 import getFilmCalendarReducer from './reducers/getFilmCalendarReducer';
 import { getFilmDetailReducer } from './reducers/getFilmDetailReducer';
 import getListFilmReducer from './reducers/getListFilmReducer';
@@ -14,5 +15,6 @@ export const store = configureStore({
     getFilmCalendar: getFilmCalendarReducer,
     getFilmDetail: getFilmDetailReducer,
     user: userReducer,
+    getBoxOfficeList: getBoxOfficeReducer,
   },
 });

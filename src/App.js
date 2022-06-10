@@ -7,6 +7,7 @@ import Detail from './page/Detail';
 import Register from './page/Register';
 import { ToastContainer } from 'react-toastify';
 import Login from './page/Login';
+import BookingTicket from './page/BookingTicket';
 
 function App() {
   return (
@@ -16,6 +17,11 @@ function App() {
         <Route exact path="/detail/:id" element={<Detail />} />
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/login" element={<Login />} />
+        <Route
+          exact
+          path="/booking_ticket/:id"
+          element={<BookingTicket />}
+        />
       </Routes>
       <ToastContainer />
     </div>

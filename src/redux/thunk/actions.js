@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import { ACCESSTOKEN, http, GROUPID } from '../../axios';
 import {
   getBannerURL,
+  getBoxOfficeListURL,
   getListFilmURL,
   getShowtimeEachFilmURL,
   getTheaterInfo,
@@ -11,6 +12,7 @@ import {
   userRegisterURL,
 } from '../../axios/apiURL';
 import { getBannerFilms } from '../reducers/getBannerReducer';
+import { getBoxOfficeList } from '../reducers/getBoxOfficeReducer';
 import { getFilmCalendar } from '../reducers/getFilmCalendarReducer';
 import { getListFilms } from '../reducers/getListFilmReducer';
 import {
@@ -143,8 +145,6 @@ export const userLoginAction = (userInfo, navigate) => {
     try {
       const result = await http.post(userLoginURL, userInfo);
 
-      console.log(result);
-
       const action = loginSuccess(result.data.content);
       dispatch(action);
       toast.success(
@@ -172,6 +172,21 @@ export const userLoginAction = (userInfo, navigate) => {
         draggable: true,
         progress: undefined,
       });
+    }
+  };
+};
+
+//get box office list
+export const getBoxOfficeListAction = (filmCode) => {
+  return async (dispatch) => {
+    try {
+      const result = await http.get(
+        `${getBoxOfficeListURL}?MaLichChieu=${filmCode}`
+      );
+      const action = getBoxOfficeList(result.data.content);
+      dispatch(action);
+    } catch (error) {
+      console.log(error);
     }
   };
 };

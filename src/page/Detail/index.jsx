@@ -15,10 +15,47 @@ import { getShowtimeEachFilmAction } from '../../redux/thunk/actions';
 import { Tab } from 'bootstrap';
 import { NavLink } from 'react-router-dom';
 import '../../assets/styles/circle.css';
+import { toast } from 'react-toastify';
+import { getFilmCode } from '../../redux/reducers/getBoxOfficeReducer';
 
 const { TabPane } = Tabs;
 
 export default function Detail() {
+  // check user login or not
+  const renderCalendar = (maLichChieu, ngayChieuGioChieu) => {
+    if (localStorage.getItem('USER_LOGIN')) {
+      return (
+        <NavLink
+          onClick={() => {
+            console.log('maLichChieu', maLichChieu);
+            dispatch(getFilmCode(maLichChieu));
+          }}
+          to={`/booking_ticket/${maLichChieu}`}
+        >
+          {moment(ngayChieuGioChieu).format('DD.MM.YYYY hh:mm A')}
+        </NavLink>
+      );
+    } else {
+      return (
+        <NavLink
+          onClick={() => {
+            toast.error('Bạn phải đăng nhập để đặt vé !', {
+              position: 'top-center',
+              autoClose: 1000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              draggable: true,
+              progress: undefined,
+            });
+          }}
+          to={'/login'}
+        >
+          {moment(ngayChieuGioChieu).format('DD.MM.YYYY hh:mm A')}
+        </NavLink>
+      );
+    }
+  };
+
   const { filmDetail } = useSelector(getFilmDetail);
   const dispatch = useDispatch();
   const {
@@ -186,14 +223,19 @@ export default function Detail() {
                                               }}
                                               color="green"
                                             >
-                                              {' '}
-                                              <NavLink to={'/'}>
+                                              {renderCalendar(
+                                                film.maLichChieu,
+                                                film.ngayChieuGioChieu
+                                              )}
+                                              {/* <NavLink
+                                                to={`/booking_ticket/${film.maLichChieu}`}
+                                              >
                                                 {moment(
                                                   film.ngayChieuGioChieu
                                                 ).format(
                                                   'DD.MM.YYYY hh:mm A'
                                                 )}
-                                              </NavLink>
+                                              </NavLink> */}
                                             </Tag>
                                           </div>
                                         );

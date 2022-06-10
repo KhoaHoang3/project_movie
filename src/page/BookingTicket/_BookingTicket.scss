@@ -1,0 +1,47 @@
+.booking__ticket {
+  // height: 100vh;
+  .booking__ticket__section {
+    margin-top: 10rem;
+    .booking__ticket__screen {
+      .trapezoid {
+        text-align: center;
+        font-size: $fs-md;
+      }
+    }
+    .booking__ticket__pay {
+      width: 20rem;
+      margin-bottom: 2rem;
+      .money {
+      }
+      .film_info {
+      }
+      .seats__total {
+      }
+      .user__email {
+      }
+      .user__phonenumber {
+      }
+      .button {
+        margin-top: 10rem;
+        .pay__button {
+          --color: #6a5af9;
+          font-family: 'Poppins', sans-serif;
+          color: white;
+          padding: 15px 30px;
+          width: 100%;
+          border-radius: 4px;
+          background-color: var(--color);
+          cursor: pointer;
+          font-weight: 500;
+          outline: none;
+          border: none;
+          font-size: 16px;
+          -webkit-transform-style: preserve-3d;
+          -moz-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+          transition: all 0.2s linear;
+        }
+      }
+    }
+  }
+}

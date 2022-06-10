@@ -7,7 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { user } from '../../redux/selectors';
 import { userLoginAction } from '../../redux/thunk/actions';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 export default function Login() {
   const schemaValidation = yup.object().shape({
@@ -93,6 +93,13 @@ export default function Login() {
             <button type="submit" className="login__button">
               Đăng nhập
             </button>
+
+            <h1 className="register__navigate">
+              Bạn chưa có tài khoản?{' '}
+              <NavLink to={'/register'}>
+                Bấm vào đây để đăng ký
+              </NavLink>
+            </h1>
           </form>
         </div>
       </CustomCard>
