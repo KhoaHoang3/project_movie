@@ -88,7 +88,6 @@ export const getShowtimeEachFilmAction = (filmID) => {
       const result = await http.get(
         `${getShowtimeEachFilmURL}?MaPhim=${filmID}`
       );
-      console.log(result);
       const action = getFilmCalendar(result.data.content);
       dispatch(action);
     } catch (error) {

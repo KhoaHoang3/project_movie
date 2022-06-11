@@ -17,15 +17,26 @@ export default function BookingTicket() {
   //get calendar code and information of each film
   const { calendarCode } = useSelector(getCalendarCode);
   const { boxOfficeList } = useSelector(getBoxOfficeList);
-  // const { thongTinPhim } = boxOfficeList;
+  const { thongTinPhim } = boxOfficeList;
+  console.log(thongTinPhim);
+  const {
+    diaChi,
+    gioChieu,
+    hinhAnh,
+    ngayChieu,
+    tenCumRap,
+    tenPhim,
+    tenRap,
+  } = thongTinPhim;
 
   // get film info from localStorage so when refresh page the info won't disapear
-  const filmInfo = JSON.parse(
-    localStorage.getItem('BOX_OFFICE_LIST')
-  );
-  const { thongTinPhim } = filmInfo;
-  const { diaChi, gioChieu, ngayChieu, tenCumRap, tenPhim, tenRap } =
-    thongTinPhim;
+  // const filmInfo = JSON.parse(
+  //   localStorage.getItem('BOX_OFFICE_LIST')
+  // );
+  // console.log(filmInfo);
+  // const { thongTinPhim } = filmInfo;
+  // const { diaChi, gioChieu, ngayChieu, tenCumRap, tenPhim, tenRap } =
+  //   thongTinPhim;
 
   const dispatch = useDispatch();
 
@@ -45,13 +56,13 @@ export default function BookingTicket() {
             <div className="trapezoid">Màn hình</div>
           </div>
           <div className="col-3 booking__ticket__pay">
-            <div className="money">
-              <h1 className="text-center">0đ</h1>
+            <div className="total">
+              <h1 className="money text-center">0đ</h1>
             </div>
             <hr></hr>
             {/* FILM_INFO */}
             <div className="film_info">
-              <h1 className="film_info_name">Phim: {tenPhim}</h1>
+              <h1 className="film_info_name">Phim: {tenPhim} </h1>
               <h1 className="film_info_theater">Rạp: {tenCumRap}</h1>
               <h1 className="film_info_address">Địa chỉ: {diaChi}</h1>
               <h1 className="film_info_date">

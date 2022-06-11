@@ -27,7 +27,6 @@ export default function Detail() {
       return (
         <NavLink
           onClick={() => {
-            console.log('maLichChieu', maLichChieu);
             dispatch(getFilmCode(maLichChieu));
           }}
           to={`/booking_ticket/${maLichChieu}`}
@@ -68,7 +67,6 @@ export default function Detail() {
     hinhAnh,
   } = filmDetail;
   const { calendar } = useSelector(getEachFilmCalendar);
-  console.log('CALENDAR', calendar);
 
   useEffect(() => {
     const action = getShowtimeEachFilmAction(maPhim);

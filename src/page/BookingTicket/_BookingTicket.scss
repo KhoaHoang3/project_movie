@@ -1,5 +1,4 @@
 .booking__ticket {
-  // height: 100vh;
   .booking__ticket__section {
     margin-top: 10rem;
     .booking__ticket__screen {
@@ -9,24 +8,43 @@
       }
     }
     .booking__ticket__pay {
+      height: 690px;
       width: 20rem;
       margin-bottom: 2rem;
-      .money {
+      .total {
+        .money {
+          font-size: 2.5rem;
+          color: aquamarine;
+        }
       }
-      .film_info {
+      .film_info > h1 {
+        font-size: 1rem;
+        font-weight: 500;
       }
       .seats__total {
+        .seats > h1 {
+          color: red;
+          font-size: 1rem;
+        }
+        .total > h1 {
+          font-size: 1rem;
+        }
       }
-      .user__email {
+      .user__email > h1,
+      h2 {
+        font-size: 1rem;
       }
-      .user__phonenumber {
+      .user__phonenumber > h1,
+      h2 {
+        font-size: 1rem;
       }
       .button {
         margin-top: 10rem;
         .pay__button {
-          --color: #6a5af9;
+          --color: aquamarine;
           font-family: 'Poppins', sans-serif;
           color: white;
+          font-weight: bolder;
           padding: 15px 30px;
           width: 100%;
           border-radius: 4px;
@@ -39,7 +57,6 @@
           -webkit-transform-style: preserve-3d;
           -moz-transform-style: preserve-3d;
           transform-style: preserve-3d;
-          transition: all 0.2s linear;
         }
       }
     }

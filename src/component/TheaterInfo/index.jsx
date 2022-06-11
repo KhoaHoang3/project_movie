@@ -2,20 +2,24 @@ import React, { memo, useEffect, useState } from 'react';
 import { Tag, Tabs, Radio, Space } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  getBoxOfficeListAction,
   getTheaterInfoAction,
   getTheaterShowtimeInfoAction,
 } from '../../redux/thunk/actions';
 import {
+  getCalendarCode,
   getTheaterInfo,
   getTheaterShowtimeInfo,
 } from '../../redux/selectors';
 import { NavLink } from 'react-router-dom';
 import moment from 'moment';
 import { toast } from 'react-toastify';
+import { getFilmCode } from '../../redux/reducers/getBoxOfficeReducer';
 const { TabPane } = Tabs;
 
 function TheaterInfo() {
   const [tabPosition, setTabPosition] = useState('left');
+  const { calendarCode } = useSelector(getCalendarCode);
 
   const changeTabPosition = (e) => {
     setTabPosition(e.target.value);
@@ -35,11 +39,22 @@ function TheaterInfo() {
     dispatch(actionThunk);
   }, [dispatch]);
 
+  //get box office list info
+  useEffect(() => {
+    const action = getBoxOfficeListAction(calendarCode);
+    dispatch(action);
+  }, [dispatch]);
+
   // check user login or not
   const renderCalendar = (maLichChieu, ngayChieuGioChieu) => {
     if (localStorage.getItem('USER_LOGIN')) {
       return (
-        <NavLink to={`/booking_ticket/${maLichChieu}`}>
+        <NavLink
+          onClick={() => {
+            dispatch(getFilmCode(maLichChieu));
+          }}
+          to={`/booking_ticket/${maLichChieu}`}
+        >
           {moment(ngayChieuGioChieu).format('DD.MM.YYYY hh:mm A')}
         </NavLink>
       );
