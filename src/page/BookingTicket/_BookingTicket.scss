@@ -2,19 +2,65 @@
   .booking__ticket__section {
     margin-top: 10rem;
     .booking__ticket__screen {
+      margin-bottom: 3rem;
       .trapezoid {
         text-align: center;
         font-size: $fs-md;
       }
+      .seats {
+        margin-top: 2rem;
+        margin-left: 1.2rem;
+        margin-bottom: 2rem;
+      }
+      .define {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .normal__seat {
+          display: flex;
+          margin-right: 1.5rem;
+          .normal__seat__title {
+            font-size: 1rem;
+            transform: translateY(28%);
+            margin-left: 0.5rem;
+          }
+        }
+        .vip__seat {
+          display: flex;
+          margin-right: 1.5rem;
+          .vip__seat__title {
+            font-size: 1rem;
+            transform: translateY(28%);
+            margin-left: 0.5rem;
+          }
+        }
+        .booking__seat {
+          display: flex;
+          margin-right: 1.5rem;
+          .booking__seat__title {
+            font-size: 1rem;
+            transform: translateY(28%);
+            margin-left: 0.5rem;
+          }
+        }
+        .booked__seat {
+          display: flex;
+          margin-right: 1.5rem;
+          .booked__seat__title {
+            font-size: 1rem;
+            transform: translateY(28%);
+            margin-left: 0.5rem;
+          }
+        }
+      }
     }
     .booking__ticket__pay {
-      height: 690px;
+      height: 750px;
       width: 20rem;
-      margin-bottom: 2rem;
       .total {
         .money {
           font-size: 2.5rem;
-          color: aquamarine;
+          color: #5bb56f;
         }
       }
       .film_info > h1 {
@@ -22,9 +68,17 @@
         font-weight: 500;
       }
       .seats__total {
-        .seats > h1 {
-          color: red;
-          font-size: 1rem;
+        .seats {
+          display: flex;
+          .title {
+            color: red;
+            font-size: 1rem;
+          }
+          .booking_seats {
+            margin-left: 0.5rem;
+            color: #5bb56f;
+            font-size: 1rem;
+          }
         }
         .total > h1 {
           font-size: 1rem;
@@ -39,9 +93,9 @@
         font-size: 1rem;
       }
       .button {
-        margin-top: 10rem;
+        margin-top: 16.563rem;
         .pay__button {
-          --color: aquamarine;
+          --color: #5bb56f;
           font-family: 'Poppins', sans-serif;
           color: white;
           font-weight: bolder;

@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { calendarTheater } from '../../_core/models/boxOfficeCalendar';
-// let saveBoxOffice = {};
-// if (localStorage.getItem('BOX_OFFICE_LIST')) {
-//   saveBoxOffice = JSON.parse(
-//     JSON.stringify(localStorage.getItem('BOX_OFFICE_LIST'))
-//   );
-// }
+let saveBoxOffice = {};
+if (localStorage.getItem('BOX_OFFICE_LIST')) {
+  saveBoxOffice = JSON.parse(
+    JSON.stringify(localStorage.getItem('BOX_OFFICE_LIST'))
+  );
+}
 
 let saveCalendarCode = 0;
 if (localStorage.getItem('CALENDAR_CODE')) {
@@ -16,8 +16,8 @@ if (localStorage.getItem('CALENDAR_CODE')) {
 
 const initialState = {
   calendarCode: saveCalendarCode,
-  boxOfficeList: new calendarTheater(),
-  // boxOfficeList: saveBoxOffice,
+  // boxOfficeList: new calendarTheater(),
+  boxOfficeList: saveBoxOffice,
 };
 
 const getBoxOfficeReducer = createSlice({

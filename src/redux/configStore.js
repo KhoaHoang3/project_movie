@@ -5,6 +5,7 @@ import getFilmCalendarReducer from './reducers/getFilmCalendarReducer';
 import { getFilmDetailReducer } from './reducers/getFilmDetailReducer';
 import getListFilmReducer from './reducers/getListFilmReducer';
 import getTheaterInfoReducer from './reducers/getTheaterInfoReducer';
+import seatReducer from './reducers/seatReducer';
 import userReducer from './reducers/userReducer';
 
 export const store = configureStore({
@@ -16,5 +17,6 @@ export const store = configureStore({
     getFilmDetail: getFilmDetailReducer,
     user: userReducer,
     getBoxOfficeList: getBoxOfficeReducer,
+    seats: seatReducer,
   },
 });

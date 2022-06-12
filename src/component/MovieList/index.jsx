@@ -124,7 +124,6 @@ export default function MovieList() {
                           <NavLink to={`/detail/${item.maPhim}`}>
                             <button
                               onClick={() => {
-                                console.log('MOVIE', item);
                                 dispatch({
                                   type: 'FILM_DETAIL',
                                   data: item,

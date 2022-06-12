@@ -7,3 +7,4 @@ export const getEachFilmCalendar = (state) => state.getFilmCalendar;
 export const user = (state) => state.user;
 export const getBoxOfficeList = (state) => state.getBoxOfficeList;
 export const getCalendarCode = (state) => state.getBoxOfficeList;
+export const getBookingSeats = (state) => state.seats;
