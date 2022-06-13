@@ -7,7 +7,8 @@ export const DOMAIN = 'https://movienew.cybersoft.edu.vn/api';
 export const USER_LOGIN = 'userLogin';
 export const ACCESSTOKEN = 'accessToken';
 export const GROUPID = 'GP13';
-const userData = JSON.parse(localStorage.getItem(ACCESSTOKEN)) || {};
+const userData =
+  JSON.parse(JSON.stringify(localStorage.getItem(ACCESSTOKEN))) || {};
 
 //setup axios interceptor
 export const http = axios.create({
@@ -19,9 +20,8 @@ http.interceptors.request.use(
   (config) => {
     config.headers = {
       ...config.headers, //Lấy lại tất cả các giá trị header qua thuộc tính headers
-      Authorization:
-        'Bearer ' +
-        JSON.parse(localStorage.getItem(ACCESSTOKEN))?.accessToken,
+      Authorization: 'Bearer ' + userData,
+      // JSON.parse(localStorage.getItem(ACCESSTOKEN))?.accessToken,
       TokenCybersoft: TOKEN_CYBERSOFT,
       'Content-type': 'application/json',
     };

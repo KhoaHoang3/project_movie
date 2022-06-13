@@ -8,3 +8,4 @@ export const getShowtimeEachFilmURL =
 export const userRegisterURL = '/QuanLyNguoiDung/DangKy';
 export const userLoginURL = '/QuanLyNguoiDung/DangNhap';
 export const getBoxOfficeListURL = '/QuanLyDatVe/LayDanhSachPhongVe';
+export const bookingTicketURL = '/QuanLyDatVe/DatVe';

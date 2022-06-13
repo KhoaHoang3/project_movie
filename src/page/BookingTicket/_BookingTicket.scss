@@ -1,6 +1,5 @@
 .booking__ticket {
   .booking__ticket__section {
-    margin-top: 10rem;
     .booking__ticket__screen {
       margin-bottom: 3rem;
       .trapezoid {
@@ -52,6 +51,15 @@
             margin-left: 0.5rem;
           }
         }
+        .user__booking__seat {
+          display: flex;
+          margin-right: 1.5rem;
+          .user__booking__seat__title {
+            font-size: 1rem;
+            transform: translateY(28%);
+            margin-left: 0.5rem;
+          }
+        }
       }
     }
     .booking__ticket__pay {
@@ -78,6 +86,7 @@
             margin-left: 0.5rem;
             color: #5bb56f;
             font-size: 1rem;
+            font-weight: bold;
           }
         }
         .total > h1 {

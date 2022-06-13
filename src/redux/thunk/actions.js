@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { ACCESSTOKEN, http, GROUPID } from '../../axios';
 import {
+  bookingTicketURL,
   getBannerURL,
   getBoxOfficeListURL,
   getListFilmURL,
@@ -11,6 +12,7 @@ import {
   userLoginURL,
   userRegisterURL,
 } from '../../axios/apiURL';
+import { calendarTheater } from '../../_core/models/boxOfficeCalendar';
 import { getBannerFilms } from '../reducers/getBannerReducer';
 import { getBoxOfficeList } from '../reducers/getBoxOfficeReducer';
 import { getFilmCalendar } from '../reducers/getFilmCalendarReducer';
@@ -184,6 +186,31 @@ export const getBoxOfficeListAction = (filmCode) => {
       );
       const action = getBoxOfficeList(result.data.content);
       dispatch(action);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+// booking ticket action
+
+export const bookingTicketAction = (maLichChieu, danhSachVe) => {
+  return async (dispatch) => {
+    try {
+      const result = await http.post(bookingTicketURL, {
+        maLichChieu,
+        danhSachVe,
+      });
+      console.log(result);
+      toast.success('Đặt vé thành công', {
+        position: 'bottom-right',
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     } catch (error) {
       console.log(error);
     }

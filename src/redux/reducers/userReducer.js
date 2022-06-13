@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { ACCESSTOKEN } from '../../axios';
 
 // default value always get from localStorage so we must check store
 let user = {};
@@ -30,7 +31,7 @@ const userReducer = createSlice({
     loginSuccess: (state, action) => {
       const { payload } = action;
       localStorage.setItem('USER_LOGIN', JSON.stringify(payload));
-      localStorage.setItem('TOKEN', payload.accessToken);
+      localStorage.setItem(ACCESSTOKEN, payload.accessToken);
       return {
         ...state,
         userLogin: payload,

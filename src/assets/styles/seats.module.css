@@ -24,6 +24,11 @@
   color: black;
 }
 
+.userBookingSeat {
+  background-color: white;
+  border: blue 3px solid;
+}
+
 .define__normal__seat {
   padding: 1rem 1.2rem;
   background-color: #bfc5c5;
@@ -54,4 +59,12 @@
   border: none;
   cursor: no-drop;
   border-radius: 10px;
+}
+
+.define__user__booking__seat {
+  padding: 0.5rem 0.6rem;
+  cursor: no-drop;
+  border-radius: 10px;
+  background-color: white;
+  border: blue 3px solid;
 }

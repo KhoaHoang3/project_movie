@@ -9,12 +9,19 @@ import {
   user,
 } from '../../redux/selectors';
 import '../../assets/styles/screen.css';
-import { getBoxOfficeListAction } from '../../redux/thunk/actions';
+import {
+  bookingTicketAction,
+  getBoxOfficeListAction,
+} from '../../redux/thunk/actions';
 import style from '../../assets/styles/seats.module.css';
+import { UserOutlined } from '@ant-design/icons';
 import { useCallback } from 'react';
 import { booking } from '../../redux/reducers/seatReducer';
+import { calendarTheater } from '../../_core/models/boxOfficeCalendar';
+import { Tabs } from 'antd';
+const { TabPane } = Tabs;
 
-export default function BookingTicket() {
+function BookingTicket(props) {
   //get information of user
   const { userLogin } = useSelector(user);
 
@@ -32,6 +39,7 @@ export default function BookingTicket() {
   //   tenPhim,
   //   tenRap,
   // } = thongTinPhim;
+
   // get film info from localStorage so when refresh page the info won't disapear
   const filmInfo = JSON.parse(
     localStorage.getItem('BOX_OFFICE_LIST')
@@ -40,7 +48,6 @@ export default function BookingTicket() {
   const { diaChi, gioChieu, ngayChieu, tenCumRap, tenPhim, tenRap } =
     thongTinPhim;
   const { bookingSeats } = useSelector(getBookingSeats);
-  console.log('bookingseats', bookingSeats);
 
   const dispatch = useDispatch();
 
@@ -48,6 +55,8 @@ export default function BookingTicket() {
     const action = getBoxOfficeListAction(calendarCode);
     dispatch(action);
   }, [dispatch]);
+
+  console.log(userLogin);
 
   const renderSeat = () => {
     const { danhSachGhe } = filmInfo;
@@ -61,6 +70,10 @@ export default function BookingTicket() {
       );
       if (bookingSeatIndex !== -1) {
         classBookingSeat = 'bookingSeat';
+      }
+      let classUserBooking = '';
+      if (item.taiKhoanNguoiDat === userLogin.taiKhoan) {
+        classUserBooking = 'userBookingSeat';
       }
       // if (item.loaiGhe === 'Thuong') {
       //   return (
@@ -86,15 +99,26 @@ export default function BookingTicket() {
               dispatch(booking(item));
             }}
             disabled={item.daDat}
-            className={`${style['seats']} ${style[classVipSeat]} ${style[classBookedSeat]} ${style[classBookingSeat]} `}
+            className={`${style['seats']} ${style[classUserBooking]} ${style[classVipSeat]} ${style[classBookedSeat]} ${style[classBookingSeat]} `}
           >
-            {item.stt}
+            {item.taiKhoanNguoiDat === userLogin.taiKhoan ? (
+              <UserOutlined style={{ fontSize: '2rem' }} />
+            ) : (
+              item.stt
+            )}
           </button>
+
+          {(index + 1) % 16 === 0 ? <br /> : ''}
         </Fragment>
       );
     });
 
     return seats;
+  };
+
+  const bookingTicketFunc = () => {
+    const action = bookingTicketAction(calendarCode, bookingSeats);
+    dispatch(action);
   };
 
   return (
@@ -136,6 +160,17 @@ export default function BookingTicket() {
                   className={`${style['define__booked__seat']}`}
                 ></button>
                 <p className="booked__seat__title">Ghế đã đặt</p>
+              </div>
+              {/* USER BOOKING SEAT */}
+              <div className="user__booking__seat">
+                <button
+                  className={`${style['define__user__booking__seat']}`}
+                >
+                  <UserOutlined style={{ fontSize: '2rem' }} />
+                </button>
+                <p className="user__booking__seat__title">
+                  Ghế người dùng đặt
+                </p>
               </div>
             </div>
           </div>
@@ -200,7 +235,14 @@ export default function BookingTicket() {
             <hr></hr>
             {/* PAY BUTTON */}
             <div className="button">
-              <button className="pay__button">ĐẶT VÉ</button>
+              <button
+                onClick={() => {
+                  bookingTicketFunc();
+                }}
+                className="pay__button"
+              >
+                ĐẶT VÉ
+              </button>
             </div>
           </div>
         </div>
@@ -210,5 +252,30 @@ export default function BookingTicket() {
         <Footer />
       </section>
     </div>
+  );
+}
+
+export default function tabInfoBookingTicket() {
+  return (
+    <Tabs style={{ marginTop: '8rem' }} defaultActiveKey="1">
+      <TabPane
+        tab={
+          <h1 style={{ fontSize: '1.2rem', marginLeft: '0.5rem' }}>
+            1. Đặt vé xem phim
+          </h1>
+        }
+        key="1"
+      >
+        <BookingTicket />
+      </TabPane>
+      <TabPane
+        tab={
+          <h1 style={{ fontSize: '1.2rem' }}>2. Kết quả đặt vé</h1>
+        }
+        key="2"
+      >
+        Content of Tab Pane 2
+      </TabPane>
+    </Tabs>
   );
 }

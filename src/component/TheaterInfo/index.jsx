@@ -154,7 +154,10 @@ function TheaterInfo() {
                                   .slice(0, 6)
                                   ?.map((date, index) => {
                                     return (
-                                      <div className="col-4">
+                                      <div
+                                        key={index}
+                                        className="col-4"
+                                      >
                                         <Tag
                                           className="time mb-2"
                                           color="green"
