@@ -24,7 +24,7 @@ export default function Carouselll() {
             disableOnInteraction: false,
           }}
           effect={'fade'}
-          style={{ height: 980 }}
+          style={{ height: 1280 }}
         >
           {/* FILM - 1 */}
           {bannerFilms.slice(0, 1).map((item, index) => {

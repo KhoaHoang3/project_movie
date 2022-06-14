@@ -50,6 +50,7 @@ function TheaterInfo() {
     if (localStorage.getItem('USER_LOGIN')) {
       return (
         <NavLink
+          style={{ fontSize: '1.2rem' }}
           onClick={() => {
             dispatch(getFilmCode(maLichChieu));
           }}
@@ -61,6 +62,7 @@ function TheaterInfo() {
     } else {
       return (
         <NavLink
+          style={{ fontSize: '1.2rem' }}
           onClick={() => {
             toast.error('Bạn phải đăng nhập để đặt vé !', {
               position: 'top-center',
@@ -80,9 +82,12 @@ function TheaterInfo() {
   };
 
   return (
-    <div className="container" style={{}}>
+    <div className="container">
       <h1 className="theater__info">THÔNG TIN CÁC RẠP CHIẾU</h1>
-      <Tabs tabPosition={tabPosition}>
+      <Tabs
+        style={{ width: '95rem', borderRadius: '2rem' }}
+        tabPosition={tabPosition}
+      >
         {theaterShowtime.map((item, index) => {
           return (
             <TabPane
@@ -90,8 +95,8 @@ function TheaterInfo() {
               tab={
                 <img
                   style={{
-                    width: 50,
-                    height: 50,
+                    width: '5rem',
+                    height: '5rem',
                     borderRadius: '50%',
                   }}
                   src={item.logo}
@@ -113,11 +118,16 @@ function TheaterInfo() {
                           </div>
 
                           <div className="address text-left ml-3 d-flex flex-column justify-content-center">
-                            <p className="font-weight-bold">
+                            <p
+                              style={{ fontSize: '1.2rem' }}
+                              className="font-weight-bold"
+                            >
                               Tên rạp:
                             </p>
 
-                            <p>{theater.tenCumRap}</p>
+                            <p style={{ fontSize: '1.2rem' }}>
+                              {theater.tenCumRap}
+                            </p>
                             {/* <p className="font-weight-bold">
                               Địa chỉ:
                             </p>
@@ -136,17 +146,30 @@ function TheaterInfo() {
                               ></img>
                             </div>
                             <div className="name ml-3 ">
-                              <p className="font-weight-bold">
+                              <p
+                                style={{ fontSize: '1.2rem' }}
+                                className="font-weight-bold"
+                              >
                                 Tên phim:
                               </p>
-                              <p>{film.tenPhim}</p>
+                              <p style={{ fontSize: '1.2rem' }}>
+                                {film.tenPhim}
+                              </p>
                               <div>
-                                <p className="font-weight-bold">
+                                <p
+                                  style={{ fontSize: '1.2rem' }}
+                                  className="font-weight-bold"
+                                >
                                   Địa chỉ:
                                 </p>
-                                <p>{theater.diaChi}</p>
+                                <p style={{ fontSize: '1.2rem' }}>
+                                  {theater.diaChi}
+                                </p>
                               </div>
-                              <p className="font-weight-bold">
+                              <p
+                                style={{ fontSize: '1.2rem' }}
+                                className="font-weight-bold"
+                              >
                                 Ngày và giờ chiếu:
                               </p>
                               <div className="row">
@@ -159,10 +182,11 @@ function TheaterInfo() {
                                         className="col-4"
                                       >
                                         <Tag
-                                          className="time mb-2"
+                                          className="time"
                                           color="green"
                                           style={{
                                             marginRight: '16rem',
+                                            marginBottom: '1.2rem',
                                           }}
                                         >
                                           {renderCalendar(

@@ -9,6 +9,7 @@ import {
   getShowtimeEachFilmURL,
   getTheaterInfo,
   getTheaterShowtimeInfoURL,
+  userBookingResultURL,
   userLoginURL,
   userRegisterURL,
 } from '../../axios/apiURL';
@@ -21,6 +22,7 @@ import {
   theaterInfomation,
   theaterShowtimeInfo,
 } from '../reducers/getTheaterInfoReducer';
+import { bookingResult } from '../reducers/userBookingResultReducer';
 import {
   loginSuccess,
   registerUserSuccess,
@@ -211,6 +213,20 @@ export const bookingTicketAction = (maLichChieu, danhSachVe) => {
         draggable: true,
         progress: undefined,
       });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+// get user booking result
+export const getUserBookingResultAction = () => {
+  return async (dispatch) => {
+    try {
+      const result = await http.post(userBookingResultURL);
+      console.log(result);
+      const action = bookingResult(result.data.content);
+      dispatch(action);
     } catch (error) {
       console.log(error);
     }

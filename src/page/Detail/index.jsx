@@ -26,6 +26,7 @@ export default function Detail() {
     if (localStorage.getItem('USER_LOGIN')) {
       return (
         <NavLink
+          style={{ fontSize: '1.2rem' }}
           onClick={() => {
             dispatch(getFilmCode(maLichChieu));
           }}
@@ -37,6 +38,7 @@ export default function Detail() {
     } else {
       return (
         <NavLink
+          style={{ fontSize: '1.2rem' }}
           onClick={() => {
             toast.error('Bạn phải đăng nhập để đặt vé !', {
               position: 'top-center',
@@ -148,14 +150,19 @@ export default function Detail() {
                 defaultActiveKey="1"
                 centered
                 style={{
-                  width: '96.875rem',
+                  width: '125rem',
                   backgroundColor: 'white',
+                  borderRadius: '2rem',
                 }}
               >
                 {/* CALENDAR */}
                 <TabPane
-                  style={{ fontSize: '2rem' }}
-                  tab="Lịch chiếu"
+                  style={{
+                    fontSize: '2rem',
+                  }}
+                  tab={
+                    <h1 style={{ fontSize: '1.5rem' }}>Lịch chiếu</h1>
+                  }
                   key="1"
                 >
                   <Tabs tabPosition={'left'}>
@@ -198,11 +205,11 @@ export default function Detail() {
                                   >
                                     {theater.tenCumRap}
                                   </p>
-                                  <p>
+                                  <p style={{ fontSize: '1.2rem' }}>
                                     Địa chỉ:{' '}
                                     <span>{theater.diaChi}</span>
                                   </p>
-                                  <p>
+                                  <p style={{ fontSize: '1.2rem' }}>
                                     Ngày - giờ chiếu: (click vào ngày
                                     giờ bạn muốn để đặt vé)
                                   </p>
@@ -217,7 +224,9 @@ export default function Detail() {
                                           >
                                             <Tag
                                               style={{
-                                                marginRight: '16rem',
+                                                marginRight: '10rem',
+                                                marginBottom:
+                                                  '1.5rem',
                                               }}
                                               color="green"
                                             >

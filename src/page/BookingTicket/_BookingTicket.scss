@@ -2,9 +2,14 @@
   .booking__ticket__section {
     .booking__ticket__screen {
       margin-bottom: 3rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
       .trapezoid {
         text-align: center;
         font-size: $fs-md;
+        transform: translateX(-2%);
       }
       .seats {
         margin-top: 2rem;
@@ -65,6 +70,7 @@
     .booking__ticket__pay {
       height: 750px;
       width: 20rem;
+
       .total {
         .money {
           font-size: 2.5rem;
@@ -102,7 +108,7 @@
         font-size: 1rem;
       }
       .button {
-        margin-top: 16.563rem;
+        margin-top: 18.563rem;
         .pay__button {
           --color: #5bb56f;
           font-family: 'Poppins', sans-serif;

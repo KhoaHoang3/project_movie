@@ -19,6 +19,7 @@ import { useCallback } from 'react';
 import { booking } from '../../redux/reducers/seatReducer';
 import { calendarTheater } from '../../_core/models/boxOfficeCalendar';
 import { Tabs } from 'antd';
+import BookingTicketResult from '../BookingTicketResult';
 const { TabPane } = Tabs;
 
 function BookingTicket(props) {
@@ -55,8 +56,6 @@ function BookingTicket(props) {
     const action = getBoxOfficeListAction(calendarCode);
     dispatch(action);
   }, [dispatch]);
-
-  console.log(userLogin);
 
   const renderSeat = () => {
     const { danhSachGhe } = filmInfo;
@@ -123,7 +122,7 @@ function BookingTicket(props) {
 
   return (
     <div>
-      <section className="header">
+      <section className="">
         <Header />
       </section>
       <section className="booking__ticket">
@@ -236,6 +235,7 @@ function BookingTicket(props) {
             {/* PAY BUTTON */}
             <div className="button">
               <button
+                style={{ fontSize: '1.5rem', fontWeight: 'bold' }}
                 onClick={() => {
                   bookingTicketFunc();
                 }}
@@ -255,13 +255,13 @@ function BookingTicket(props) {
   );
 }
 
-export default function tabInfoBookingTicket() {
+export default function (props) {
   return (
     <Tabs style={{ marginTop: '8rem' }} defaultActiveKey="1">
       <TabPane
         tab={
           <h1 style={{ fontSize: '1.2rem', marginLeft: '0.5rem' }}>
-            1. Đặt vé xem phim
+            01. ĐẶT GHẾ & THANH TOÁN
           </h1>
         }
         key="1"
@@ -270,11 +270,11 @@ export default function tabInfoBookingTicket() {
       </TabPane>
       <TabPane
         tab={
-          <h1 style={{ fontSize: '1.2rem' }}>2. Kết quả đặt vé</h1>
+          <h1 style={{ fontSize: '1.2rem' }}>02. KẾT QUẢ ĐẶT VÉ</h1>
         }
         key="2"
       >
-        Content of Tab Pane 2
+        <BookingTicketResult />
       </TabPane>
     </Tabs>
   );
