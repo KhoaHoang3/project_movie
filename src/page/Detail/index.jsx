@@ -16,7 +16,10 @@ import { Tab } from 'bootstrap';
 import { NavLink } from 'react-router-dom';
 import '../../assets/styles/circle.css';
 import { toast } from 'react-toastify';
-import { getFilmCode } from '../../redux/reducers/getBoxOfficeReducer';
+import {
+  getDateAndTime,
+  getFilmCode,
+} from '../../redux/reducers/getBoxOfficeReducer';
 
 const { TabPane } = Tabs;
 
@@ -29,6 +32,7 @@ export default function Detail() {
           style={{ fontSize: '1.2rem' }}
           onClick={() => {
             dispatch(getFilmCode(maLichChieu));
+            dispatch(getDateAndTime(ngayChieuGioChieu));
           }}
           to={`/booking_ticket/${maLichChieu}`}
         >

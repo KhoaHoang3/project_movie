@@ -2,188 +2,31 @@ import React, { Fragment, useEffect } from 'react';
 import Footer from '../../component/Footer';
 import Header from '../../component/Header';
 import { SearchOutlined } from '@ant-design/icons';
-import { Button, Input, Space, Table } from 'antd';
+import { Button, Input, Space, Table, Pagination } from 'antd';
 import { useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserBookingResultAction } from '../../redux/thunk/actions';
-import { getUserBookingResult, user } from '../../redux/selectors';
-const data = [
-  {
-    key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-  },
-  {
-    key: '2',
-    name: 'Joe Black',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-  },
-  {
-    key: '3',
-    name: 'Jim Green',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-  },
-  {
-    key: '4',
-    name: 'Jim Red',
-    age: 32,
-    address: 'London No. 2 Lake Park',
-  },
-];
+import {
+  getDateAndTime,
+  getUserBookingResult,
+  user,
+} from '../../redux/selectors';
+import moment from 'moment';
 
 export default function BookingTicketResult() {
-  const [searchText, setSearchText] = useState('');
-  const [searchedColumn, setSearchedColumn] = useState('');
-  const searchInput = useRef(null);
-
-  const handleSearch = (selectedKeys, confirm, dataIndex) => {
-    confirm();
-    setSearchText(selectedKeys[0]);
-    setSearchedColumn(dataIndex);
-  };
-
-  const handleReset = (clearFilters) => {
-    clearFilters();
-    setSearchText('');
-  };
-
-  const getColumnSearchProps = (dataIndex) => ({
-    filterDropdown: ({
-      setSelectedKeys,
-      selectedKeys,
-      confirm,
-      clearFilters,
-    }) => (
-      <div
-        style={{
-          padding: 8,
-        }}
-      >
-        <Input
-          ref={searchInput}
-          placeholder={`Search ${dataIndex}`}
-          value={selectedKeys[0]}
-          onChange={(e) =>
-            setSelectedKeys(e.target.value ? [e.target.value] : [])
-          }
-          onPressEnter={() =>
-            handleSearch(selectedKeys, confirm, dataIndex)
-          }
-          style={{
-            marginBottom: 8,
-            display: 'block',
-          }}
-        />
-        <Space>
-          <Button
-            type="primary"
-            onClick={() =>
-              handleSearch(selectedKeys, confirm, dataIndex)
-            }
-            icon={<SearchOutlined />}
-            size="small"
-            style={{
-              width: 90,
-            }}
-          >
-            Search
-          </Button>
-          <Button
-            onClick={() => clearFilters && handleReset(clearFilters)}
-            size="small"
-            style={{
-              width: 90,
-            }}
-          >
-            Reset
-          </Button>
-          <Button
-            type="link"
-            size="small"
-            onClick={() => {
-              confirm({
-                closeDropdown: false,
-              });
-              setSearchText(selectedKeys[0]);
-              setSearchedColumn(dataIndex);
-            }}
-          >
-            Filter
-          </Button>
-        </Space>
-      </div>
-    ),
-    filterIcon: (filtered) => (
-      <SearchOutlined
-        style={{
-          color: filtered ? '#1890ff' : undefined,
-        }}
-      />
-    ),
-    onFilter: (value, record) =>
-      record[dataIndex]
-        .toString()
-        .toLowerCase()
-        .includes(value.toLowerCase()),
-    onFilterDropdownVisibleChange: (visible) => {
-      if (visible) {
-        setTimeout(() => searchInput.current?.select(), 100);
-      }
-    },
-    render: (text) =>
-      searchedColumn === dataIndex ? (
-        <Highlighter
-          highlightStyle={{
-            backgroundColor: '#ffc069',
-            padding: 0,
-          }}
-          searchWords={[searchText]}
-          autoEscape
-          textToHighlight={text ? text.toString() : ''}
-        />
-      ) : (
-        text
-      ),
-  });
-
-  //   DATA
-  const columns = [
-    {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name',
-      width: '30%',
-      ...getColumnSearchProps('name'),
-    },
-    {
-      title: 'Age',
-      dataIndex: 'age',
-      key: 'age',
-      width: '20%',
-      ...getColumnSearchProps('age'),
-    },
-    {
-      title: 'Address',
-      dataIndex: 'address',
-      key: 'address',
-      ...getColumnSearchProps('address'),
-      sorter: (a, b) => a.address.length - b.address.length,
-      sortDirections: ['descend', 'ascend'],
-    },
-  ];
-
   const dispatch = useDispatch();
   useEffect(() => {
     const action = getUserBookingResultAction();
     dispatch(action);
   }, [dispatch]);
-  const { result } = useSelector(getUserBookingResult);
   const { userLogin } = useSelector(user);
-  console.log(result);
+  const { result } = useSelector(getUserBookingResult);
+  const { thongTinDatVe } = result;
+  const { dateAndTime } = useSelector(getDateAndTime);
+  console.log('result', result);
+  console.log('dateAndTime', dateAndTime);
+
   return (
     <Fragment>
       {/* HEADER */}
@@ -200,12 +43,156 @@ export default function BookingTicketResult() {
           Hãy xem thông tin, địa điểm và thời gian để xem phim vui vẻ
           bạn nhé !
         </h2>
-        <Table
-          style={{ height: '1280px', fontSize: '2rem' }}
-          columns={columns}
-          dataSource={data}
-        />
+        <div className="user__booking__result__info">
+          <div className="user__booking__result__container">
+            <div className="row ">
+              {/* ITEM-1 */}
+              {result.thongTinDatVe.length === 1
+                ? result.thongTinDatVe.map((item, index) => {
+                    <div key={index} className="col-12">
+                      <div className="user__booking__result__info_2 d-flex ">
+                        <div className="d-flex justify-content-center align-items-center">
+                          <img
+                            className="rounded-circle"
+                            src={item.hinhAnh}
+                            alt=""
+                            height={200}
+                            width={200}
+                          />
+                        </div>
+                        <div className="ml-3">
+                          <h1 style={{ fontSize: '1.5rem' }}>
+                            Tên phim: {item.tenPhim}
+                          </h1>
+                          <h1 style={{ fontSize: '1.2rem' }}>
+                            Ngày đặt:{' '}
+                            {moment(item.ngayDat).format(
+                              'DD/MM/YYYY hh:mm A'
+                            )}
+                          </h1>
+                          <h1 style={{ fontSize: '1.2rem' }}>
+                            Ngày chiếu:{' '}
+                            {moment(dateAndTime).format(
+                              'DD/MM/YYYY hh:mm A'
+                            )}
+                          </h1>
+                          <h1 style={{ fontSize: '1.2rem' }}>
+                            Thời lượng: {item.thoiLuongPhim}p
+                          </h1>
+                          <h1 style={{ fontSize: '1.2rem' }}>
+                            Giá vé: {item.giaVe.toLocaleString()} đ
+                          </h1>
+                          {/* FOR THEATER INFO */}
+                          <h1 style={{ fontSize: '1.2rem' }}>
+                            Rạp:{' '}
+                            {item.danhSachGhe
+                              .slice(0, 1)
+                              .map(
+                                (theater) => theater.tenHeThongRap
+                              )}
+                          </h1>
+                          <h1 style={{ fontSize: '1.2rem' }}>
+                            Ghế đã đặt:{' '}
+                            <span style={{}}>
+                              {' '}
+                              {item.danhSachGhe
+                                .map((seat) => seat.tenGhe)
+                                .sort()
+                                .join('-')}
+                            </span>
+                          </h1>
+                        </div>
+                      </div>
+                    </div>;
+                  })
+                : result.thongTinDatVe.map((item, index) => {
+                    return (
+                      <div key={index} className="col-6 mt-5">
+                        <div className="user__booking__result__info_2 d-flex ">
+                          <div className="d-flex justify-content-center align-items-center">
+                            <img
+                              className="rounded-circle"
+                              src={item.hinhAnh}
+                              alt=""
+                              height={200}
+                              width={200}
+                            />
+                          </div>
+                          <div className="ml-3">
+                            <h1 style={{ fontSize: '1.5rem' }}>
+                              Tên phim: {item.tenPhim}
+                            </h1>
+                            <h1 style={{ fontSize: '1.2rem' }}>
+                              Ngày đặt:{' '}
+                              {moment(item.ngayDat).format(
+                                'DD/MM/YYYY hh:mm A'
+                              )}
+                            </h1>
+                            <h1 style={{ fontSize: '1.2rem' }}>
+                              Ngày chiếu:{' '}
+                              {moment(dateAndTime).format(
+                                'DD/MM/YYYY hh:mm A'
+                              )}
+                            </h1>
+                            <h1 style={{ fontSize: '1.2rem' }}>
+                              Thời lượng: {item.thoiLuongPhim}p
+                            </h1>
+                            <h1 style={{ fontSize: '1.2rem' }}>
+                              Giá vé: {item.giaVe.toLocaleString()} đ
+                            </h1>
+                            {/* FOR THEATER INFO */}
+                            <h1 style={{ fontSize: '1.2rem' }}>
+                              Rạp:{' '}
+                              {item.danhSachGhe
+                                .slice(0, 1)
+                                .map(
+                                  (theater) => theater.tenHeThongRap
+                                )}
+                            </h1>
+                            <h1 style={{ fontSize: '1.2rem' }}>
+                              Ghế đã đặt:{' '}
+                              <span style={{}}>
+                                {' '}
+                                {item.danhSachGhe
+                                  .map((seat) => seat.tenGhe)
+                                  .sort()
+                                  .join('-')}
+                              </span>
+                            </h1>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+
+              {/* <div className="col-6">
+                <div className="user__booking__result__info_2 d-flex ">
+                  <div className="d-flex justify-content-center align-items-center">
+                    <img
+                      className="rounded-circle"
+                      src="https://movienew.cybersoft.edu.vn/hinhanh/avengers-infinity-war.jpg"
+                      alt=""
+                      height={150}
+                      width={150}
+                    />
+                  </div>
+                  <div className="ml-3">
+                    <h1>Tên phim: Avenger Infinity War</h1>
+                    <h1>Ngày đặt: 13-6-2022</h1>
+                    <h1>Thời lượng: 120p</h1>
+                    <h1>Giá vé: 75.000đ</h1>
+                   
+                    <h1>Rạp: </h1>
+                    <h1>Ghế đã đặt:</h1>
+                  </div>
+                </div>
+              </div> */}
+            </div>
+          </div>
+        </div>
       </div>
+
+      <Pagination defaultCurrent={1} total={500} />
 
       {/*FOOTER  */}
       <section className="footer">

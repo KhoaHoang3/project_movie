@@ -18,6 +18,7 @@ const initialState = {
   calendarCode: saveCalendarCode,
   // boxOfficeList: new calendarTheater(),
   boxOfficeList: saveBoxOffice,
+  dateAndTime: '',
 };
 
 const getBoxOfficeReducer = createSlice({
@@ -37,10 +38,15 @@ const getBoxOfficeReducer = createSlice({
       state.calendarCode = payload;
       localStorage.setItem('CALENDAR_CODE', JSON.stringify(payload));
     },
+
+    getDateAndTime: (state, action) => {
+      const { payload } = action;
+      state.dateAndTime = payload;
+    },
   },
 });
 
-export const { getBoxOfficeList, getFilmCode } =
+export const { getBoxOfficeList, getFilmCode, getDateAndTime } =
   getBoxOfficeReducer.actions;
 
 export default getBoxOfficeReducer.reducer;

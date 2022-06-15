@@ -200,13 +200,12 @@ function BookingTicket(props) {
             <div className="seats__total d-flex justify-content-between">
               <div className="seats">
                 <h1 className="title">Ghế</h1>
-                {bookingSeats.map((item, index) => {
-                  return (
-                    <span className="booking_seats" key={index}>
-                      {item.stt}
-                    </span>
-                  );
-                })}
+                <span className="booking_seats">
+                  {bookingSeats
+                    .map((item) => item.stt)
+                    .sort()
+                    .join('-')}
+                </span>
               </div>
               <div className="total">
                 <h1>

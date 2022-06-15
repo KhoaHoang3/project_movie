@@ -14,7 +14,10 @@ import {
 import { NavLink } from 'react-router-dom';
 import moment from 'moment';
 import { toast } from 'react-toastify';
-import { getFilmCode } from '../../redux/reducers/getBoxOfficeReducer';
+import {
+  getDateAndTime,
+  getFilmCode,
+} from '../../redux/reducers/getBoxOfficeReducer';
 const { TabPane } = Tabs;
 
 function TheaterInfo() {
@@ -53,10 +56,11 @@ function TheaterInfo() {
           style={{ fontSize: '1.2rem' }}
           onClick={() => {
             dispatch(getFilmCode(maLichChieu));
+            dispatch(getDateAndTime(ngayChieuGioChieu));
           }}
           to={`/booking_ticket/${maLichChieu}`}
         >
-          {moment(ngayChieuGioChieu).format('DD.MM.YYYY hh:mm A')}
+          {moment(ngayChieuGioChieu).format('DD/MM/YYYY hh:mm A')}
         </NavLink>
       );
     } else {
