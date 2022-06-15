@@ -199,7 +199,12 @@ function BookingTicket(props) {
             {/* SEATS_TOTAL */}
             <div className="seats__total d-flex justify-content-between">
               <div className="seats">
-                <h1 className="title">Ghế</h1>
+                <h1
+                  style={{ fontWeight: 'bolder' }}
+                  className="title"
+                >
+                  Ghế
+                </h1>
                 <span className="booking_seats">
                   {bookingSeats
                     .map((item) => item.stt)

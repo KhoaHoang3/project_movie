@@ -22,6 +22,11 @@ import {
   theaterInfomation,
   theaterShowtimeInfo,
 } from '../reducers/getTheaterInfoReducer';
+import {
+  displayLoading,
+  hideLoading,
+} from '../reducers/loadingReducer';
+import { bookingSuccess } from '../reducers/seatReducer';
 import { bookingResult } from '../reducers/userBookingResultReducer';
 import {
   loginSuccess,
@@ -186,6 +191,7 @@ export const getBoxOfficeListAction = (filmCode) => {
       const result = await http.get(
         `${getBoxOfficeListURL}?MaLichChieu=${filmCode}`
       );
+
       const action = getBoxOfficeList(result.data.content);
       dispatch(action);
     } catch (error) {
@@ -199,14 +205,25 @@ export const getBoxOfficeListAction = (filmCode) => {
 export const bookingTicketAction = (maLichChieu, danhSachVe) => {
   return async (dispatch) => {
     try {
+      dispatch(displayLoading());
+
       const result = await http.post(bookingTicketURL, {
         maLichChieu,
         danhSachVe,
       });
-      console.log(result);
+
+      //dispatch is a asynchronous function
+      //so use await to handle asynchronous
+      // call getBoxOfficeList again to refresh booking ticket page
+      await dispatch(getBoxOfficeListAction(maLichChieu));
+
+      //clear data when user booking success
+      await dispatch(bookingSuccess());
+
+      dispatch(hideLoading());
       toast.success('Đặt vé thành công', {
         position: 'bottom-right',
-        autoClose: 1000,
+        autoClose: 1500,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -214,6 +231,8 @@ export const bookingTicketAction = (maLichChieu, danhSachVe) => {
         progress: undefined,
       });
     } catch (error) {
+      dispatch(hideLoading());
+
       console.log(error);
     }
   };
@@ -223,11 +242,17 @@ export const bookingTicketAction = (maLichChieu, danhSachVe) => {
 export const getUserBookingResultAction = () => {
   return async (dispatch) => {
     try {
+      dispatch(displayLoading());
+
       const result = await http.post(userBookingResultURL);
-      console.log(result);
+
       const action = bookingResult(result.data.content);
       dispatch(action);
+
+      dispatch(hideLoading());
     } catch (error) {
+      dispatch(hideLoading());
+
       console.log(error);
     }
   };

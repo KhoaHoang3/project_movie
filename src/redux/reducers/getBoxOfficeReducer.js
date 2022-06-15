@@ -14,11 +14,16 @@ if (localStorage.getItem('CALENDAR_CODE')) {
   );
 }
 
+let saveDateAndTime = 0;
+if (localStorage.getItem('DATE_AND_TIME')) {
+  saveDateAndTime = JSON.parse(localStorage.getItem('DATE_AND_TIME'));
+}
+
 const initialState = {
   calendarCode: saveCalendarCode,
   // boxOfficeList: new calendarTheater(),
   boxOfficeList: saveBoxOffice,
-  dateAndTime: '',
+  dateAndTime: saveDateAndTime,
 };
 
 const getBoxOfficeReducer = createSlice({
@@ -42,6 +47,7 @@ const getBoxOfficeReducer = createSlice({
     getDateAndTime: (state, action) => {
       const { payload } = action;
       state.dateAndTime = payload;
+      localStorage.setItem('DATE_AND_TIME', payload);
     },
   },
 });

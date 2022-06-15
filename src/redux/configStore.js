@@ -5,6 +5,7 @@ import getFilmCalendarReducer from './reducers/getFilmCalendarReducer';
 import { getFilmDetailReducer } from './reducers/getFilmDetailReducer';
 import getListFilmReducer from './reducers/getListFilmReducer';
 import getTheaterInfoReducer from './reducers/getTheaterInfoReducer';
+import loadingReducer from './reducers/loadingReducer';
 import seatReducer from './reducers/seatReducer';
 import userBookingResultReducer from './reducers/userBookingResultReducer';
 import userReducer from './reducers/userReducer';
@@ -20,5 +21,6 @@ export const store = configureStore({
     getBoxOfficeList: getBoxOfficeReducer,
     seats: seatReducer,
     bookingResult: userBookingResultReducer,
+    loading: loadingReducer,
   },
 });

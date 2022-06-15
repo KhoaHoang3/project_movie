@@ -29,9 +29,13 @@ const seatReducer = createSlice({
        * state.bookingSeats.push(payload)
        * }*/
     },
+
+    bookingSuccess: (state, action) => {
+      state.bookingSeats = [];
+    },
   },
 });
 
-export const { booking } = seatReducer.actions;
+export const { booking, bookingSuccess } = seatReducer.actions;
 
 export default seatReducer.reducer;

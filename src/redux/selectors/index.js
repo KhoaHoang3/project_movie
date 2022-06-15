@@ -10,3 +10,4 @@ export const getCalendarCode = (state) => state.getBoxOfficeList;
 export const getBookingSeats = (state) => state.seats;
 export const getUserBookingResult = (state) => state.bookingResult;
 export const getDateAndTime = (state) => state.getBoxOfficeList;
+export const loadingPage = (state) => state.loading;

@@ -24,8 +24,6 @@ export default function BookingTicketResult() {
   const { result } = useSelector(getUserBookingResult);
   const { thongTinDatVe } = result;
   const { dateAndTime } = useSelector(getDateAndTime);
-  console.log('result', result);
-  console.log('dateAndTime', dateAndTime);
 
   return (
     <Fragment>
@@ -36,7 +34,10 @@ export default function BookingTicketResult() {
 
       {/* USER BOOKING RESULT */}
       <div className="user__booking__result">
-        <h1 className="user__booking__result__title">
+        <h1
+          style={{ color: '#5bb56f' }}
+          className="user__booking__result__title"
+        >
           Thông tin đặt vé của {userLogin.hoTen}
         </h1>
         <h2 className="user__booking__result__subtitle">
@@ -119,7 +120,12 @@ export default function BookingTicketResult() {
                             />
                           </div>
                           <div className="ml-3">
-                            <h1 style={{ fontSize: '1.5rem' }}>
+                            <h1
+                              style={{
+                                fontSize: '1.5rem',
+                                color: '#0b4dbe',
+                              }}
+                            >
                               Tên phim: {item.tenPhim}
                             </h1>
                             <h1 style={{ fontSize: '1.2rem' }}>
@@ -151,7 +157,12 @@ export default function BookingTicketResult() {
                             </h1>
                             <h1 style={{ fontSize: '1.2rem' }}>
                               Ghế đã đặt:{' '}
-                              <span style={{}}>
+                              <span
+                                style={{
+                                  color: '#5bb56f',
+                                  fontWeight: 'bolder',
+                                }}
+                              >
                                 {' '}
                                 {item.danhSachGhe
                                   .map((seat) => seat.tenGhe)
@@ -191,8 +202,6 @@ export default function BookingTicketResult() {
           </div>
         </div>
       </div>
-
-      <Pagination defaultCurrent={1} total={500} />
 
       {/*FOOTER  */}
       <section className="footer">
