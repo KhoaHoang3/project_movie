@@ -16,7 +16,9 @@ if (localStorage.getItem('CALENDAR_CODE')) {
 
 let saveDateAndTime = 0;
 if (localStorage.getItem('DATE_AND_TIME')) {
-  saveDateAndTime = JSON.parse(localStorage.getItem('DATE_AND_TIME'));
+  saveDateAndTime = JSON.parse(
+    JSON.stringify(localStorage.getItem('DATE_AND_TIME'))
+  );
 }
 
 const initialState = {

@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { getDefaultMiddleware } from '@reduxjs/toolkit';
 import getBannerReducer from './reducers/getBannerReducer';
 import getBoxOfficeReducer from './reducers/getBoxOfficeReducer';
 import getFilmCalendarReducer from './reducers/getFilmCalendarReducer';
@@ -11,6 +12,10 @@ import userBookingResultReducer from './reducers/userBookingResultReducer';
 import userReducer from './reducers/userReducer';
 
 export const store = configureStore({
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
   reducer: {
     getBanner: getBannerReducer,
     getListFilm: getListFilmReducer,

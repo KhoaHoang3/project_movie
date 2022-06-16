@@ -9,6 +9,10 @@ import { ToastContainer } from 'react-toastify';
 import Login from './page/Login';
 import BookingTicket from './page/BookingTicket';
 import Loading from './page/Loading';
+import Admin from './page/Admin';
+import MovieManagement from './component/_MovieManagement';
+import UserManagement from './component/_UserManagement';
+import ShowTime from './component/_Showtime';
 
 function App() {
   return (
@@ -24,6 +28,23 @@ function App() {
           path="/booking_ticket/:id"
           element={<BookingTicket />}
         />
+        <Route path="/admin" element={<Admin />}>
+          <Route
+            exact
+            path={'/admin/movie_management'}
+            element={<MovieManagement />}
+          />
+          <Route
+            exact
+            path={'/admin/user_management'}
+            element={<UserManagement />}
+          />
+          <Route
+            exact
+            path={'/admin/showtime'}
+            element={<ShowTime />}
+          />
+        </Route>
       </Routes>
       <ToastContainer />
     </div>

@@ -7,6 +7,8 @@ import {
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { user } from '../../redux/selectors';
+import { Select } from 'antd';
+const { Option } = Select;
 const { confirm } = Modal;
 
 export default function Header() {
@@ -22,9 +24,7 @@ export default function Header() {
         navigate('/');
       },
 
-      onCancel() {
-        console.log('Cancel');
-      },
+      onCancel() {},
     });
   };
   const navigate = useNavigate();
@@ -38,6 +38,7 @@ export default function Header() {
       user = JSON.parse(localStorage.getItem('USER_LOGIN'));
       return (
         <div className="logout__section d-flex">
+          <div className="language"></div>
           <div className="user">
             <h1 style={{ fontSize: '1.2rem' }} className="text-white">
               Xin chào, {user.hoTen} !
