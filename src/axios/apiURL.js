@@ -11,3 +11,5 @@ export const getBoxOfficeListURL = '/QuanLyDatVe/LayDanhSachPhongVe';
 export const bookingTicketURL = '/QuanLyDatVe/DatVe';
 export const userBookingResultURL =
   '/QuanLyNguoiDung/ThongTinTaiKhoan';
+export const getFilmsForManagementURL = '/QuanLyPhim/LayDanhSachPhim';
+export const deleteFilmManagementURL = '/QuanLyPhim/XoaPhim';

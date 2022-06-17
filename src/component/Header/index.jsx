@@ -40,7 +40,10 @@ export default function Header() {
         <div className="logout__section d-flex">
           <div className="language"></div>
           <div className="user">
-            <h1 style={{ fontSize: '1.2rem' }} className="text-white">
+            <h1
+              style={{ fontSize: '1.2rem', marginRight: '1.2rem' }}
+              className="text-white"
+            >
               Xin chào, {user.hoTen} !
             </h1>
           </div>

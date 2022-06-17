@@ -11,3 +11,5 @@ export const getBookingSeats = (state) => state.seats;
 export const getUserBookingResult = (state) => state.bookingResult;
 export const getDateAndTime = (state) => state.getBoxOfficeList;
 export const loadingPage = (state) => state.loading;
+export const getFilmManagement = (state) => state.filmManagement;
+// export const deleteFilmManagement = state

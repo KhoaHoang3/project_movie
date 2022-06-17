@@ -13,6 +13,7 @@ import Admin from './page/Admin';
 import MovieManagement from './component/_MovieManagement';
 import UserManagement from './component/_UserManagement';
 import ShowTime from './component/_Showtime';
+import AddMovie from './component/_AddMovie';
 
 function App() {
   return (
@@ -43,6 +44,11 @@ function App() {
             exact
             path={'/admin/showtime'}
             element={<ShowTime />}
+          />
+          <Route
+            exact
+            path={'/admin/add_movie'}
+            element={<AddMovie />}
           />
         </Route>
       </Routes>

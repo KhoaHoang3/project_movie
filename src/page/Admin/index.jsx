@@ -6,6 +6,7 @@ import {
   UserOutlined,
   VideoCameraOutlined,
   ArrowLeftOutlined,
+  DiffOutlined,
 } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 import { Outlet, useLocation, useNavigate } from 'react-router';
@@ -49,25 +50,34 @@ export default function Admin(props) {
           items={[
             {
               key: '/admin/user_management',
-              icon: <UserOutlined style={{ fontSize: '2rem' }} />,
+              icon: <UserOutlined />,
               label: 'Quản lý người dùng',
               onClick: () => {
                 navigate('/admin/user_management');
               },
             },
+            // MOVIE_MANAGEMENT
             {
               key: '/admin/movie_management',
-              icon: (
-                <VideoCameraOutlined style={{ fontSize: '2rem' }} />
-              ),
+              icon: <VideoCameraOutlined />,
               label: 'Quản lý phim',
               onClick: () => {
                 navigate('/admin/movie_management');
               },
             },
+            // ADD_MOVIE
+            {
+              key: '/admin/add_movie',
+              icon: <DiffOutlined />,
+              label: 'Thêm phim mới',
+              onClick: () => {
+                navigate('/admin/add_movie');
+              },
+            },
+
             {
               key: '/admin/showtime',
-              icon: <UploadOutlined style={{ fontSize: '2rem' }} />,
+              icon: <UploadOutlined />,
               label: 'Showtime',
               onClick: () => {
                 navigate('/admin/showtime');
@@ -75,9 +85,7 @@ export default function Admin(props) {
             },
             {
               key: '4',
-              icon: (
-                <ArrowLeftOutlined style={{ fontSize: '2rem' }} />
-              ),
+              icon: <ArrowLeftOutlined />,
               label: 'Về trang chủ',
             },
           ]}

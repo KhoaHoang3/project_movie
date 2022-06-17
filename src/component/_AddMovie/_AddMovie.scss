@@ -1,0 +1,39 @@
+// .add__movie {
+//   .add__movie__title {
+//   }
+//   .add__movie__form {
+//     .text-field {
+//       position: relative;
+//       margin-top: 2.5rem;
+//     }
+
+//     .text-field label {
+//       display: inline-block;
+//       font-weight: 600;
+//       cursor: pointer;
+//       position: absolute;
+//       top: 0;
+//       left: 10px;
+//       background-color: white;
+//       padding: 1px 5px;
+//       font-size: 1.2rem;
+//       transform: translateY(-50%);
+//       color: black;
+//     }
+
+//     .text-field input {
+//       padding: 15px;
+//       display: block;
+//       width: 100%;
+//       font-size: 1.2rem;
+//       border: 1px solid black;
+//       border-radius: 4px;
+//       background-color: transparent;
+//       color: black;
+//     }
+//   }
+// }
+
+.ant-form-item-label > label:after {
+  display: none;
+}

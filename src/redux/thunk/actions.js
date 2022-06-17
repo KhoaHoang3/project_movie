@@ -5,6 +5,7 @@ import {
   bookingTicketURL,
   getBannerURL,
   getBoxOfficeListURL,
+  getFilmsForManagementURL,
   getListFilmURL,
   getShowtimeEachFilmURL,
   getTheaterInfo,
@@ -12,11 +13,13 @@ import {
   userBookingResultURL,
   userLoginURL,
   userRegisterURL,
+  deleteFilmManagementURL,
 } from '../../axios/apiURL';
 import { calendarTheater } from '../../_core/models/boxOfficeCalendar';
 import { getBannerFilms } from '../reducers/getBannerReducer';
 import { getBoxOfficeList } from '../reducers/getBoxOfficeReducer';
 import { getFilmCalendar } from '../reducers/getFilmCalendarReducer';
+import { getFilmsManagement } from '../reducers/getFilmsManagementReducer';
 import { getListFilms } from '../reducers/getListFilmReducer';
 import {
   theaterInfomation,
@@ -253,6 +256,47 @@ export const getUserBookingResultAction = () => {
     } catch (error) {
       dispatch(hideLoading());
 
+      console.log(error);
+    }
+  };
+};
+
+// get list film action
+export const getFilmsForManagementAction = () => {
+  return async (dispatch) => {
+    try {
+      const result = await http.get(
+        `${getFilmsForManagementURL}?maNhom=${GROUPID}`
+      );
+      const action = getFilmsManagement(result.data.content);
+      dispatch(action);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+// delete film action
+export const deleteFilmManagementAction = (filmCode) => {
+  return async (dispatch) => {
+    try {
+      dispatch(displayLoading());
+      const result = await http.delete(
+        `${deleteFilmManagementURL}?MaPhim=${filmCode}`
+      );
+
+      dispatch(getFilmsForManagementAction());
+
+      toast.success('Xóa phim thành công !', {
+        position: 'top-center',
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } catch (error) {
       console.log(error);
     }
   };

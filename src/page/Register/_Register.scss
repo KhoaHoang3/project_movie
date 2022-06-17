@@ -5,6 +5,9 @@
   flex-direction: column;
   height: 100vh;
   background-image: url('../../assets/img/background_movie_2.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   position: relative;
 
   .background__form {
