@@ -18,6 +18,9 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import moment from 'moment';
+import { uploadNewMovieAction } from '../../redux/thunk/actions';
+import { useDispatch } from 'react-redux';
+import { GROUPID } from '../../axios';
 
 const AliyunOSSUpload = ({ value, onChange }) => {
   const [OSSData, setOSSData] = useState(); // Mock get OSS api
@@ -90,23 +93,93 @@ const AliyunOSSUpload = ({ value, onChange }) => {
     beforeUpload,
   };
   return (
-    <Upload listType="picture" {...uploadProps}>
+    <Upload
+      accept=".png,.jpeg,.jpg,.doc"
+      listType="picture"
+      action={'http://localhost:3000/admin/add_movie'}
+      multiple={'false'}
+      // {...uploadProps}
+      beforeUpload={(file) => {
+        console.log(file);
+        return false;
+      }}
+      maxCount={1}
+      // defaultFileList={[
+      //   {
+      //     uid: '1',
+      //     name: 'movie_image.png',
+      //     status: 'done',
+      //     url: 'https://www.google.com/',
+      //   },
+      // ]}
+    >
       <Button icon={<UploadOutlined />}>Tải hình lên</Button>
     </Upload>
   );
 };
 export default function AddMovie() {
-  //   const [componentSize, setComponentSize] = useState('default');
+  const [img, setImg] = useState('');
+  const dispatch = useDispatch();
 
-  //   const onFormLayoutChange = ({ size }) => {
-  //     setComponentSize(size);
-  //   };
-
-  const onFinish = (values) => {
-    console.log(values);
-    console.log(moment(values.ngayKhoiChieu._d).format('DD/MM/YYYY'));
-  };
   const [form] = Form.useForm();
+
+  //send data to backend
+  const onFinish = (values) => {
+    const {
+      tenPhim,
+      trailer,
+      moTa,
+      sapChieu,
+      dangChieu,
+      hot,
+      ngayKhoiChieu,
+      hinhAnh,
+      maNhom,
+    } = values;
+    console.log(values);
+    const newNgayKC = moment(ngayKhoiChieu._d).format('DD/MM/YYYY');
+
+    const formData = new FormData();
+    for (let key in values) {
+      if (key === 'ngayKhoiChieu') {
+        formData.append(key, newNgayKC);
+      } else if (key !== 'hinhAnh') {
+        formData.append(key, values[key]);
+      } else {
+        formData.append('File', hinhAnh);
+      }
+    }
+
+    const action = uploadNewMovieAction(formData);
+    dispatch(action);
+  };
+
+  const handleUpdaloadImage = (e) => {
+    let file = e.target.files[0];
+    console.log('file', file);
+    //Create object to read file
+    if (
+      file.type === 'image/jpeg' ||
+      file.type === 'image/jpg' ||
+      file.type === 'image/png'
+    ) {
+      let reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = (e) => {
+        setImg(e.target.result);
+      };
+    }
+  };
+
+  // get image data
+  const getFile = (e) => {
+    console.log('Upload event:', e);
+
+    if (Array.isArray(e)) {
+      return e;
+    }
+    return e && e.file;
+  };
 
   return (
     <div style={{}}>
@@ -125,6 +198,9 @@ export default function AddMovie() {
         // }}
         // onValuesChange={onFormLayoutChange}
         size={'large'}
+        initialValues={{
+          maNhom: GROUPID,
+        }}
       >
         {/* MOVIE_NAME */}
         <Form.Item
@@ -148,6 +224,24 @@ export default function AddMovie() {
         >
           <Input />
         </Form.Item>
+
+        {/* MOVIE GROUP */}
+        <Form.Item
+          name="maNhom"
+          label={
+            <h1
+              style={{
+                marginRight: '0.5rem',
+                transform: 'translateY(10%)',
+              }}
+            >
+              Mã nhóm:{' '}
+            </h1>
+          }
+        >
+          <Input name="maNhom" disabled />
+        </Form.Item>
+
         {/* TRAILER */}
         <Form.Item
           name={'trailer'}
@@ -216,8 +310,9 @@ export default function AddMovie() {
             </h1>
           }
         >
-          <DatePicker />
+          <DatePicker format={'DD/MM/YYYY'} />
         </Form.Item>
+
         {/* NOW_SHOWING */}
         <Form.Item
           name={'dangChieu'}
@@ -231,9 +326,10 @@ export default function AddMovie() {
               Đang chiếu
             </h1>
           }
-          //   valuePropName="checked"
+          valuePropName="checked"
+          initialValue={false}
         >
-          <Switch defaultChecked />
+          <Switch />
         </Form.Item>
         {/* COMING SOON */}
         <Form.Item
@@ -249,8 +345,9 @@ export default function AddMovie() {
             </h1>
           }
           valuePropName="checked"
+          initialValue={false}
         >
-          <Switch defaultChecked />
+          <Switch />
         </Form.Item>
 
         {/* HOT? */}
@@ -266,9 +363,10 @@ export default function AddMovie() {
               Hot
             </h1>
           }
-          //   valuePropName="checked"
+          valuePropName="checked"
+          initialValue={false}
         >
-          <Switch defaultChecked />
+          <Switch />
         </Form.Item>
 
         {/* IMDB */}
@@ -279,11 +377,6 @@ export default function AddMovie() {
               required: true,
               message: 'Hãy nhập điểm IMDB',
             },
-
-            // {
-            //   type: 'number',
-            //   message: 'Hãy nhập vào số',
-            // },
           ]}
           label={
             <h1
@@ -296,11 +389,13 @@ export default function AddMovie() {
             </h1>
           }
         >
-          <Input style={{ width: '10%' }} />
+          <InputNumber size="large" min={1} max={10} />
         </Form.Item>
 
         {/* UPLOAD IMAGE */}
         <Form.Item
+          getValueFromEvent={getFile}
+          name="hinhAnh"
           label={
             <h1
               style={{
@@ -311,15 +406,40 @@ export default function AddMovie() {
               Hình ảnh
             </h1>
           }
-          name="hinhAnh"
         >
-          <AliyunOSSUpload />
+          <Upload
+            status={'done'}
+            openFileDialogOnClick
+            accept=".png,.jpeg,.jpg,.doc"
+            listType="picture"
+            beforeUpload={(file) => {
+              console.log(file);
+              return false;
+            }}
+            maxCount={1}
+          >
+            <Button icon={<UploadOutlined />}>Tải hình lên</Button>
+          </Upload>
+
+          {/* <input
+            name="hinhAnh"
+            type={'file'}
+            onChange={handleUpdaloadImage}
+          ></input>
+          <img
+            style={{ marginTop: '1rem' }}
+            height={200}
+            width={150}
+            src={img}
+            alt=""
+            accept="image/jpeg, image/jpg, image/png"
+          /> */}
         </Form.Item>
 
         <Form.Item>
           <Button
             htmlType="submit"
-            style={{ transform: 'translateX(194%)' }}
+            style={{ transform: 'translateX(256%)' }}
             type="primary"
           >
             Thêm phim

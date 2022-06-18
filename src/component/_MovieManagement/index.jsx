@@ -193,6 +193,17 @@ export default function MovieManagement() {
       key: 'moTa',
       width: '45%',
       align: 'center',
+      render: (text, record, index) => {
+        {
+          return (
+            <p>
+              {record.moTa.length > 50
+                ? record.moTa.subtr(0, 50) + '...'
+                : record.moTa}
+            </p>
+          );
+        }
+      },
 
       ...getColumnSearchProps('moTa'),
     },
@@ -233,7 +244,6 @@ export default function MovieManagement() {
     dispatch(action);
   }, [dispatch]);
   const { films } = useSelector(getFilmManagement);
-  console.log(films);
   return (
     <div>
       <Table

@@ -14,6 +14,7 @@ import {
   userLoginURL,
   userRegisterURL,
   deleteFilmManagementURL,
+  uploadNewMovieURL,
 } from '../../axios/apiURL';
 import { calendarTheater } from '../../_core/models/boxOfficeCalendar';
 import { getBannerFilms } from '../reducers/getBannerReducer';
@@ -280,7 +281,6 @@ export const getFilmsForManagementAction = () => {
 export const deleteFilmManagementAction = (filmCode) => {
   return async (dispatch) => {
     try {
-      dispatch(displayLoading());
       const result = await http.delete(
         `${deleteFilmManagementURL}?MaPhim=${filmCode}`
       );
@@ -288,6 +288,27 @@ export const deleteFilmManagementAction = (filmCode) => {
       dispatch(getFilmsForManagementAction());
 
       toast.success('Xóa phim thành công !', {
+        position: 'top-center',
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+//upload new movie action
+export const uploadNewMovieAction = (formData) => {
+  return async (dispatch) => {
+    try {
+      const result = await http.post(uploadNewMovieURL, formData);
+      console.log(result);
+      toast.success('Thêm phim thành công !', {
         position: 'top-center',
         autoClose: 1000,
         hideProgressBar: false,
