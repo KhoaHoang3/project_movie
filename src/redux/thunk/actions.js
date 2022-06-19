@@ -15,6 +15,7 @@ import {
   userRegisterURL,
   deleteFilmManagementURL,
   uploadNewMovieURL,
+  updateFilmURL,
 } from '../../axios/apiURL';
 import { calendarTheater } from '../../_core/models/boxOfficeCalendar';
 import { getBannerFilms } from '../reducers/getBannerReducer';
@@ -317,6 +318,18 @@ export const uploadNewMovieAction = (formData) => {
         draggable: true,
         progress: undefined,
       });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+//update film action
+export const updateFilmAction = (formData) => {
+  return async (dispatch) => {
+    try {
+      const result = await http.post(updateFilmURL, formData);
+      console.log(result);
     } catch (error) {
       console.log(error);
     }

@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { getDefaultMiddleware } from '@reduxjs/toolkit';
+import editFilmReducer from './reducers/editFilmReducer';
 import getBannerReducer from './reducers/getBannerReducer';
 import getBoxOfficeReducer from './reducers/getBoxOfficeReducer';
 import getFilmCalendarReducer from './reducers/getFilmCalendarReducer';
@@ -29,5 +30,6 @@ export const store = configureStore({
     bookingResult: userBookingResultReducer,
     loading: loadingReducer,
     filmManagement: getFilmsManagementReducer,
+    editFilm: editFilmReducer,
   },
 });

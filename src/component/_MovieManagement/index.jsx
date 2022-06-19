@@ -11,9 +11,19 @@ import {
   DeleteOutlined,
   ExclamationCircleOutlined,
 } from '@ant-design/icons';
-import { Button, Input, Space, Table, Modal } from 'antd';
+import {
+  Button,
+  Input,
+  Space,
+  Table,
+  Modal,
+  Drawer,
+  Tooltip,
+} from 'antd';
 import { useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
+import FormEditFilm from '../../Layout/LayoutEditFilm';
+import { edittingFilm } from '../../redux/reducers/editFilmReducer';
 const { confirm } = Modal;
 
 export default function MovieManagement() {
@@ -193,17 +203,6 @@ export default function MovieManagement() {
       key: 'moTa',
       width: '45%',
       align: 'center',
-      render: (text, record, index) => {
-        {
-          return (
-            <p>
-              {record.moTa.length > 50
-                ? record.moTa.subtr(0, 50) + '...'
-                : record.moTa}
-            </p>
-          );
-        }
-      },
 
       ...getColumnSearchProps('moTa'),
     },
@@ -217,20 +216,28 @@ export default function MovieManagement() {
       render: (text, record, index) => {
         return (
           <Space size="middle">
-            <Button
-              onClick={() => {
-                showDeleteConfirm(record.maPhim);
-              }}
-              size="large"
-              icon={<DeleteOutlined style={{ fontSize: '40px' }} />}
-              type="danger"
-            ></Button>
+            <Tooltip placement="top" title="Xóa phim">
+              <Button
+                onClick={() => {
+                  showDeleteConfirm(record.maPhim);
+                }}
+                size="large"
+                icon={<DeleteOutlined style={{ fontSize: '40px' }} />}
+                type="danger"
+              ></Button>
+            </Tooltip>
 
-            <Button
-              size="large"
-              icon={<FormOutlined style={{ fontSize: '40px' }} />}
-              type="primary"
-            ></Button>
+            <Tooltip placement="top" title="Chỉnh sửa/cập nhật phim">
+              <Button
+                onClick={() => {
+                  setDrawer(true);
+                  dispatch(edittingFilm(record));
+                }}
+                size="large"
+                icon={<FormOutlined style={{ fontSize: '40px' }} />}
+                type="primary"
+              ></Button>
+            </Tooltip>
           </Space>
         );
       },
@@ -239,6 +246,8 @@ export default function MovieManagement() {
 
   // ----------------------------------
   const dispatch = useDispatch();
+  const [drawer, setDrawer] = useState(false);
+
   useEffect(() => {
     const action = getFilmsForManagementAction();
     dispatch(action);
@@ -251,6 +260,28 @@ export default function MovieManagement() {
         columns={columns}
         dataSource={films}
       />
+
+      {<FormEditFilm drawer={drawer} closeDrawer={setDrawer} />}
+
+      {/* <Drawer
+        title={`Cập nhật phim`}
+        placement="right"
+        size={'large'}
+        onClose={() => setDrawer(false)}
+        visible={drawer}
+        extra={
+          <Space>
+            <Button onClick={() => setDrawer(false)}>Hủy</Button>
+            <Button type="primary" onClick={() => setDrawer(false)}>
+              OK
+            </Button>
+          </Space>
+        }
+      >
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+      </Drawer> */}
     </div>
   );
 }
