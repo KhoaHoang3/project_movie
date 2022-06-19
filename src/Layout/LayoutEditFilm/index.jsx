@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Drawer,
   Space,
@@ -12,15 +12,26 @@ import {
 } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { GROUPID } from '../../axios';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { editFilm } from '../../redux/selectors';
 import moment from 'moment';
 import { Footer } from 'antd/lib/layout/layout';
+import { updateFilmAction } from '../../redux/thunk/actions';
 
 export default function FormEditFilm({ drawer, closeDrawer }) {
   const [form] = Form.useForm();
 
   const { currentFilm } = useSelector(editFilm);
+  const dispatch = useDispatch();
+  // get image data
+  const getFile = (e) => {
+    console.log('Upload Image', e);
+    if (Array.isArray(e)) {
+      return e;
+    }
+    return e && e.file;
+  };
+
   const {
     tenPhim,
     sapChieu,
@@ -31,9 +42,37 @@ export default function FormEditFilm({ drawer, closeDrawer }) {
     moTa,
     ngayKhoiChieu,
     trailer,
+    maPhim,
   } = currentFilm;
+  const oldImage = hinhAnh;
   const onFinish = (values) => {
+    const {
+      tenPhim,
+      trailer,
+      hot,
+      dangChieu,
+      sapChieu,
+      hinhAnh,
+      moTa,
+      ngayKhoiChieu,
+      maPhim,
+    } = values;
     console.log(values);
+    const newNgayKC = moment(ngayKhoiChieu).format('DD/MM/YYYY');
+    const formData = new FormData();
+    for (let key in values) {
+      if (key === 'ngayKhoiChieu') {
+        formData.append('ngayKhoiChieu', newNgayKC);
+      } else if (key !== 'hinhAnh') {
+        formData.append(key, values[key]);
+      } else if (values.hinhAnh === undefined) {
+        formData.append('hinhAnh', oldImage);
+      } else {
+        formData.append('File', hinhAnh);
+      }
+    }
+    const action = updateFilmAction(formData);
+    dispatch(action);
   };
   return (
     <Drawer
@@ -77,14 +116,29 @@ export default function FormEditFilm({ drawer, closeDrawer }) {
         initialValues={{
           maNhom: GROUPID,
           tenPhim: tenPhim,
-          dangChieu: dangChieu,
           danhGia: danhGia,
-          hot: hot,
           moTa: moTa,
           trailer: trailer,
-          sapChieu: sapChieu,
+          ngayKhoiChieu: moment(ngayKhoiChieu),
+          maPhim: maPhim,
         }}
       >
+        {/* FILM CODE */}
+        <Form.Item
+          name="maPhim"
+          label={
+            <h1
+              style={{
+                marginRight: '0.5rem',
+                transform: 'translateY(10%)',
+              }}
+            >
+              Mã phim:{' '}
+            </h1>
+          }
+        >
+          <Input name="maPhim" disabled />
+        </Form.Item>
         {/* MOVIE_NAME */}
         <Form.Item
           rules={[
@@ -175,16 +229,13 @@ export default function FormEditFilm({ drawer, closeDrawer }) {
         </Form.Item>
         {/* DATE_AND_TIME */}
         <Form.Item
-          help={`Ngày khởi chiếu cũ là ${moment(ngayKhoiChieu).format(
-            'DD/MM/YYYY'
-          )}`}
           name={'ngayKhoiChieu'}
-          rules={[
-            {
-              required: true,
-              message: 'Hãy chọn ngày chiếu ',
-            },
-          ]}
+          // rules={[
+          //   {
+          //     required: true,
+          //     message: 'Hãy chọn ngày chiếu ',
+          //   },
+          // ]}
           label={
             <h1
               style={{
@@ -280,7 +331,7 @@ export default function FormEditFilm({ drawer, closeDrawer }) {
 
         {/* UPLOAD IMAGE */}
         <Form.Item
-          //   getValueFromEvent={getFile}
+          getValueFromEvent={getFile}
           name="hinhAnh"
           label={
             <h1
@@ -317,6 +368,7 @@ export default function FormEditFilm({ drawer, closeDrawer }) {
               fontSize: '1.5rem',
               transform: 'translateX(132px)',
               borderRadius: '10px',
+              marginTop: '3rem',
             }}
             type="primary"
           >

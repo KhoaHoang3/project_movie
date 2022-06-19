@@ -154,27 +154,8 @@ export default function AddMovie() {
     dispatch(action);
   };
 
-  const handleUpdaloadImage = (e) => {
-    let file = e.target.files[0];
-    console.log('file', file);
-    //Create object to read file
-    if (
-      file.type === 'image/jpeg' ||
-      file.type === 'image/jpg' ||
-      file.type === 'image/png'
-    ) {
-      let reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = (e) => {
-        setImg(e.target.result);
-      };
-    }
-  };
-
   // get image data
   const getFile = (e) => {
-    console.log('Upload event:', e);
-
     if (Array.isArray(e)) {
       return e;
     }
@@ -394,6 +375,7 @@ export default function AddMovie() {
 
         {/* UPLOAD IMAGE */}
         <Form.Item
+          help="File ảnh không quá 1MB"
           getValueFromEvent={getFile}
           name="hinhAnh"
           label={
@@ -440,11 +422,12 @@ export default function AddMovie() {
           <Button
             htmlType="submit"
             style={{
-              transform: 'translateX(256px)',
+              transform: 'translateX(286px)',
               width: '100%',
               padding: '2rem 0',
               fontSize: '1.5rem',
               borderRadius: '10px',
+              marginTop: '3.6rem',
             }}
             type="primary"
           >
@@ -452,7 +435,7 @@ export default function AddMovie() {
               style={{
                 color: 'white',
                 marginBottom: '0',
-                lineHeight: '5px',
+                lineHeight: '1px',
               }}
             >
               Thêm phim

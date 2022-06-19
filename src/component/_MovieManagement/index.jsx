@@ -10,6 +10,7 @@ import {
   FormOutlined,
   DeleteOutlined,
   ExclamationCircleOutlined,
+  CalendarOutlined,
 } from '@ant-design/icons';
 import {
   Button,
@@ -24,6 +25,7 @@ import { useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import FormEditFilm from '../../Layout/LayoutEditFilm';
 import { edittingFilm } from '../../redux/reducers/editFilmReducer';
+import { NavLink } from 'react-router-dom';
 const { confirm } = Modal;
 
 export default function MovieManagement() {
@@ -230,6 +232,7 @@ export default function MovieManagement() {
             <Tooltip placement="top" title="Chỉnh sửa/cập nhật phim">
               <Button
                 onClick={() => {
+                  console.log(record);
                   setDrawer(true);
                   dispatch(edittingFilm(record));
                 }}
@@ -237,6 +240,20 @@ export default function MovieManagement() {
                 icon={<FormOutlined style={{ fontSize: '40px' }} />}
                 type="primary"
               ></Button>
+            </Tooltip>
+
+            <Tooltip placement="top" title="Tạo lịch chiếu">
+              <NavLink to={``}>
+                <Button
+                  style={{
+                    backgroundColor: 'green',
+                    borderColor: 'green',
+                  }}
+                  type="primary"
+                  size="large"
+                  icon={<CalendarOutlined />}
+                ></Button>
+              </NavLink>
             </Tooltip>
           </Space>
         );
@@ -262,26 +279,6 @@ export default function MovieManagement() {
       />
 
       {<FormEditFilm drawer={drawer} closeDrawer={setDrawer} />}
-
-      {/* <Drawer
-        title={`Cập nhật phim`}
-        placement="right"
-        size={'large'}
-        onClose={() => setDrawer(false)}
-        visible={drawer}
-        extra={
-          <Space>
-            <Button onClick={() => setDrawer(false)}>Hủy</Button>
-            <Button type="primary" onClick={() => setDrawer(false)}>
-              OK
-            </Button>
-          </Space>
-        }
-      >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-      </Drawer> */}
     </div>
   );
 }

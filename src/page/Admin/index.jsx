@@ -68,7 +68,7 @@ export default function Admin(props) {
             // ADD_MOVIE
             {
               key: '/admin/add_movie',
-              icon: <DiffOutlined />,
+              icon: <UploadOutlined />,
               label: 'Thêm phim mới',
               onClick: () => {
                 navigate('/admin/add_movie');

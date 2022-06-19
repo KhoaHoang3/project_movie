@@ -308,7 +308,8 @@ export const uploadNewMovieAction = (formData) => {
   return async (dispatch) => {
     try {
       const result = await http.post(uploadNewMovieURL, formData);
-      console.log(result);
+      dispatch(getFilmsForManagementAction());
+
       toast.success('Thêm phim thành công !', {
         position: 'top-center',
         autoClose: 1000,
@@ -329,9 +330,27 @@ export const updateFilmAction = (formData) => {
   return async (dispatch) => {
     try {
       const result = await http.post(updateFilmURL, formData);
-      console.log(result);
+      dispatch(getFilmsForManagementAction());
+
+      toast.success('Cập nhật phim thành công !', {
+        position: 'top-center',
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     } catch (error) {
-      console.log(error);
+      toast.error(error.response.statusText, {
+        position: 'top-center',
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
 };

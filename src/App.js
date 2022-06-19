@@ -14,6 +14,7 @@ import MovieManagement from './component/_MovieManagement';
 import UserManagement from './component/_UserManagement';
 import ShowTime from './component/_Showtime';
 import AddMovie from './component/_AddMovie';
+import CalendarShowtime from './component/_CalendarShowtime';
 
 function App() {
   return (
@@ -34,7 +35,7 @@ function App() {
             exact
             path={'/admin/movie_management'}
             element={<MovieManagement />}
-          />
+          ></Route>
           <Route
             exact
             path={'/admin/user_management'}
