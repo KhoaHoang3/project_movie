@@ -76,14 +76,6 @@ export default function Admin(props) {
             },
 
             {
-              key: '/admin/showtime',
-              icon: <UploadOutlined />,
-              label: 'Showtime',
-              onClick: () => {
-                navigate('/admin/showtime');
-              },
-            },
-            {
               key: '4',
               icon: <ArrowLeftOutlined />,
               label: 'Về trang chủ',

@@ -12,9 +12,7 @@ import Loading from './page/Loading';
 import Admin from './page/Admin';
 import MovieManagement from './component/_MovieManagement';
 import UserManagement from './component/_UserManagement';
-import ShowTime from './component/_Showtime';
 import AddMovie from './component/_AddMovie';
-import CalendarShowtime from './component/_CalendarShowtime';
 
 function App() {
   return (
@@ -30,6 +28,7 @@ function App() {
           path="/booking_ticket/:id"
           element={<BookingTicket />}
         />
+        {/* ADMIN */}
         <Route path="/admin" element={<Admin />}>
           <Route
             exact
@@ -40,11 +39,6 @@ function App() {
             exact
             path={'/admin/user_management'}
             element={<UserManagement />}
-          />
-          <Route
-            exact
-            path={'/admin/showtime'}
-            element={<ShowTime />}
           />
           <Route
             exact

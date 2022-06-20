@@ -26,6 +26,7 @@ import Highlighter from 'react-highlight-words';
 import FormEditFilm from '../../Layout/LayoutEditFilm';
 import { edittingFilm } from '../../redux/reducers/editFilmReducer';
 import { NavLink } from 'react-router-dom';
+import FormCreateCalendar from '../../Layout/LayoutCreateCalendar';
 const { confirm } = Modal;
 
 export default function MovieManagement() {
@@ -218,7 +219,7 @@ export default function MovieManagement() {
       render: (text, record, index) => {
         return (
           <Space size="middle">
-            <Tooltip placement="top" title="Xóa phim">
+            <Tooltip key={'1'} placement="top" title="Xóa phim">
               <Button
                 onClick={() => {
                   showDeleteConfirm(record.maPhim);
@@ -229,10 +230,13 @@ export default function MovieManagement() {
               ></Button>
             </Tooltip>
 
-            <Tooltip placement="top" title="Chỉnh sửa/cập nhật phim">
+            <Tooltip
+              key={'2'}
+              placement="top"
+              title="Chỉnh sửa/cập nhật phim"
+            >
               <Button
                 onClick={() => {
-                  console.log(record);
                   setDrawer(true);
                   dispatch(edittingFilm(record));
                 }}
@@ -242,18 +246,20 @@ export default function MovieManagement() {
               ></Button>
             </Tooltip>
 
-            <Tooltip placement="top" title="Tạo lịch chiếu">
-              <NavLink to={``}>
-                <Button
-                  style={{
-                    backgroundColor: 'green',
-                    borderColor: 'green',
-                  }}
-                  type="primary"
-                  size="large"
-                  icon={<CalendarOutlined />}
-                ></Button>
-              </NavLink>
+            <Tooltip key={'3'} placement="top" title="Tạo lịch chiếu">
+              <Button
+                onClick={() => {
+                  setModalCalendar(true);
+                  dispatch(edittingFilm(record));
+                }}
+                style={{
+                  backgroundColor: 'green',
+                  borderColor: 'green',
+                }}
+                type="primary"
+                size="large"
+                icon={<CalendarOutlined />}
+              ></Button>
             </Tooltip>
           </Space>
         );
@@ -264,6 +270,7 @@ export default function MovieManagement() {
   // ----------------------------------
   const dispatch = useDispatch();
   const [drawer, setDrawer] = useState(false);
+  const [modalCalendar, setModalCalendar] = useState(false);
 
   useEffect(() => {
     const action = getFilmsForManagementAction();
@@ -278,7 +285,16 @@ export default function MovieManagement() {
         dataSource={films}
       />
 
-      {<FormEditFilm drawer={drawer} closeDrawer={setDrawer} />}
+      {drawer && (
+        <FormEditFilm drawer={drawer} closeDrawer={setDrawer} />
+      )}
+
+      {modalCalendar && (
+        <FormCreateCalendar
+          modalCalendar={modalCalendar}
+          closeModal={setModalCalendar}
+        />
+      )}
     </div>
   );
 }

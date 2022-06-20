@@ -17,8 +17,9 @@ import { editFilm } from '../../redux/selectors';
 import moment from 'moment';
 import { Footer } from 'antd/lib/layout/layout';
 import { updateFilmAction } from '../../redux/thunk/actions';
+import { memo } from 'react';
 
-export default function FormEditFilm({ drawer, closeDrawer }) {
+function FormEditFilm({ drawer, closeDrawer }) {
   const [form] = Form.useForm();
 
   const { currentFilm } = useSelector(editFilm);
@@ -387,3 +388,5 @@ export default function FormEditFilm({ drawer, closeDrawer }) {
     </Drawer>
   );
 }
+
+export default memo(FormEditFilm);

@@ -15,3 +15,5 @@ export const getFilmsForManagementURL = '/QuanLyPhim/LayDanhSachPhim';
 export const deleteFilmManagementURL = '/QuanLyPhim/XoaPhim';
 export const uploadNewMovieURL = '/QuanLyPhim/ThemPhimUploadHinh';
 export const updateFilmURL = '/QuanLyPhim/CapNhatPhimUpload';
+export const getTheaterSystemInfoURL =
+  '/QuanLyRap/LayThongTinCumRapTheoHeThong';
