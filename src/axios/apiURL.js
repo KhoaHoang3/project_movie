@@ -17,3 +17,4 @@ export const uploadNewMovieURL = '/QuanLyPhim/ThemPhimUploadHinh';
 export const updateFilmURL = '/QuanLyPhim/CapNhatPhimUpload';
 export const getTheaterSystemInfoURL =
   '/QuanLyRap/LayThongTinCumRapTheoHeThong';
+export const createShowtimeURL = '/QuanLyDatVe/TaoLichChieu';

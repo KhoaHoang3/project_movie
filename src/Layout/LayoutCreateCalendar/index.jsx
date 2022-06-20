@@ -11,7 +11,10 @@ import {
   Input,
 } from 'antd';
 import FormItem from 'antd/lib/form/FormItem';
-import { getTheaterInfoAction } from '../../redux/thunk/actions';
+import {
+  createShowtimeMovieAction,
+  getTheaterInfoAction,
+} from '../../redux/thunk/actions';
 import { useDispatch, useSelector } from 'react-redux';
 // import { getTheaterInfo } from '../../redux/selectors';
 import { useState } from 'react';
@@ -21,32 +24,54 @@ import {
   getTheaterSystemInfoURL,
 } from '../../axios/apiURL';
 import { editFilm } from '../../redux/selectors';
+import moment from 'moment';
 
 export default function FormCreateCalendar({
   modalCalendar,
   closeModal,
 }) {
-  const onChange = (value, dateString) => {
-    console.log('Selected Time: ', value);
-    console.log('Formatted Selected Time: ', dateString);
-  };
+  // const onChange = (value, dateString) => {
+  //   console.log('Selected Time: ', value);
+  //   console.log('Formatted Selected Time: ', dateString);
+  // };
 
-  const onOk = (value) => {
-    console.log('onOk: ', value);
-  };
+  // const onOk = (value) => {
+  //   console.log('onOk: ', value);
+  // };
+  const dispatch = useDispatch();
   const onFinish = (values) => {
     console.log('VALUES', values);
+    console.log(
+      'dateTime',
+      moment(values.ngayGioKhoiChieu).format('DD/MM/YYYY hh:mm:ss')
+    );
+    const { maPhim, ngayGioKhoiChieu, maRap, giaVe } = values;
+    const ngayChieuGioChieu = moment(ngayGioKhoiChieu).format(
+      'DD/MM/YYYY hh:mm:ss'
+    );
+    const action = createShowtimeMovieAction({
+      maPhim,
+      ngayChieuGioChieu,
+      maRap,
+      giaVe,
+    });
+    dispatch(action);
   };
+  const [form] = Form.useForm();
+
   const { currentFilm } = useSelector(editFilm);
   const { maPhim } = currentFilm;
-  console.log(maPhim);
 
   const [theater, setTheater] = useState({
     theaterSystem: [],
     theater: [],
   });
-  // console.log('HTR', theater.heThongRap);
-  //   console.log('cumRap', theater.cumRap);
+
+  const changeMoney = (value) => {
+    console.log('money', value);
+  };
+  console.log('HTR', theater.theaterSystem);
+  console.log('cumRap', theater.theater);
 
   useEffect(() => {
     async function callTheaterSystemApi() {
@@ -90,6 +115,7 @@ export default function FormCreateCalendar({
         style={{ width: '700px' }}
       >
         <Form
+          form={form}
           onFinish={onFinish}
           style={{ width: '620px' }}
           size="large"
@@ -159,7 +185,7 @@ export default function FormCreateCalendar({
                 message: 'Hãy chọn hệ thống rạp',
               },
             ]}
-            name={'cumRap'}
+            name={'maRap'}
             label={
               <h1
                 style={{
@@ -175,7 +201,7 @@ export default function FormCreateCalendar({
               options={theater.theater?.map((item) => {
                 return {
                   label: item.tenCumRap,
-                  value: item.tenCumRap,
+                  value: item.maCumRap,
                 };
               })}
               placeholder="Chọn cụm rạp"
@@ -186,10 +212,10 @@ export default function FormCreateCalendar({
             rules={[
               {
                 required: true,
-                message: 'Hãy chọn hệ ngày/giờ chiếu',
+                message: 'Hãy chọn ngày/giờ chiếu',
               },
             ]}
-            name={'ngayChieuGioChieu'}
+            name={'ngayGioKhoiChieu'}
             label={
               <h1
                 style={{
@@ -202,10 +228,11 @@ export default function FormCreateCalendar({
             }
           >
             <DatePicker
+              format={'DD/MM/YYY hh:mm:ss A'}
               placeholder="Chọn ngày/giờ"
               showTime
-              onChange={onChange}
-              onOk={onOk}
+              // onChange={onChange}
+              // onOk={onOk}
             />
           </Form.Item>
           {/* TICKET PRICE */}
@@ -213,7 +240,7 @@ export default function FormCreateCalendar({
             rules={[
               {
                 required: true,
-                message: 'Hãy nhập giá vé từ 75.000-150.000đ',
+                message: 'Hãy nhập giá vé',
               },
             ]}
             name={'giaVe'}
@@ -228,7 +255,7 @@ export default function FormCreateCalendar({
               </h1>
             }
           >
-            <InputNumber max={150000} min={75000} /> đồng
+            <InputNumber size="large"></InputNumber>
           </Form.Item>
           {/* BUTTON */}
           <Form.Item>

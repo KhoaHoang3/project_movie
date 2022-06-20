@@ -36,7 +36,7 @@ export default function Detail() {
           }}
           to={`/booking_ticket/${maLichChieu}`}
         >
-          {moment(ngayChieuGioChieu).format('DD.MM.YYYY hh:mm A')}
+          {moment(ngayChieuGioChieu).format('DD/MM/YYYY hh:mm A')}
         </NavLink>
       );
     } else {

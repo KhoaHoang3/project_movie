@@ -16,6 +16,7 @@ import {
   deleteFilmManagementURL,
   uploadNewMovieURL,
   updateFilmURL,
+  createShowtimeURL,
 } from '../../axios/apiURL';
 import { calendarTheater } from '../../_core/models/boxOfficeCalendar';
 import { getBannerFilms } from '../reducers/getBannerReducer';
@@ -343,6 +344,34 @@ export const updateFilmAction = (formData) => {
       });
     } catch (error) {
       toast.error(error.response.statusText, {
+        position: 'top-center',
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  };
+};
+
+// create showtime movie
+export const createShowtimeMovieAction = (data) => {
+  return async (dispatch) => {
+    try {
+      const result = await http.post(createShowtimeURL, data);
+      toast.success('Tạo lịch chiếu phim thành công !', {
+        position: 'top-center',
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } catch (error) {
+      toast.error(error.response.data.content, {
         position: 'top-center',
         autoClose: 1000,
         hideProgressBar: false,
