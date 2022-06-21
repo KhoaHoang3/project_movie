@@ -136,6 +136,7 @@ export default function Carouselll() {
           <div className="modal-content">
             <div className="modal-body">
               <iframe
+                id="trailer_1"
                 width={720}
                 height={600}
                 src="https://www.youtube.com/embed/uqJ9u7GSaYM"
@@ -174,6 +175,7 @@ export default function Carouselll() {
           <div className="modal-content">
             <div className="modal-body">
               <iframe
+                id="trailer_2"
                 width={720}
                 height={600}
                 src="https://www.youtube.com/embed/kBY2k3G6LsM"
@@ -212,6 +214,7 @@ export default function Carouselll() {
           <div className="modal-content">
             <div className="modal-body">
               <iframe
+                id="trailer_3"
                 width="720"
                 height="600"
                 src="https://www.youtube.com/embed/Eu9G8nO5-Ug"

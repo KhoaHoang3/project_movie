@@ -1,8 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Radio, Modal } from 'antd';
+import {
+  Button,
+  Radio,
+  Modal,
+  Menu,
+  Dropdown,
+  Space,
+  Avatar,
+} from 'antd';
 import {
   VideoCameraOutlined,
   ExclamationCircleOutlined,
+  DownOutlined,
 } from '@ant-design/icons';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -12,6 +21,80 @@ const { Option } = Select;
 const { confirm } = Modal;
 
 export default function Header() {
+  const adminMenu = (
+    <Menu
+      items={[
+        {
+          label: (
+            <h1 className="update__info">
+              Cập nhật thông tin tài khoản
+            </h1>
+          ),
+          key: '0',
+          danger: true,
+        },
+        {
+          label: (
+            <NavLink to={'/admin'}>
+              <h1 className="update__info">Đi đến trang admin</h1>
+            </NavLink>
+          ),
+          key: '0',
+          danger: true,
+        },
+        {
+          type: 'divider',
+        },
+        {
+          label: (
+            <h1
+              onClick={() => {
+                showConfirm();
+              }}
+              className="user__logout"
+            >
+              Đăng xuất
+            </h1>
+          ),
+          key: '1',
+          danger: true,
+        },
+      ]}
+    />
+  );
+
+  const userMenu = (
+    <Menu
+      items={[
+        {
+          label: (
+            <h1 className="update__info">
+              Cập nhật thông tin tài khoản
+            </h1>
+          ),
+          key: '0',
+          danger: true,
+        },
+        {
+          type: 'divider',
+        },
+        {
+          label: (
+            <h1
+              onClick={() => {
+                showConfirm();
+              }}
+              className="user__logout"
+            >
+              Đăng xuất
+            </h1>
+          ),
+          key: '1',
+          danger: true,
+        },
+      ]}
+    />
+  );
   const showConfirm = () => {
     confirm({
       title: 'Bạn vẫn muốn đăng xuất khỏi tài khoản?',
@@ -36,28 +119,103 @@ export default function Header() {
     let user = {};
     if (localStorage.getItem('USER_LOGIN')) {
       user = JSON.parse(localStorage.getItem('USER_LOGIN'));
-      return (
-        <div className="logout__section d-flex">
-          <div className="language"></div>
-          <div className="user">
-            <h1
-              style={{ fontSize: '1.2rem', marginRight: '1.2rem' }}
-              className="text-white"
+      if (user.maLoaiNguoiDung === 'QuanTri') {
+        return (
+          <div className="logout__section d-flex">
+            <Dropdown
+              overlayStyle={{ zIndex: '10000' }}
+              overlay={adminMenu}
+              trigger={['hover']}
             >
-              Xin chào, {user.hoTen} !
-            </h1>
+              <a onClick={(e) => e.preventDefault()}>
+                <Space>
+                  <Avatar
+                    style={{
+                      transform: 'translateY(2px)',
+                      marginRight: '0.5rem',
+                    }}
+                    src={`https://joeschmoe.io/api/v1/${user.hoTen}`}
+                  />
+                  <div className="user">
+                    <h1
+                      style={{
+                        fontSize: '1.2rem',
+                        marginRight: '1.2rem',
+                      }}
+                      className="text-white"
+                    >
+                      Xin chào, {user.hoTen} !
+                    </h1>
+                  </div>
+                  <DownOutlined
+                    style={{
+                      color: 'white',
+                      transform: 'translate(-18px,4px)',
+                    }}
+                  />
+                </Space>
+              </a>
+            </Dropdown>
+            {/* <div className="user">
+              <h1
+                style={{ fontSize: '1.2rem', marginRight: '1.2rem' }}
+                className="text-white"
+              >
+                Xin chào, {user.hoTen} !
+              </h1>
+            </div> */}
+            {/* <button
+              style={{ fontSize: '1.2rem' }}
+              onClick={() => {
+                showConfirm();
+              }}
+              className="logout__button"
+            >
+              Đăng xuất
+            </button> */}
           </div>
-          <button
-            style={{ fontSize: '1.2rem' }}
-            onClick={() => {
-              showConfirm();
-            }}
-            className="logout__button"
-          >
-            Đăng xuất
-          </button>
-        </div>
-      );
+        );
+      } else if (user.maLoaiNguoiDung === 'KhachHang') {
+        return (
+          <div className="logout__section d-flex">
+            <Dropdown
+              overlayStyle={{ zIndex: '10000' }}
+              overlay={userMenu}
+              trigger={['hover']}
+            >
+              <a onClick={(e) => e.preventDefault()}>
+                <Space>
+                  <Avatar
+                    style={{
+                      transform: 'translateY(2px)',
+                      marginRight: '0.5rem',
+                      fontSize: '1.2rem',
+                    }}
+                    src={`https://joeschmoe.io/api/v1/${user.hoTen}`}
+                  />
+                  <div className="user">
+                    <h1
+                      style={{
+                        fontSize: '1.2rem',
+                        marginRight: '1.2rem',
+                      }}
+                      className="text-white"
+                    >
+                      Xin chào, {user.hoTen} !
+                    </h1>
+                  </div>
+                  <DownOutlined
+                    style={{
+                      color: 'white',
+                      transform: 'translate(-18px,4px)',
+                    }}
+                  />
+                </Space>
+              </a>
+            </Dropdown>
+          </div>
+        );
+      }
     } else {
       return (
         <div>

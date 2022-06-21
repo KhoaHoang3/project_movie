@@ -164,12 +164,12 @@ export default function UserManagement() {
     // PHONE NUMBER
     {
       title: 'Số điện thoại',
-      dataIndex: 'soDt',
-      key: 'soDt',
+      dataIndex: 'soDT',
+      key: 'soDT',
       width: '22%',
       align: 'center',
 
-      ...getColumnSearchProps('soDt'),
+      ...getColumnSearchProps('soDT'),
     },
     // KIND OF USERS
     {
@@ -245,10 +245,11 @@ export default function UserManagement() {
             <Tooltip
               key={'2'}
               placement="top"
-              title="Chỉnh sửa/ cập nhật người dùng"
+              title="Chỉnh sửa/ cập nhật tài khoản"
             >
               <Button
                 onClick={() => {
+                  console.log(record);
                   dispatch(getUserInfoEdit(record));
                   setVisible(true);
                 }}

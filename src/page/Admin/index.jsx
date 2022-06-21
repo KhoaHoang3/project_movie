@@ -6,13 +6,24 @@ import {
   UserOutlined,
   VideoCameraOutlined,
   ArrowLeftOutlined,
-  DiffOutlined,
+  DownOutlined,
+  PlusCircleOutlined,
 } from '@ant-design/icons';
-import { Layout, Menu, Avatar } from 'antd';
+import { Layout, Menu, Avatar, Space, Dropdown } from 'antd';
 import { Outlet, useLocation, useNavigate } from 'react-router';
 import MovieManagement from '../../component/_MovieManagement';
 import { NavLink } from 'react-router-dom';
 const { Header, Sider, Content } = Layout;
+const menu = (
+  <Menu
+    items={[
+      {
+        label: <h1 style={{ fontSize: '1.2rem' }}>Đăng xuất</h1>,
+        key: '1',
+      },
+    ]}
+  />
+);
 
 export default function Admin(props) {
   const [collapsed, setCollapsed] = useState(false);
@@ -24,20 +35,29 @@ export default function Admin(props) {
       user = JSON.parse(localStorage.getItem('USER_LOGIN'));
       return (
         <div className="d-flex" style={{ marginRight: '5rem' }}>
-          <Avatar
-            style={{
-              transform: 'translateY(15px)',
-              marginRight: '1rem',
-            }}
-            src={`https://joeschmoe.io/api/v1/${user.hoTen}`}
-          />
+          <Dropdown overlay={menu} trigger={['click']}>
+            <a onClick={(e) => e.preventDefault()}>
+              <Space>
+                <Avatar
+                  style={{
+                    transform: 'translateY(-7px)',
+                    marginRight: '0.5rem',
+                  }}
+                  src={`https://joeschmoe.io/api/v1/${user.hoTen}`}
+                />
 
-          <h1 style={{ fontSize: '1.3rem' }}>
-            Xin chào {user.hoTen} !
-          </h1>
-          <h1 style={{ fontSize: '1.3rem', marginLeft: '1rem' }}>
-            Đăng xuất
-          </h1>
+                <h1 style={{ fontSize: '1.3rem' }}>
+                  Xin chào {user.hoTen} !
+                </h1>
+                <DownOutlined
+                  style={{
+                    transform: 'translateY(-7px)',
+                    color: 'black',
+                  }}
+                />
+              </Space>
+            </a>
+          </Dropdown>
         </div>
       );
     }
@@ -72,12 +92,22 @@ export default function Admin(props) {
           selectedKeys={location.pathname}
           defaultSelectedKeys={location.pathname}
           items={[
+            // USER_MANAGEMENT
             {
               key: '/admin/user_management',
               icon: <UserOutlined />,
               label: 'Quản lý người dùng',
               onClick: () => {
                 navigate('/admin/user_management');
+              },
+            },
+            // ADD USER
+            {
+              key: '/admin/add_user',
+              icon: <PlusCircleOutlined />,
+              label: 'Thêm người dùng',
+              onClick: () => {
+                navigate('/admin/add_user');
               },
             },
             // MOVIE_MANAGEMENT
@@ -103,6 +133,9 @@ export default function Admin(props) {
               key: '4',
               icon: <ArrowLeftOutlined />,
               label: 'Về trang chủ',
+              onClick: () => {
+                navigate('/');
+              },
             },
           ]}
         ></Menu>

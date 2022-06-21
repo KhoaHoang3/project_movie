@@ -11,7 +11,7 @@ import { toast } from 'react-toastify';
 export default function FormEditUser({ visible, closeModal }) {
   const [form] = Form.useForm();
   const { userInfo } = useSelector(getUserList);
-  const { email, hoTen, maLoaiNguoiDung, matKhau, soDt, taiKhoan } =
+  const { email, hoTen, maLoaiNguoiDung, matKhau, soDT, taiKhoan } =
     userInfo;
   const [kindOfUser, setKindOfUser] = useState([]);
   const dispatch = useDispatch();
@@ -62,7 +62,7 @@ export default function FormEditUser({ visible, closeModal }) {
             hoTen: hoTen,
             maLoaiNguoiDung: maLoaiNguoiDung,
             matKhau: matKhau,
-            soDt: soDt,
+            soDT: soDT,
             taiKhoan: taiKhoan,
           }}
         >
@@ -103,12 +103,12 @@ export default function FormEditUser({ visible, closeModal }) {
           </Form.Item>
           {/* PHONE NUMBER */}
           <Form.Item
-            name={'soDt'}
+            name={'soDT'}
             label={
               <h1 style={{ fontSize: '1.2rem' }}>Số điện thoại</h1>
             }
           >
-            <Input name="soDt"></Input>
+            <Input name="soDT"></Input>
           </Form.Item>
           {/* KIND OF USER */}
           <Form.Item

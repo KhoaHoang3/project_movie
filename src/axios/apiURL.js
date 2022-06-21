@@ -24,3 +24,4 @@ export const getKindOfUserURL =
   '/QuanLyNguoiDung/LayDanhSachLoaiNguoiDung';
 export const updateUserURL =
   '/QuanLyNguoiDung/CapNhatThongTinNguoiDung';
+export const addUserURL = '/QuanLyNguoiDung/ThemNguoiDung';

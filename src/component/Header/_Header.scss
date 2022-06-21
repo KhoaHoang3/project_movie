@@ -5,7 +5,7 @@
   position: fixed;
   top: 0;
   padding: 1.2rem 3rem;
-  z-index: 1000000;
+  z-index: 10000;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.6);
   .name {
@@ -84,4 +84,9 @@
       color: orange;
     }
   }
+}
+
+//for drop down
+.ant-dropdown-menu-item.ant-dropdown-menu-item-danger:hover {
+  background-color: orange !important;
 }

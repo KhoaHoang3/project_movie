@@ -13,6 +13,7 @@ import Admin from './page/Admin';
 import MovieManagement from './component/_MovieManagement';
 import UserManagement from './component/_UserManagement';
 import AddMovie from './component/_AddMovie';
+import AddUser from './component/_AddUser';
 
 function App() {
   return (
@@ -39,6 +40,11 @@ function App() {
             exact
             path={'/admin/user_management'}
             element={<UserManagement />}
+          />
+          <Route
+            exact
+            path={'/admin/add_user'}
+            element={<AddUser />}
           />
           <Route
             exact

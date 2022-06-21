@@ -20,6 +20,7 @@ import {
   getUserListURL,
   deleteUserURL,
   updateUserURL,
+  addUserURL,
 } from '../../axios/apiURL';
 import { calendarTheater } from '../../_core/models/boxOfficeCalendar';
 import { getBannerFilms } from '../reducers/getBannerReducer';
@@ -446,6 +447,24 @@ export const updateUserAction = (data) => {
       });
     } catch (error) {
       console.log(error);
+      toast.error(error.response.data.content, {
+        position: 'top-center',
+        autoClose: 1000,
+      });
+    }
+  };
+};
+
+//add user
+export const addUserAction = (data) => {
+  return async (dispatch) => {
+    try {
+      const result = await http.post(addUserURL, data);
+      toast.success('Thêm người dùng thành công !', {
+        position: 'top-center',
+        autoClose: 1000,
+      });
+    } catch (error) {
       toast.error(error.response.data.content, {
         position: 'top-center',
         autoClose: 1000,
