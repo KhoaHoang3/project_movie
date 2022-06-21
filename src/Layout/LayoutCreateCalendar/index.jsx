@@ -144,7 +144,11 @@ export default function FormCreateCalendar({
               </h1>
             }
           >
-            <Input name="maPhim" disabled />
+            <Input
+              style={{ fontWeight: 'bolder' }}
+              name="maPhim"
+              disabled
+            />
           </Form.Item>
           {/* THEATER SYSTEM */}
           <Form.Item
@@ -228,7 +232,7 @@ export default function FormCreateCalendar({
             }
           >
             <DatePicker
-              format={'DD/MM/YYY hh:mm:ss A'}
+              format={'DD/MM/YYYY hh:mm:ss A'}
               placeholder="Chọn ngày/giờ"
               showTime
               // onChange={onChange}

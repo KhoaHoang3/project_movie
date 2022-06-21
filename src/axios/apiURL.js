@@ -18,3 +18,9 @@ export const updateFilmURL = '/QuanLyPhim/CapNhatPhimUpload';
 export const getTheaterSystemInfoURL =
   '/QuanLyRap/LayThongTinCumRapTheoHeThong';
 export const createShowtimeURL = '/QuanLyDatVe/TaoLichChieu';
+export const getUserListURL = '/QuanLyNguoiDung/LayDanhSachNguoiDung';
+export const deleteUserURL = '/QuanLyNguoiDung/XoaNguoiDung';
+export const getKindOfUserURL =
+  '/QuanLyNguoiDung/LayDanhSachLoaiNguoiDung';
+export const updateUserURL =
+  '/QuanLyNguoiDung/CapNhatThongTinNguoiDung';

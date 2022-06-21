@@ -14,3 +14,4 @@ export const loadingPage = (state) => state.loading;
 export const getFilmManagement = (state) => state.filmManagement;
 // export const deleteFilmManagement = state
 export const editFilm = (state) => state.editFilm;
+export const getUserList = (state) => state.userList;

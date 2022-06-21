@@ -17,6 +17,9 @@ import {
   uploadNewMovieURL,
   updateFilmURL,
   createShowtimeURL,
+  getUserListURL,
+  deleteUserURL,
+  updateUserURL,
 } from '../../axios/apiURL';
 import { calendarTheater } from '../../_core/models/boxOfficeCalendar';
 import { getBannerFilms } from '../reducers/getBannerReducer';
@@ -28,6 +31,7 @@ import {
   theaterInfomation,
   theaterShowtimeInfo,
 } from '../reducers/getTheaterInfoReducer';
+import { getUserListManagement } from '../reducers/getUserListReducer';
 import {
   displayLoading,
   hideLoading,
@@ -379,6 +383,72 @@ export const createShowtimeMovieAction = (data) => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
+      });
+    }
+  };
+};
+
+//get user list action
+export const getUserListAction = () => {
+  return async (dispatch) => {
+    try {
+      const result = await http.get(
+        `${getUserListURL}?MaNhom=${GROUPID}`
+      );
+      dispatch(getUserListManagement(result.data.content));
+    } catch (error) {
+      toast.error(error.response.data.content);
+    }
+  };
+};
+
+//delete user action
+export const deleteUserAction = (userAccount) => {
+  return async (dispatch) => {
+    try {
+      const result = await http.delete(
+        `${deleteUserURL}?TaiKhoan=${userAccount}`
+      );
+      dispatch(getUserListAction());
+      toast.success('Xóa người dùng thành công', {
+        position: 'top-center',
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } catch (error) {
+      toast.error(error.response.data.content, {
+        position: 'top-center',
+        autoClose: 1000,
+      });
+    }
+  };
+};
+
+// update user
+export const updateUserAction = (data) => {
+  return async (dispatch) => {
+    try {
+      const result = await http.put(updateUserURL, data);
+      console.log(result);
+      dispatch(getUserListAction());
+      toast.success('Cập nhật thông tin người dùng thành công', {
+        position: 'top-center',
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.content, {
+        position: 'top-center',
+        autoClose: 1000,
       });
     }
   };

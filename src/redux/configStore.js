@@ -8,6 +8,7 @@ import { getFilmDetailReducer } from './reducers/getFilmDetailReducer';
 import getFilmsManagementReducer from './reducers/getFilmsManagementReducer';
 import getListFilmReducer from './reducers/getListFilmReducer';
 import getTheaterInfoReducer from './reducers/getTheaterInfoReducer';
+import getUserListReducer from './reducers/getUserListReducer';
 import loadingReducer from './reducers/loadingReducer';
 import seatReducer from './reducers/seatReducer';
 import userBookingResultReducer from './reducers/userBookingResultReducer';
@@ -31,5 +32,6 @@ export const store = configureStore({
     loading: loadingReducer,
     filmManagement: getFilmsManagementReducer,
     editFilm: editFilmReducer,
+    userList: getUserListReducer,
   },
 });

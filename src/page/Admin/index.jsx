@@ -8,7 +8,7 @@ import {
   ArrowLeftOutlined,
   DiffOutlined,
 } from '@ant-design/icons';
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, Avatar } from 'antd';
 import { Outlet, useLocation, useNavigate } from 'react-router';
 import MovieManagement from '../../component/_MovieManagement';
 import { NavLink } from 'react-router-dom';
@@ -18,6 +18,30 @@ export default function Admin(props) {
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const renderUser = () => {
+    let user = {};
+    if (localStorage.getItem('USER_LOGIN')) {
+      user = JSON.parse(localStorage.getItem('USER_LOGIN'));
+      return (
+        <div className="d-flex" style={{ marginRight: '5rem' }}>
+          <Avatar
+            style={{
+              transform: 'translateY(15px)',
+              marginRight: '1rem',
+            }}
+            src={`https://joeschmoe.io/api/v1/${user.hoTen}`}
+          />
+
+          <h1 style={{ fontSize: '1.3rem' }}>
+            Xin chào {user.hoTen} !
+          </h1>
+          <h1 style={{ fontSize: '1.3rem', marginLeft: '1rem' }}>
+            Đăng xuất
+          </h1>
+        </div>
+      );
+    }
+  };
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Sider
@@ -88,6 +112,9 @@ export default function Admin(props) {
           className="site-layout-background"
           style={{
             padding: 0,
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
           }}
         >
           {React.createElement(
@@ -97,6 +124,10 @@ export default function Admin(props) {
               onClick: () => setCollapsed(!collapsed),
             }
           )}
+          {/* <div className="">
+            <h1>aiosdjoiajsd</h1>
+          </div> */}
+          {renderUser()}
         </Header>
         <Content
           className="site-layout-background"
