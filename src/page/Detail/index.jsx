@@ -20,10 +20,18 @@ import {
   getDateAndTime,
   getFilmCode,
 } from '../../redux/reducers/getBoxOfficeReducer';
+import $ from 'jquery';
 
 const { TabPane } = Tabs;
 
 export default function Detail() {
+  //stop video modal
+  $('#modalTrailer').on('hidden.bs.modal', function (e) {
+    $('#modalTrailer iframe').attr(
+      'src',
+      $('#modalTrailer iframe').attr('src')
+    );
+  });
   // check user login or not
   const renderCalendar = (maLichChieu, ngayChieuGioChieu) => {
     if (localStorage.getItem('USER_LOGIN')) {
@@ -95,18 +103,32 @@ export default function Detail() {
         >
           <CustomCard
             style={{ minHeight: '100vh' }}
-            effectColor="#C780FF" // required
+            effectColor="orange" // required
             color="black" // default color is white
             blur={25} // default blur value is 10px
             borderRadius={0} // default border radius value is 10px
           >
             <div className="film__detail row">
               <div className="film__image col-4">
-                <img
-                  style={{ width: '80%', height: '34rem' }}
-                  src={`${hinhAnh}`}
-                  alt=""
-                />
+                <div className="film__poster">
+                  <img
+                    style={{
+                      width: '120%',
+                      height: '34rem',
+                      borderRadius: '10px',
+                    }}
+                    src={`${hinhAnh}`}
+                    alt=""
+                  />
+                </div>
+                <div className="film__trailer">
+                  <a
+                    data-toggle="modal"
+                    data-target="#modalTrailer"
+                    className="play-btn"
+                    href=""
+                  ></a>
+                </div>
               </div>
               <div className="film__info col-4">
                 <h1 className="font-weight-bold">
@@ -338,6 +360,50 @@ export default function Detail() {
               </Tabs> */}
             </div>
           </CustomCard>
+        </div>
+        {/* MODAL TRAILER */}
+        <div
+          className="modal fade"
+          id="modalTrailer"
+          tabIndex={-1}
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+          role="dialog"
+        >
+          <div
+            role="document"
+            className="modal-dialog modal-dialog-centered"
+          >
+            <div className="modal-content">
+              <div className="modal-body">
+                <iframe
+                  id="trailer_1"
+                  width={720}
+                  height={600}
+                  src={trailer}
+                  title="YouTube video player"
+                  frameBorder={0}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                />
+                <button
+                  type="button"
+                  className="close"
+                  aria-label="Close"
+                  data-dismiss="modal"
+                >
+                  <span
+                    // onClick={() => {
+                    //   handleStopVideo1();
+                    // }}
+                    className="text-white"
+                    aria-hidden="true"
+                  >
+                    X
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

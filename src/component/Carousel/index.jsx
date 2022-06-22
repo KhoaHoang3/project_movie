@@ -3,8 +3,9 @@ import { PlayCircleOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { getBannerFilms } from '../../redux/selectors';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Autoplay, EffectFade } from 'swiper';
+import { Navigation, Autoplay, EffectFade, Pagination } from 'swiper';
 import { getBannerFilmsAction } from '../../redux/thunk/actions';
+import $ from 'jquery';
 
 export default function Carouselll() {
   const dispatch = useDispatch();
@@ -13,18 +14,39 @@ export default function Carouselll() {
     const action = getBannerFilmsAction();
     dispatch(action);
   }, []);
+
+  $('#trailer_film_1').on('hidden.bs.modal', function (e) {
+    $('#trailer_film_1 iframe').attr(
+      'src',
+      $('#trailer_film_1 iframe').attr('src')
+    );
+  });
+
+  $('#trailer_film_2').on('hidden.bs.modal', function (e) {
+    $('#trailer_film_2 iframe').attr(
+      'src',
+      $('#trailer_film_2 iframe').attr('src')
+    );
+  });
+
+  $('#trailer_film_3').on('hidden.bs.modal', function (e) {
+    $('#trailer_film_3 iframe').attr(
+      'src',
+      $('#trailer_film_3 iframe').attr('src')
+    );
+  });
   return (
     <div>
       <>
         <Swiper
           navigation={true}
-          modules={[Navigation, Autoplay, EffectFade]}
+          modules={[Navigation, Autoplay, EffectFade, Pagination]}
           autoplay={{
             delay: 3500,
             disableOnInteraction: false,
           }}
           effect={'fade'}
-          style={{ height: 1280 }}
+          style={{ height: 1200 }}
         >
           {/* FILM - 1 */}
           {bannerFilms.slice(0, 1).map((item, index) => {
@@ -47,12 +69,13 @@ export default function Carouselll() {
                     data-toggle="modal"
                     data-target="#trailer_film_1"
                   >
-                    <PlayCircleOutlined />
+                    {/* <PlayCircleOutlined /> */}
+                    <a className="play-btn" href="#"></a>
                   </div>
-
+                  {/* 
                   <div className="trailer__define">
                     <h1 className="text-white">Xem trailer</h1>
-                  </div>
+                  </div> */}
                 </div>
               </SwiperSlide>
             );
@@ -77,12 +100,13 @@ export default function Carouselll() {
                     data-target="#trailer_film_2"
                     className="trailer__icon"
                   >
-                    <PlayCircleOutlined />
+                    {/* <PlayCircleOutlined /> */}
+                    <a className="play-btn" href="#"></a>
                   </div>
 
-                  <div className="trailer__define">
+                  {/* <div className="trailer__define">
                     <h1 className="text-white">Xem trailer</h1>
-                  </div>
+                  </div> */}
                 </div>
               </SwiperSlide>
             );
@@ -107,12 +131,13 @@ export default function Carouselll() {
                     data-target="#trailer_film_3"
                     className="trailer__icon"
                   >
-                    <PlayCircleOutlined />
+                    {/* <PlayCircleOutlined /> */}
+                    <a className="play-btn" href="#"></a>
                   </div>
 
-                  <div className="trailer__define">
+                  {/* <div className="trailer__define">
                     <h1 className="text-white">Xem trailer</h1>
-                  </div>
+                  </div> */}
                 </div>
               </SwiperSlide>
             );
@@ -150,7 +175,13 @@ export default function Carouselll() {
                 aria-label="Close"
                 data-dismiss="modal"
               >
-                <span className="text-white" aria-hidden="true">
+                <span
+                  // onClick={() => {
+                  //   handleStopVideo1();
+                  // }}
+                  className="text-white"
+                  aria-hidden="true"
+                >
                   X
                 </span>
               </button>

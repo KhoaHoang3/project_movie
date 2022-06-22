@@ -123,7 +123,7 @@ export default function Header() {
         return (
           <div className="logout__section d-flex">
             <Dropdown
-              overlayStyle={{ zIndex: '10000' }}
+              overlayStyle={{ zIndex: '11' }}
               overlay={adminMenu}
               trigger={['hover']}
             >
@@ -142,14 +142,14 @@ export default function Header() {
                         fontSize: '1.2rem',
                         marginRight: '1.2rem',
                       }}
-                      className="text-white"
+                      className="text-dark"
                     >
                       Xin chào, {user.hoTen} !
                     </h1>
                   </div>
                   <DownOutlined
                     style={{
-                      color: 'white',
+                      color: 'black',
                       transform: 'translate(-18px,4px)',
                     }}
                   />
@@ -179,7 +179,7 @@ export default function Header() {
         return (
           <div className="logout__section d-flex">
             <Dropdown
-              overlayStyle={{ zIndex: '10000' }}
+              overlayStyle={{ zIndex: '11' }}
               overlay={userMenu}
               trigger={['hover']}
             >
@@ -199,14 +199,14 @@ export default function Header() {
                         fontSize: '1.2rem',
                         marginRight: '1.2rem',
                       }}
-                      className="text-white"
+                      className="text-dark"
                     >
                       Xin chào, {user.hoTen} !
                     </h1>
                   </div>
                   <DownOutlined
                     style={{
-                      color: 'white',
+                      color: 'black',
                       transform: 'translate(-18px,4px)',
                     }}
                   />
@@ -252,12 +252,12 @@ export default function Header() {
         </h1>
       </div>
       <div className="nav_bar">
-        <a className="text-white" href="/">
+        <a className="" href="/">
           Trang chủ
         </a>
-        <a className="text-white">Cụm rạp</a>
-        <a className="text-white">Tin tức</a>
-        <a className="text-white">Liên hệ</a>
+        <a className="">Cụm rạp</a>
+        <a className="">Tin tức</a>
+        <a className="">Liên hệ</a>
       </div>
       <div className="buttons">
         {renderUI()}

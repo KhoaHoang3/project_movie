@@ -4,7 +4,7 @@ import React, {
   useState,
   Fragment,
 } from 'react';
-import { Card } from 'antd';
+import { Card, Modal } from 'antd';
 import Slider from 'react-slick';
 import {
   RightCircleOutlined,
@@ -18,7 +18,6 @@ import { getListFilmAction } from '../../redux/thunk/actions';
 import { getListFilms } from '../../redux/selectors';
 import { NavLink } from 'react-router-dom';
 import ReactDOM from 'react-dom';
-import ModalVideo from 'react-modal-video';
 const { Meta } = Card;
 
 export default function MovieList() {
@@ -65,8 +64,6 @@ export default function MovieList() {
     const action = getListFilmAction();
     dispatch(action);
   }, [dispatch]);
-
-  const [isOpen, setOpen] = useState(false);
 
   const { listFilms } = useSelector(getListFilms);
   return (
@@ -120,12 +117,7 @@ export default function MovieList() {
                           ) : (
                             <p>{item.moTa}</p>
                           )}
-                          <button
-                            onClick={() => {
-                              console.log('FILM-INFO', item);
-                              setOpen(true);
-                            }}
-                          >
+                          {/* <button type="button">
                             <YoutubeOutlined
                               style={{
                                 fontSize: 40,
@@ -133,7 +125,7 @@ export default function MovieList() {
                               }}
                             />
                             Xem trailer
-                          </button>
+                          </button> */}
 
                           <NavLink to={`/detail/${item.maPhim}`}>
                             <button
@@ -150,16 +142,8 @@ export default function MovieList() {
                           </NavLink>
                         </div>
                       </div>
-                      <Fragment>
-                        <ModalVideo
-                          channel="youtube"
-                          autoplay
-                          isOpen={isOpen}
-                          videoId="L61p2uyiMSo"
-                          onClose={() => setOpen(false)}
-                        />
-                      </Fragment>
                     </div>
+
                     // <div key={index} className="list">
                     //   <div className="item">
                     //     <div className="content">
@@ -207,7 +191,7 @@ export default function MovieList() {
                           ) : (
                             <p>{item.moTa}</p>
                           )}
-                          <button>
+                          {/* <button>
                             <YoutubeOutlined
                               style={{
                                 fontSize: 40,
@@ -215,7 +199,7 @@ export default function MovieList() {
                               }}
                             />
                             Xem trailer
-                          </button>
+                          </button> */}
                           <NavLink to={`/detail/${item.maPhim}`}>
                             <button
                               onClick={() => {
