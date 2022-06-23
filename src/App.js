@@ -15,6 +15,7 @@ import MovieManagement from './component/_MovieManagement';
 import UserManagement from './component/_UserManagement';
 import AddMovie from './component/_AddMovie';
 import AddUser from './component/_AddUser';
+import EditInformation from './page/EditInfomation';
 
 function App() {
   return (
@@ -29,6 +30,11 @@ function App() {
           exact
           path="/booking_ticket/:id"
           element={<BookingTicket />}
+        />
+        <Route
+          exact
+          path="/edit_information"
+          element={<EditInformation />}
         />
         {/* ADMIN */}
         <Route path="/admin" element={<Admin />}>

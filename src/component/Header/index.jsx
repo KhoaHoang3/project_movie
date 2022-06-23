@@ -14,19 +14,27 @@ import {
   DownOutlined,
 } from '@ant-design/icons';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { user } from '../../redux/selectors';
 import { Select } from 'antd';
+import { getUserInfoAction } from '../../redux/thunk/actions';
+import { ACCESSTOKEN } from '../../axios';
 const { Option } = Select;
 const { confirm } = Modal;
 
 export default function Header() {
+  const dispatch = useDispatch();
   const adminMenu = (
     <Menu
       items={[
         {
           label: (
-            <h1 className="update__info">
+            <h1
+              onClick={() => {
+                navigate('/edit_information');
+              }}
+              className="update__info"
+            >
               Cập nhật thông tin tài khoản
             </h1>
           ),
@@ -39,7 +47,7 @@ export default function Header() {
               <h1 className="update__info">Đi đến trang admin</h1>
             </NavLink>
           ),
-          key: '0',
+          key: '1',
           danger: true,
         },
         {
@@ -56,7 +64,7 @@ export default function Header() {
               Đăng xuất
             </h1>
           ),
-          key: '1',
+          key: '2',
           danger: true,
         },
       ]}
@@ -68,7 +76,12 @@ export default function Header() {
       items={[
         {
           label: (
-            <h1 className="update__info">
+            <h1
+              onClick={() => {
+                navigate('/edit_information');
+              }}
+              className="update__info"
+            >
               Cập nhật thông tin tài khoản
             </h1>
           ),
@@ -104,6 +117,7 @@ export default function Header() {
 
       onOk() {
         localStorage.removeItem('USER_LOGIN');
+        localStorage.removeItem(ACCESSTOKEN);
         navigate('/');
       },
 

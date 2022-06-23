@@ -34,7 +34,6 @@ export default function FormEditUser({ visible, closeModal }) {
     const action = updateUserAction(values);
     dispatch(action);
   };
-  console.log(kindOfUser);
 
   return (
     <div>

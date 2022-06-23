@@ -48,133 +48,74 @@ export default function BookingTicketResult() {
           <div className="user__booking__result__container">
             <div className="row ">
               {/* ITEM-1 */}
-              {result.thongTinDatVe.length === 1
-                ? result.thongTinDatVe.map((item, index) => {
-                    <div key={index} className="col-12">
-                      <div className="user__booking__result__info_2 d-flex ">
-                        <div className="d-flex justify-content-center align-items-center">
-                          <img
-                            className="rounded-circle"
-                            src={item.hinhAnh}
-                            alt=""
-                            height={200}
-                            width={200}
-                          />
-                        </div>
-                        <div className="ml-3">
-                          <h1 style={{ fontSize: '1.5rem' }}>
-                            Tên phim: {item.tenPhim}
-                          </h1>
-                          <h1 style={{ fontSize: '1.2rem' }}>
-                            Ngày đặt:{' '}
-                            {moment(item.ngayDat).format(
-                              'DD/MM/YYYY hh:mm A'
-                            )}
-                          </h1>
-                          <h1 style={{ fontSize: '1.2rem' }}>
-                            Ngày chiếu:{' '}
-                            {moment(dateAndTime).format(
-                              'DD/MM/YYYY hh:mm A'
-                            )}
-                          </h1>
-                          <h1 style={{ fontSize: '1.2rem' }}>
-                            Thời lượng: {item.thoiLuongPhim}p
-                          </h1>
-                          <h1 style={{ fontSize: '1.2rem' }}>
-                            Giá vé: {item.giaVe.toLocaleString()} đ
-                          </h1>
-                          {/* FOR THEATER INFO */}
-                          <h1 style={{ fontSize: '1.2rem' }}>
-                            Rạp:{' '}
+
+              {result.thongTinDatVe.map((item, index) => {
+                return (
+                  <div key={index} className="col-6 mt-5">
+                    <div className="user__booking__result__info_2 d-flex ">
+                      <div className="d-flex justify-content-center align-items-center">
+                        <img
+                          className="rounded-circle"
+                          src={item.hinhAnh}
+                          alt=""
+                          height={200}
+                          width={200}
+                        />
+                      </div>
+                      <div className="ml-3">
+                        <h1
+                          style={{
+                            fontSize: '1.5rem',
+                            color: '#0b4dbe',
+                          }}
+                        >
+                          Tên phim: {item.tenPhim}
+                        </h1>
+                        <h1 style={{ fontSize: '1.2rem' }}>
+                          Ngày đặt:{' '}
+                          {moment(item.ngayDat).format(
+                            'DD/MM/YYYY hh:mm A'
+                          )}
+                        </h1>
+                        <h1 style={{ fontSize: '1.2rem' }}>
+                          Ngày chiếu:{' '}
+                          {moment(dateAndTime).format(
+                            'DD/MM/YYYY hh:mm A'
+                          )}
+                        </h1>
+                        <h1 style={{ fontSize: '1.2rem' }}>
+                          Thời lượng: {item.thoiLuongPhim}p
+                        </h1>
+                        <h1 style={{ fontSize: '1.2rem' }}>
+                          Giá vé: {item.giaVe.toLocaleString()} đ
+                        </h1>
+                        {/* FOR THEATER INFO */}
+                        <h1 style={{ fontSize: '1.2rem' }}>
+                          Rạp:{' '}
+                          {item.danhSachGhe
+                            .slice(0, 1)
+                            .map((theater) => theater.tenHeThongRap)}
+                        </h1>
+                        <h1 style={{ fontSize: '1.2rem' }}>
+                          Ghế đã đặt:{' '}
+                          <span
+                            style={{
+                              color: '#5bb56f',
+                              fontWeight: 'bolder',
+                            }}
+                          >
+                            {' '}
                             {item.danhSachGhe
-                              .slice(0, 1)
-                              .map(
-                                (theater) => theater.tenHeThongRap
-                              )}
-                          </h1>
-                          <h1 style={{ fontSize: '1.2rem' }}>
-                            Ghế đã đặt:{' '}
-                            <span style={{}}>
-                              {' '}
-                              {item.danhSachGhe
-                                .map((seat) => seat.tenGhe)
-                                .sort()
-                                .join('-')}
-                            </span>
-                          </h1>
-                        </div>
+                              .map((seat) => seat.tenGhe)
+                              .sort()
+                              .join('-')}
+                          </span>
+                        </h1>
                       </div>
-                    </div>;
-                  })
-                : result.thongTinDatVe.map((item, index) => {
-                    return (
-                      <div key={index} className="col-6 mt-5">
-                        <div className="user__booking__result__info_2 d-flex ">
-                          <div className="d-flex justify-content-center align-items-center">
-                            <img
-                              className="rounded-circle"
-                              src={item.hinhAnh}
-                              alt=""
-                              height={200}
-                              width={200}
-                            />
-                          </div>
-                          <div className="ml-3">
-                            <h1
-                              style={{
-                                fontSize: '1.5rem',
-                                color: '#0b4dbe',
-                              }}
-                            >
-                              Tên phim: {item.tenPhim}
-                            </h1>
-                            <h1 style={{ fontSize: '1.2rem' }}>
-                              Ngày đặt:{' '}
-                              {moment(item.ngayDat).format(
-                                'DD/MM/YYYY hh:mm A'
-                              )}
-                            </h1>
-                            <h1 style={{ fontSize: '1.2rem' }}>
-                              Ngày chiếu:{' '}
-                              {moment(dateAndTime).format(
-                                'DD/MM/YYYY hh:mm A'
-                              )}
-                            </h1>
-                            <h1 style={{ fontSize: '1.2rem' }}>
-                              Thời lượng: {item.thoiLuongPhim}p
-                            </h1>
-                            <h1 style={{ fontSize: '1.2rem' }}>
-                              Giá vé: {item.giaVe.toLocaleString()} đ
-                            </h1>
-                            {/* FOR THEATER INFO */}
-                            <h1 style={{ fontSize: '1.2rem' }}>
-                              Rạp:{' '}
-                              {item.danhSachGhe
-                                .slice(0, 1)
-                                .map(
-                                  (theater) => theater.tenHeThongRap
-                                )}
-                            </h1>
-                            <h1 style={{ fontSize: '1.2rem' }}>
-                              Ghế đã đặt:{' '}
-                              <span
-                                style={{
-                                  color: '#5bb56f',
-                                  fontWeight: 'bolder',
-                                }}
-                              >
-                                {' '}
-                                {item.danhSachGhe
-                                  .map((seat) => seat.tenGhe)
-                                  .sort()
-                                  .join('-')}
-                              </span>
-                            </h1>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
+                    </div>
+                  </div>
+                );
+              })}
 
               {/* <div className="col-6">
                 <div className="user__booking__result__info_2 d-flex ">

@@ -6,28 +6,28 @@ import MovieList from '../../component/MovieList';
 import TheaterInfo from '../../component/TheaterInfo';
 import $, { easing } from 'jquery';
 
-var btn = $('.return-to-top');
-
-$(window).scroll(function () {
-  if ($(window).scrollTop() > 700) {
-    // btn.addClass('show');
-    btn.show('slow');
-  } else {
-    // btn.removeClass('show');
-    btn.hide();
-  }
-});
-
-btn.on('click', function (e) {
-  e.preventDefault();
-  $('html, body').animate({ scrollTop: 0 }, 600);
-  return false;
-});
-
 export default function HomeScreen(props) {
+  const btn = $('.return-to-top');
+
+  $(window).scroll(function () {
+    if ($(window).scrollTop() > 300) {
+      // btn.addClass('show');
+      btn.show();
+    } else {
+      // btn.removeClass('show');
+      btn.hide();
+    }
+  });
+
+  btn.on('click', function (e) {
+    e.preventDefault();
+    $('html').animate({ scrollTop: 0 }, 300);
+    // $('html, body').animate({ scrollTop: $('#top').offset().top }, 300);
+    return false;
+  });
   return (
     <div>
-      <section className="header">
+      <section id="top" className="header">
         <Header />
       </section>
 

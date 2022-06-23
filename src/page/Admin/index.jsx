@@ -13,6 +13,7 @@ import { Layout, Menu, Avatar, Space, Dropdown } from 'antd';
 import { Outlet, useLocation, useNavigate } from 'react-router';
 import MovieManagement from '../../component/_MovieManagement';
 import { NavLink } from 'react-router-dom';
+import { toast } from 'react-toastify';
 const { Header, Sider, Content } = Layout;
 const menu = (
   <Menu
@@ -26,8 +27,20 @@ const menu = (
 );
 
 export default function Admin(props) {
-  const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
+  let user = {};
+  if (localStorage.getItem('USER_LOGIN')) {
+    user = JSON.parse(localStorage.getItem('USER_LOGIN'));
+    if (user.maLoaiNguoiDung !== 'QuanTri') {
+      toast.error('Bạn không được phép vào trang này !', {
+        position: 'top-center',
+        autoClose: 1000,
+      });
+    }
+    navigate('/');
+  }
+
+  const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
   const renderUser = () => {
     let user = {};

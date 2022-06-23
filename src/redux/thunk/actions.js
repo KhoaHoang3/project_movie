@@ -21,6 +21,7 @@ import {
   deleteUserURL,
   updateUserURL,
   addUserURL,
+  getUserInfoURL,
 } from '../../axios/apiURL';
 import { calendarTheater } from '../../_core/models/boxOfficeCalendar';
 import { getBannerFilms } from '../reducers/getBannerReducer';
@@ -32,6 +33,7 @@ import {
   theaterInfomation,
   theaterShowtimeInfo,
 } from '../reducers/getTheaterInfoReducer';
+import { getUserInfoEditPage } from '../reducers/getUserInfoReducer';
 import { getUserListManagement } from '../reducers/getUserListReducer';
 import {
   displayLoading,
@@ -163,7 +165,6 @@ export const userLoginAction = (userInfo, navigate) => {
   return async (dispatch) => {
     try {
       const result = await http.post(userLoginURL, userInfo);
-
       const action = loginSuccess(result.data.content);
       dispatch(action);
       toast.success(
@@ -181,6 +182,11 @@ export const userLoginAction = (userInfo, navigate) => {
       setTimeout(() => {
         navigate('/');
       }, 2500);
+      dispatch(displayLoading());
+      setTimeout(() => {
+        window.location.reload(false);
+      }, 3000);
+      dispatch(hideLoading());
     } catch (error) {
       toast.error(error.response.data.content, {
         position: 'top-center',
@@ -233,7 +239,7 @@ export const bookingTicketAction = (maLichChieu, danhSachVe) => {
 
       dispatch(hideLoading());
       toast.success('Đặt vé thành công', {
-        position: 'bottom-right',
+        position: 'top-right',
         autoClose: 1500,
         hideProgressBar: false,
         closeOnClick: true,
@@ -429,14 +435,14 @@ export const deleteUserAction = (userAccount) => {
   };
 };
 
-// update user
+// update user at admin page
 export const updateUserAction = (data) => {
   return async (dispatch) => {
     try {
       const result = await http.put(updateUserURL, data);
       console.log(result);
       dispatch(getUserListAction());
-      toast.success('Cập nhật thông tin người dùng thành công', {
+      toast.success('Cập nhật thông tin thành công', {
         position: 'top-center',
         autoClose: 1000,
         hideProgressBar: false,
@@ -465,6 +471,48 @@ export const addUserAction = (data) => {
         autoClose: 1000,
       });
     } catch (error) {
+      toast.error(error.response.data.content, {
+        position: 'top-center',
+        autoClose: 1000,
+      });
+    }
+  };
+};
+
+// update user at user setting account
+export const updateUserActionV2 = (data) => {
+  return async (dispatch) => {
+    try {
+      const result = await http.put(updateUserURL, data);
+      console.log(result);
+      toast.success('Cập nhật thông tin thành công', {
+        position: 'top-center',
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.content, {
+        position: 'top-center',
+        autoClose: 1000,
+      });
+    }
+  };
+};
+
+// get user info for edit
+export const getUserInfoAction = () => {
+  return async (dispatch) => {
+    try {
+      const result = await http.post(getUserInfoURL);
+
+      await dispatch(getUserInfoEditPage(result.data.content));
+    } catch (error) {
+      console.log(error);
       toast.error(error.response.data.content, {
         position: 'top-center',
         autoClose: 1000,

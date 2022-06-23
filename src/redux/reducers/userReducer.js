@@ -30,12 +30,9 @@ const userReducer = createSlice({
     },
     loginSuccess: (state, action) => {
       const { payload } = action;
+      state.userLogin = payload;
       localStorage.setItem('USER_LOGIN', JSON.stringify(payload));
       localStorage.setItem(ACCESSTOKEN, payload.accessToken);
-      return {
-        ...state,
-        userLogin: payload,
-      };
     },
   },
 });

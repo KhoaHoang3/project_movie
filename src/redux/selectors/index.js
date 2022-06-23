@@ -15,3 +15,4 @@ export const getFilmManagement = (state) => state.filmManagement;
 // export const deleteFilmManagement = state
 export const editFilm = (state) => state.editFilm;
 export const getUserList = (state) => state.userList;
+export const getUserInfoEditPage = (state) => state.userInfo;
