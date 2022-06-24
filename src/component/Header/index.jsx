@@ -32,10 +32,13 @@ export default function Header() {
             <h1
               onClick={() => {
                 navigate('/edit_information');
+                setTimeout(() => {
+                  window.location.reload();
+                }, 500);
               }}
               className="update__info"
             >
-              Cập nhật thông tin tài khoản
+              Cập nhật tài khoản/ lịch sử đặt vé
             </h1>
           ),
           key: '0',
@@ -79,10 +82,13 @@ export default function Header() {
             <h1
               onClick={() => {
                 navigate('/edit_information');
+                setTimeout(() => {
+                  window.location.reload();
+                }, 500);
               }}
               className="update__info"
             >
-              Cập nhật thông tin tài khoản
+              Cập nhật tài khoản/ lịch sử đặt vé
             </h1>
           ),
           key: '0',
@@ -116,8 +122,7 @@ export default function Header() {
       ),
 
       onOk() {
-        localStorage.removeItem('USER_LOGIN');
-        localStorage.removeItem(ACCESSTOKEN);
+        localStorage.clear();
         navigate('/');
       },
 

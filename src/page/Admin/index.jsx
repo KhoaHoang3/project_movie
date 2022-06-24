@@ -8,36 +8,62 @@ import {
   ArrowLeftOutlined,
   DownOutlined,
   PlusCircleOutlined,
+  ExclamationCircleOutlined,
 } from '@ant-design/icons';
-import { Layout, Menu, Avatar, Space, Dropdown } from 'antd';
+import { Layout, Menu, Avatar, Space, Dropdown, Modal } from 'antd';
 import { Outlet, useLocation, useNavigate } from 'react-router';
 import MovieManagement from '../../component/_MovieManagement';
 import { NavLink } from 'react-router-dom';
 import { toast } from 'react-toastify';
 const { Header, Sider, Content } = Layout;
-const menu = (
-  <Menu
-    items={[
-      {
-        label: <h1 style={{ fontSize: '1.2rem' }}>Đăng xuất</h1>,
-        key: '1',
-      },
-    ]}
-  />
-);
+const { confirm } = Modal;
 
 export default function Admin(props) {
   const navigate = useNavigate();
+  const showConfirm = () => {
+    confirm({
+      title: 'Bạn vẫn muốn đăng xuất khỏi tài khoản?',
+      icon: (
+        <ExclamationCircleOutlined style={{ fontSize: '2.5rem' }} />
+      ),
+
+      onOk() {
+        localStorage.clear();
+        navigate('/');
+      },
+
+      onCancel() {},
+    });
+  };
+  const menu = (
+    <Menu
+      items={[
+        {
+          label: (
+            <h1
+              onClick={() => {
+                showConfirm();
+              }}
+              style={{ fontSize: '1.2rem' }}
+            >
+              Đăng xuất
+            </h1>
+          ),
+          key: '1',
+        },
+      ]}
+    />
+  );
   let user = {};
   if (localStorage.getItem('USER_LOGIN')) {
     user = JSON.parse(localStorage.getItem('USER_LOGIN'));
     if (user.maLoaiNguoiDung !== 'QuanTri') {
-      toast.error('Bạn không được phép vào trang này !', {
+      toast.error('Bạn không được phép vào trang này', {
         position: 'top-center',
         autoClose: 1000,
       });
+      navigate('/');
     }
-    navigate('/');
   }
 
   const [collapsed, setCollapsed] = useState(false);
@@ -48,7 +74,7 @@ export default function Admin(props) {
       user = JSON.parse(localStorage.getItem('USER_LOGIN'));
       return (
         <div className="d-flex" style={{ marginRight: '5rem' }}>
-          <Dropdown overlay={menu} trigger={['click']}>
+          <Dropdown overlay={menu} trigger={['hover']}>
             <a onClick={(e) => e.preventDefault()}>
               <Space>
                 <Avatar

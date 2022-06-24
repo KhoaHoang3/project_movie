@@ -260,15 +260,6 @@ export default function Detail() {
                                                 film.maLichChieu,
                                                 film.ngayChieuGioChieu
                                               )}
-                                              {/* <NavLink
-                                                to={`/booking_ticket/${film.maLichChieu}`}
-                                              >
-                                                {moment(
-                                                  film.ngayChieuGioChieu
-                                                ).format(
-                                                  'DD.MM.YYYY hh:mm A'
-                                                )}
-                                              </NavLink> */}
                                             </Tag>
                                           </div>
                                         );

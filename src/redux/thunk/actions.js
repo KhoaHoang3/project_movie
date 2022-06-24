@@ -182,11 +182,10 @@ export const userLoginAction = (userInfo, navigate) => {
       setTimeout(() => {
         navigate('/');
       }, 2500);
-      dispatch(displayLoading());
+      await dispatch(getUserInfoAction());
       setTimeout(() => {
-        window.location.reload(false);
-      }, 3000);
-      dispatch(hideLoading());
+        window.location.reload();
+      }, 2700);
     } catch (error) {
       toast.error(error.response.data.content, {
         position: 'top-center',
@@ -205,13 +204,17 @@ export const userLoginAction = (userInfo, navigate) => {
 export const getBoxOfficeListAction = (filmCode) => {
   return async (dispatch) => {
     try {
+      dispatch(displayLoading());
       const result = await http.get(
         `${getBoxOfficeListURL}?MaLichChieu=${filmCode}`
       );
 
       const action = getBoxOfficeList(result.data.content);
       dispatch(action);
+      dispatch(hideLoading());
     } catch (error) {
+      dispatch(hideLoading());
+
       console.log(error);
     }
   };
@@ -509,6 +512,8 @@ export const getUserInfoAction = () => {
   return async (dispatch) => {
     try {
       const result = await http.post(getUserInfoURL);
+
+      console.log(result);
 
       await dispatch(getUserInfoEditPage(result.data.content));
     } catch (error) {

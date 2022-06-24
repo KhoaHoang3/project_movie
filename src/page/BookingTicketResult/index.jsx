@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect } from 'react';
 import Footer from '../../component/Footer';
 import Header from '../../component/Header';
+import { List } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { Button, Input, Space, Table, Pagination } from 'antd';
 import { useRef, useState } from 'react';
@@ -20,10 +21,53 @@ export default function BookingTicketResult() {
     const action = getUserBookingResultAction();
     dispatch(action);
   }, [dispatch]);
-  const { userLogin } = useSelector(user);
   const { result } = useSelector(getUserBookingResult);
+  console.log(result);
   const { thongTinDatVe } = result;
   const { dateAndTime } = useSelector(getDateAndTime);
+  const data = thongTinDatVe.map((item) => ({
+    title: (
+      <h2 style={{ fontSize: '1.5rem' }}>Tên phim: {item.tenPhim}</h2>
+    ),
+    avatar: `${item.hinhAnh}`,
+    description: `Ngày đặt: ${moment(item.ngayDat).format(
+      'DD/MM/YYYY'
+    )}`,
+
+    content: (
+      <div>
+        <p style={{ fontSize: '1rem' }}>
+          Tên rạp:{' '}
+          {item.danhSachGhe
+            .slice(0, 1)
+            .map((theater) => theater.tenHeThongRap)}
+        </p>
+        <p style={{ fontSize: '1rem' }}>
+          {' '}
+          Giá vé: {item.giaVe.toLocaleString()} đồng
+        </p>
+        <p style={{ fontSize: '1rem' }}>
+          {' '}
+          Thời lượng phim: {item.thoiLuongPhim} phút
+        </p>
+
+        <p style={{ fontSize: '1rem' }}>
+          Rạp:{' '}
+          {item.danhSachGhe
+            .slice(0, 1)
+            .map((theater) => theater.tenCumRap)}
+        </p>
+
+        <p style={{ fontSize: '1rem' }}>
+          Ghế đã đặt:{' '}
+          {item.danhSachGhe
+            .map((theater) => theater.tenGhe)
+            .sort()
+            .join('-')}
+        </p>
+      </div>
+    ),
+  }));
 
   return (
     <Fragment>
@@ -38,18 +82,57 @@ export default function BookingTicketResult() {
           style={{ color: '#5bb56f' }}
           className="user__booking__result__title"
         >
-          Thông tin đặt vé của {userLogin.hoTen}
+          Thông tin đặt vé của {result.hoTen}
         </h1>
-        <h2 className="user__booking__result__subtitle">
+        <h2
+          style={{ marginBottom: '1.2rem' }}
+          className="user__booking__result__subtitle"
+        >
           Hãy xem thông tin, địa điểm và thời gian để xem phim vui vẻ
           bạn nhé !
         </h2>
         <div className="user__booking__result__info">
-          <div className="user__booking__result__container">
-            <div className="row ">
-              {/* ITEM-1 */}
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+            className="user__booking__result__container"
+          >
+            {/* ITEM-1 */}
 
-              {result.thongTinDatVe.map((item, index) => {
+            <List
+              style={{ marginBottom: '1.2rem', width: '1200px' }}
+              itemLayout="vertical"
+              size="large"
+              pagination={{
+                onChange: (page) => {},
+                pageSize: 3,
+              }}
+              dataSource={data}
+              renderItem={(item) => (
+                <List.Item
+                  key={item.title}
+                  extra={
+                    <img
+                      style={{ borderRadius: '10px' }}
+                      width={200}
+                      alt="logo"
+                      src={item.avatar}
+                    />
+                  }
+                >
+                  <List.Item.Meta
+                    title={<a href={item.href}>{item.title}</a>}
+                    description={item.description}
+                  />
+                  {item.content}
+                </List.Item>
+              )}
+            />
+
+            {/* {result.thongTinDatVe.map((item, index) => {
                 return (
                   <div key={index} className="col-6 mt-5">
                     <div className="user__booking__result__info_2 d-flex ">
@@ -89,7 +172,6 @@ export default function BookingTicketResult() {
                         <h1 style={{ fontSize: '1.2rem' }}>
                           Giá vé: {item.giaVe.toLocaleString()} đ
                         </h1>
-                        {/* FOR THEATER INFO */}
                         <h1 style={{ fontSize: '1.2rem' }}>
                           Rạp:{' '}
                           {item.danhSachGhe
@@ -115,31 +197,7 @@ export default function BookingTicketResult() {
                     </div>
                   </div>
                 );
-              })}
-
-              {/* <div className="col-6">
-                <div className="user__booking__result__info_2 d-flex ">
-                  <div className="d-flex justify-content-center align-items-center">
-                    <img
-                      className="rounded-circle"
-                      src="https://movienew.cybersoft.edu.vn/hinhanh/avengers-infinity-war.jpg"
-                      alt=""
-                      height={150}
-                      width={150}
-                    />
-                  </div>
-                  <div className="ml-3">
-                    <h1>Tên phim: Avenger Infinity War</h1>
-                    <h1>Ngày đặt: 13-6-2022</h1>
-                    <h1>Thời lượng: 120p</h1>
-                    <h1>Giá vé: 75.000đ</h1>
-                   
-                    <h1>Rạp: </h1>
-                    <h1>Ghế đã đặt:</h1>
-                  </div>
-                </div>
-              </div> */}
-            </div>
+              })} */}
           </div>
         </div>
       </div>

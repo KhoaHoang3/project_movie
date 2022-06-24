@@ -1,7 +1,16 @@
 import React, { useEffect } from 'react';
 import Header from '../../component/Header';
 import Footer from '../../component/Footer';
-import { Form, Tabs, Button, Input, Select } from 'antd';
+import {
+  List,
+  Space,
+  Avatar,
+  Form,
+  Tabs,
+  Button,
+  Input,
+  Select,
+} from 'antd';
 import {
   getUserInfoAction,
   updateUserActionV2,
@@ -13,32 +22,92 @@ import {
   displayLoading,
   hideLoading,
 } from '../../redux/reducers/loadingReducer';
+import moment from 'moment';
 
 const { TabPane } = Tabs;
 
 export default function EditInformation() {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
+  useEffect(() => {
+    const action = getUserInfoAction();
+    dispatch(action);
+  }, []);
 
   const { userInfo } = useSelector(getUserInfoEditPage);
-  let user = {};
-  if (localStorage.getItem('USER_LOGIN')) {
-    user = JSON.parse(localStorage.getItem('USER_LOGIN'));
-  }
+
   // const { taiKhoan, email, soDT, hoTen, maLoaiNguoiDung, maNhom } =
   //   user;
-  const { taiKhoan, email, soDT, hoTen, maLoaiNguoiDung, maNhom } =
-    user;
-  const { matKhau } = userInfo;
+  const {
+    matKhau,
+    taiKhoan,
+    email,
+    soDT,
+    hoTen,
+    maLoaiNguoiDung,
+    maNhom,
+  } = userInfo;
+  const { thongTinDatVe } = userInfo;
+  // const data = Array.from({
+  //   length: 23,
+  // }).map((_, i) => ({
+  //   href: 'https://ant.design',
+  //   title: `ant design part ${i}`,
+  //   avatar: 'https://joeschmoe.io/api/v1/random',
+  //   description:
+  //     'Ant Design, a design language for background applications, is refined by Ant UED Team.',
+  //   content:
+  //     'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
+  // }));
+
+  const data = thongTinDatVe.map((item) => ({
+    title: (
+      <h2 style={{ fontSize: '1.5rem' }}>Tên phim: {item.tenPhim}</h2>
+    ),
+    avatar: `${item.hinhAnh}`,
+    description: `Ngày đặt: ${moment(item.ngayDat).format(
+      'DD/MM/YYYY'
+    )}`,
+
+    content: (
+      <div>
+        <p style={{ fontSize: '1rem' }}>
+          Tên rạp:{' '}
+          {item.danhSachGhe
+            .slice(0, 1)
+            .map((theater) => theater.tenHeThongRap)}
+        </p>
+        <p style={{ fontSize: '1rem' }}>
+          {' '}
+          Giá vé: {item.giaVe.toLocaleString()} đồng
+        </p>
+        <p style={{ fontSize: '1rem' }}>
+          {' '}
+          Thời lượng phim: {item.thoiLuongPhim} phút
+        </p>
+
+        <p style={{ fontSize: '1rem' }}>
+          Rạp:{' '}
+          {item.danhSachGhe
+            .slice(0, 1)
+            .map((theater) => theater.tenCumRap)}
+        </p>
+
+        <p style={{ fontSize: '1rem' }}>
+          Ghế đã đặt:{' '}
+          {item.danhSachGhe
+            .map((theater) => theater.tenGhe)
+            .sort()
+            .join('-')}
+        </p>
+      </div>
+    ),
+  }));
+
   const onFinish = (values) => {
     const action = updateUserActionV2(values);
     dispatch(action);
   };
-  useEffect(() => {
-    console.log('renderinggg');
-    const action = getUserInfoAction();
-    dispatch(action);
-  }, []);
 
   return (
     <div>
@@ -69,6 +138,7 @@ export default function EditInformation() {
               initialValues={{
                 hoTen: hoTen,
                 taiKhoan: taiKhoan,
+                matKhau: matKhau,
                 email: email,
                 maNhom: maNhom,
                 soDT: soDT,
@@ -77,8 +147,8 @@ export default function EditInformation() {
             >
               {/* NAME */}
               <Form.Item
-                label={<h2 style={{ fontSize: '1.2rem' }}>Họ tên</h2>}
                 name={'hoTen'}
+                label={<h2 style={{ fontSize: '1.2rem' }}>Họ tên</h2>}
               >
                 <Input name="hoTen"></Input>
               </Form.Item>
@@ -118,9 +188,7 @@ export default function EditInformation() {
                   },
                 ]}
                 label={
-                  <h2 style={{ fontSize: '1.2rem' }}>
-                    Nhập lại mật khẩu cũ
-                  </h2>
+                  <h2 style={{ fontSize: '1.2rem' }}>Mật khẩu</h2>
                 }
                 name={'matKhau'}
               >
@@ -196,7 +264,36 @@ export default function EditInformation() {
               <h2 style={{ fontSize: '1.2rem' }}>Lịch sử đặt vé</h2>
             }
             key="2"
-          ></TabPane>
+          >
+            <List
+              itemLayout="vertical"
+              size="large"
+              pagination={{
+                onChange: (page) => {},
+                pageSize: 3,
+              }}
+              dataSource={data}
+              renderItem={(item) => (
+                <List.Item
+                  key={item.title}
+                  extra={
+                    <img
+                      style={{ borderRadius: '10px' }}
+                      width={200}
+                      alt="logo"
+                      src={item.avatar}
+                    />
+                  }
+                >
+                  <List.Item.Meta
+                    title={<a href={item.href}>{item.title}</a>}
+                    description={item.description}
+                  />
+                  {item.content}
+                </List.Item>
+              )}
+            />
+          </TabPane>
         </Tabs>
       </section>
 

@@ -12,7 +12,7 @@ export default function Footer() {
   return (
     <div className="footer_2">
       <div className="title">
-        <h1>DatVeXemPhim.vn</h1>
+        <h1>CYBERMOVIE</h1>
       </div>
       <div className="partner">
         <h1>Đối tác:</h1>

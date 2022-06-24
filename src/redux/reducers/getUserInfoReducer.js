@@ -1,11 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { userInfo } from '../../_core/models/userInformation';
 // save user info to local storage for when we refresh page user info won't disapear and user's info will apear in input field
 let saveUserInfo = {};
 if (localStorage.getItem('USER_INFO')) {
   saveUserInfo = JSON.parse(localStorage.getItem('USER_INFO'));
 }
 const initialState = {
-  userInfo: {},
+  userInfo: saveUserInfo,
 };
 
 const getUserInfoReducer = createSlice({
@@ -14,9 +15,11 @@ const getUserInfoReducer = createSlice({
   reducers: {
     getUserInfoEditPage: (state, action) => {
       const { payload } = action;
-      console.log('payload', payload);
       state.userInfo = payload;
-      localStorage.setItem('USER_INFO', JSON.stringify(payload));
+      localStorage.setItem(
+        'USER_INFO',
+        JSON.stringify(state.userInfo)
+      );
     },
   },
 });

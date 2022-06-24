@@ -29,25 +29,25 @@ function BookingTicket(props) {
   //get calendar code and information of each film
   const { calendarCode } = useSelector(getCalendarCode);
   const { boxOfficeList } = useSelector(getBoxOfficeList);
-  // const { thongTinPhim } = boxOfficeList;
-  // console.log(thongTinPhim);
-  // const {
-  //   diaChi,
-  //   gioChieu,
-  //   hinhAnh,
-  //   ngayChieu,
-  //   tenCumRap,
-  //   tenPhim,
-  //   tenRap,
-  // } = thongTinPhim;
+  const { thongTinPhim } = boxOfficeList;
+  const {
+    diaChi,
+    gioChieu,
+    hinhAnh,
+    ngayChieu,
+    tenCumRap,
+    tenPhim,
+    tenRap,
+  } = thongTinPhim;
 
   // get film info from localStorage so when refresh page the info won't disapear
-  const filmInfo = JSON.parse(
-    localStorage.getItem('BOX_OFFICE_LIST')
-  );
-  const { thongTinPhim } = filmInfo;
-  const { diaChi, gioChieu, ngayChieu, tenCumRap, tenPhim, tenRap } =
-    thongTinPhim;
+  // const filmInfo = JSON.parse(
+  //   localStorage.getItem('BOX_OFFICE_LIST')
+  // );
+  // const { thongTinPhim } = filmInfo;
+  // const { diaChi, gioChieu, ngayChieu, tenCumRap, tenPhim, tenRap } =
+  //   thongTinPhim;
+
   const { bookingSeats } = useSelector(getBookingSeats);
 
   const dispatch = useDispatch();
@@ -58,7 +58,8 @@ function BookingTicket(props) {
   }, [dispatch]);
 
   const renderSeat = () => {
-    const { danhSachGhe } = filmInfo;
+    // const { danhSachGhe } = filmInfo;
+    const { danhSachGhe } = boxOfficeList;
 
     const seats = danhSachGhe.map((item, index) => {
       let classVipSeat = item.loaiGhe === 'Vip' ? 'vipSeat' : '';
@@ -192,7 +193,8 @@ function BookingTicket(props) {
               <h1 className="film_info_theater">Rạp: {tenCumRap}</h1>
               <h1 className="film_info_address">Địa chỉ: {diaChi}</h1>
               <h1 className="film_info_date">
-                {ngayChieu} - {gioChieu} - {tenRap}
+                Ngày chiếu: {ngayChieu} - Giờ chiếu: {gioChieu} - Rạp:{' '}
+                {tenRap}
               </h1>
             </div>
             <hr></hr>
