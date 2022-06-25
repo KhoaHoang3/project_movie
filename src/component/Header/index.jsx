@@ -19,6 +19,10 @@ import { user } from '../../redux/selectors';
 import { Select } from 'antd';
 import { getUserInfoAction } from '../../redux/thunk/actions';
 import { ACCESSTOKEN } from '../../axios';
+import {
+  displayLoading,
+  hideLoading,
+} from '../../redux/reducers/loadingReducer';
 const { Option } = Select;
 const { confirm } = Modal;
 
@@ -31,10 +35,10 @@ export default function Header() {
           label: (
             <h1
               onClick={() => {
-                navigate('/edit_information');
-                // setTimeout(() => {
-                //   window.location.reload();
-                // }, 1000);
+                dispatch(getUserInfoAction());
+                setTimeout(() => {
+                  navigate('/edit_information');
+                }, 500);
               }}
               className="update__info"
             >
@@ -81,10 +85,10 @@ export default function Header() {
           label: (
             <h1
               onClick={() => {
-                navigate('/edit_information');
-                // setTimeout(() => {
-                //   window.location.reload();
-                // }, 500);
+                dispatch(getUserInfoAction());
+                setTimeout(() => {
+                  navigate('/edit_information');
+                }, 500);
               }}
               className="update__info"
             >

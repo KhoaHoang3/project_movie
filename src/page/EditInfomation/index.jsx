@@ -11,6 +11,7 @@ import {
   Input,
   Select,
 } from 'antd';
+import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
 import {
   getUserInfoAction,
   updateUserActionV2,
@@ -31,30 +32,30 @@ import { useState } from 'react';
 const { TabPane } = Tabs;
 
 export default function EditInformation() {
-  const schemaValidation = yup.object().shape({
-    hoTen: yup.string().trim().required('Họ tên không được bỏ trống'),
-    matKhau: yup.string().required('Mật khẩu không được bỏ trống'),
-    email: yup
-      .string()
-      .trim()
-      .required('Email không được bỏ trống')
-      .matches(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-        'Email không đúng định dạng, nhập lại Email'
-      ),
-    taiKhoan: yup.string().trim().required(),
-    maNhom: yup.string().trim().required(),
-    soDT: yup
-      .string()
-      .trim()
-      .matches(/^[0-9]+$/, 'Số điện thoại phải là chữ số'),
-    maLoaiNguoiDung: yup.string().trim().required(),
-  });
-  const { register, handleSubmit, formState } = useForm({
-    mode: 'all',
-    resolver: yupResolver(schemaValidation),
-  });
-  const { errors } = formState;
+  // const schemaValidation = yup.object().shape({
+  //   hoTen: yup.string().trim().required('Họ tên không được bỏ trống'),
+  //   matKhau: yup.string().required('Mật khẩu không được bỏ trống'),
+  //   email: yup
+  //     .string()
+  //     .trim()
+  //     .required('Email không được bỏ trống')
+  //     .matches(
+  //       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+  //       'Email không đúng định dạng, nhập lại Email'
+  //     ),
+  //   taiKhoan: yup.string().trim().required(),
+  //   maNhom: yup.string().trim().required(),
+  //   soDT: yup
+  //     .string()
+  //     .trim()
+  //     .matches(/^[0-9]+$/, 'Số điện thoại phải là chữ số'),
+  //   maLoaiNguoiDung: yup.string().trim().required(),
+  // });
+  // const { register, handleSubmit, formState } = useForm({
+  //   mode: 'all',
+  //   resolver: yupResolver(schemaValidation),
+  // });
+  // const { errors } = formState;
   const [form] = Form.useForm();
   const dispatch = useDispatch();
   const { userInfo } = useSelector(getUserInfoEditPage);
@@ -120,16 +121,46 @@ export default function EditInformation() {
   //   soDT: soDT,
   // });
 
-  const onSubmit = (values) => {
+  // const onSubmit = (values) => {
+  //   const action = updateUserActionV2(values);
+  //   dispatch(action);
+  // };
+  const [values, setValues] = useState({
+    hoTen: hoTen,
+    taiKhoan: taiKhoan,
+    email: email,
+    maLoaiNguoiDung: maLoaiNguoiDung,
+    maNhom: maNhom,
+    matKhau: matKhau,
+    soDT: soDT,
+  });
+
+  const handleChangeInput = (e) => {
+    let { id, value } = e.target;
+    setValues({
+      ...values,
+      [id]: value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
     const action = updateUserActionV2(values);
     dispatch(action);
   };
-  useEffect(() => {
-    dispatch(displayLoading());
-    const action = getUserInfoAction();
-    dispatch(action);
-    dispatch(hideLoading());
-  }, []);
+
+  const [type, setType] = useState('password');
+  const [eye, setEye] = useState(<EyeInvisibleOutlined />);
+
+  const handleChangeType = () => {
+    if (type === 'password') {
+      setType('text');
+      setEye(<EyeOutlined />);
+    } else {
+      setType('password');
+      setEye(<EyeInvisibleOutlined />);
+    }
+  };
 
   return (
     <div>
@@ -152,22 +183,24 @@ export default function EditInformation() {
             }
             key="0"
           >
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit}>
               {/* NAME */}
               <div className="text-field">
                 <label htmlFor="hoTen">Họ tên</label>
                 <input
+                  value={values.hoTen}
                   defaultValue={hoTen}
                   autoComplete="off"
                   type="text"
                   id="hoTen"
-                  {...register('hoTen')}
+                  onChange={handleChangeInput}
+                  // {...register('hoTen')}
                 />
-                {errors.hoTen && (
+                {/* {errors.hoTen && (
                   <p className="text-danger">
                     {errors.hoTen.message}
                   </p>
-                )}
+                )} */}
               </div>
               {/* ACCOUNT */}
               <div className="text-field">
@@ -178,15 +211,18 @@ export default function EditInformation() {
                     cursor: 'no-drop',
                   }}
                   readOnly={true}
+                  value={values.taiKhoan}
                   defaultValue={taiKhoan}
                   autoComplete="off"
                   type="text"
                   id="taiKhoan"
-                  {...register('taiKhoan')}
+                  onChange={handleChangeInput}
+
+                  // {...register('taiKhoan')}
                 />
               </div>
               {/* GROUPID */}
-              <div className="text-field">
+              {/* <div className="text-field">
                 <label htmlFor="maNhom">Mã nhóm</label>
                 <input
                   style={{
@@ -194,38 +230,64 @@ export default function EditInformation() {
                     cursor: 'no-drop',
                   }}
                   readOnly={true}
+                  value={values.maNhom}
                   defaultValue={maNhom}
                   autoComplete="off"
                   type="text"
                   id="maNhom"
-                  {...register('maNhom')}
+                  onChange={handleChangeInput}
+
+                  // {...register('maNhom')}
                 />
-              </div>
+              </div> */}
               {/* PASSWORD */}
-              <div className="text-field">
+              <div
+                style={{ position: 'relative' }}
+                className="text-field"
+              >
                 <label htmlFor="matKhau">Mật khẩu</label>
                 <input
+                  value={values.matKhau}
                   defaultValue={matKhau}
                   autoComplete="off"
-                  type="password"
+                  type={type}
                   id="matKhau"
-                  {...register('matKhau')}
+                  onChange={handleChangeInput}
+
+                  // {...register('matKhau')}
                 />
-                {errors.matKhau && (
+                <span
+                  onClick={() => {
+                    handleChangeType();
+                  }}
+                  style={{
+                    cursor: 'pointer',
+                    position: 'absolute',
+                    right: '22px',
+                    top: '18px',
+                  }}
+                >
+                  {eye}
+                </span>
+
+                {/* {errors.matKhau && (
                   <p className="text-danger">
                     Mật khẩu không được bỏ trống
                   </p>
-                )}
+                )} */}
               </div>
               {/* email */}
               <div className="text-field">
                 <label htmlFor="email">Email</label>
                 <input
+                  value={values.email}
                   defaultValue={email}
                   autoComplete="off"
                   type="text"
                   id="email"
-                  {...register('email')}
+                  onChange={handleChangeInput}
+
+                  // {...register('email')}
                 />
               </div>
 
@@ -233,16 +295,19 @@ export default function EditInformation() {
               <div className="text-field">
                 <label htmlFor="soDT">Số điện thoại</label>
                 <input
+                  value={values.soDT}
                   defaultValue={soDT}
                   autoComplete="off"
                   type="text"
                   id="soDT"
-                  {...register('soDT')}
+                  onChange={handleChangeInput}
+
+                  // {...register('soDT')}
                 />
               </div>
 
               {/* KIND OF USER */}
-              <div className="text-field">
+              {/* <div className="text-field">
                 <label htmlFor="maLoaiNguoiDung">Mã người dùng</label>
                 <input
                   style={{
@@ -254,9 +319,8 @@ export default function EditInformation() {
                   autoComplete="off"
                   type="text"
                   id="maLoaiNguoiDung"
-                  {...register('maLoaiNguoiDung')}
                 />
-              </div>
+              </div> */}
 
               <button
                 type="submit"

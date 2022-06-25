@@ -182,9 +182,6 @@ export const userLoginAction = (userInfo, navigate) => {
       setTimeout(() => {
         navigate('/');
       }, 2500);
-      // setTimeout(() => {
-      //   window.location.reload();
-      // }, 2700);
     } catch (error) {
       toast.error(error.response.data.content, {
         position: 'top-center',
@@ -485,17 +482,19 @@ export const updateUserActionV2 = (data) => {
     try {
       const result = await http.put(updateUserURL, data);
       console.log(result);
-      toast.success('Cập nhật thông tin thành công', {
-        position: 'top-center',
-        autoClose: 1000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.success(
+        'Cập nhật thông tin thành công, hãy đăng nhập lại để thấy sự thay đổi',
+        {
+          position: 'top-center',
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        }
+      );
     } catch (error) {
-      console.log(error);
       toast.error(error.response.data.content, {
         position: 'top-center',
         autoClose: 1000,
@@ -508,12 +507,14 @@ export const updateUserActionV2 = (data) => {
 export const getUserInfoAction = () => {
   return async (dispatch) => {
     try {
+      dispatch(displayLoading());
       const result = await http.post(getUserInfoURL);
 
       await dispatch(getUserInfoEditPage(result.data.content));
-      console.log(result);
+      dispatch(hideLoading());
     } catch (error) {
-      console.log(error);
+      dispatch(hideLoading());
+
       toast.error(error.response.data.content, {
         position: 'top-center',
         autoClose: 1000,
