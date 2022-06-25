@@ -23,21 +23,41 @@ import {
   hideLoading,
 } from '../../redux/reducers/loadingReducer';
 import moment from 'moment';
+import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useState } from 'react';
 
 const { TabPane } = Tabs;
 
 export default function EditInformation() {
+  const schemaValidation = yup.object().shape({
+    hoTen: yup.string().trim().required('Họ tên không được bỏ trống'),
+    matKhau: yup.string().required('Mật khẩu không được bỏ trống'),
+    email: yup
+      .string()
+      .trim()
+      .required('Email không được bỏ trống')
+      .matches(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+        'Email không đúng định dạng, nhập lại Email'
+      ),
+    taiKhoan: yup.string().trim().required(),
+    maNhom: yup.string().trim().required(),
+    soDT: yup
+      .string()
+      .trim()
+      .matches(/^[0-9]+$/, 'Số điện thoại phải là chữ số'),
+    maLoaiNguoiDung: yup.string().trim().required(),
+  });
+  const { register, handleSubmit, formState } = useForm({
+    mode: 'all',
+    resolver: yupResolver(schemaValidation),
+  });
+  const { errors } = formState;
   const [form] = Form.useForm();
   const dispatch = useDispatch();
-  useEffect(() => {
-    const action = getUserInfoAction();
-    dispatch(action);
-  }, []);
-
   const { userInfo } = useSelector(getUserInfoEditPage);
-
-  // const { taiKhoan, email, soDT, hoTen, maLoaiNguoiDung, maNhom } =
-  //   user;
   const {
     matKhau,
     taiKhoan,
@@ -48,17 +68,6 @@ export default function EditInformation() {
     maNhom,
   } = userInfo;
   const { thongTinDatVe } = userInfo;
-  // const data = Array.from({
-  //   length: 23,
-  // }).map((_, i) => ({
-  //   href: 'https://ant.design',
-  //   title: `ant design part ${i}`,
-  //   avatar: 'https://joeschmoe.io/api/v1/random',
-  //   description:
-  //     'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-  //   content:
-  //     'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-  // }));
 
   const data = thongTinDatVe.map((item) => ({
     title: (
@@ -104,10 +113,23 @@ export default function EditInformation() {
     ),
   }));
 
-  const onFinish = (values) => {
+  // const [values, setValues] = useState({
+  //   taiKhoan: taiKhoan,
+  //   email: email,
+  //   matKhau: matKhau,
+  //   soDT: soDT,
+  // });
+
+  const onSubmit = (values) => {
     const action = updateUserActionV2(values);
     dispatch(action);
   };
+  useEffect(() => {
+    dispatch(displayLoading());
+    const action = getUserInfoAction();
+    dispatch(action);
+    dispatch(hideLoading());
+  }, []);
 
   return (
     <div>
@@ -121,141 +143,145 @@ export default function EditInformation() {
         <Tabs tabPosition={'left'}>
           {/* EDIT INFORMATION */}
           <TabPane
+            defaultActiveKey="0"
             style={{ marginRight: '1.2rem', width: '900px' }}
             tab={
               <h2 style={{ fontSize: '1.2rem' }}>
                 Thông tin tài khoản
               </h2>
             }
-            key="1"
+            key="0"
           >
-            <Form
-              layout="vertical"
-              size="large"
-              style={{ fontSize: '1.2rem' }}
-              onFinish={onFinish}
-              form={form}
-              initialValues={{
-                hoTen: hoTen,
-                taiKhoan: taiKhoan,
-                matKhau: matKhau,
-                email: email,
-                maNhom: maNhom,
-                soDT: soDT,
-                maLoaiNguoiDung: maLoaiNguoiDung,
-              }}
-            >
+            <form onSubmit={handleSubmit(onSubmit)}>
               {/* NAME */}
-              <Form.Item
-                name={'hoTen'}
-                label={<h2 style={{ fontSize: '1.2rem' }}>Họ tên</h2>}
-              >
-                <Input name="hoTen"></Input>
-              </Form.Item>
+              <div className="text-field">
+                <label htmlFor="hoTen">Họ tên</label>
+                <input
+                  defaultValue={hoTen}
+                  autoComplete="off"
+                  type="text"
+                  id="hoTen"
+                  {...register('hoTen')}
+                />
+                {errors.hoTen && (
+                  <p className="text-danger">
+                    {errors.hoTen.message}
+                  </p>
+                )}
+              </div>
               {/* ACCOUNT */}
-              <Form.Item
-                label={
-                  <h2 style={{ fontSize: '1.2rem' }}>Tài khoản</h2>
-                }
-                name={'taiKhoan'}
-              >
-                <Input
-                  disabled
-                  style={{ fontWeight: 'bolder' }}
-                  name="taiKhoan"
-                ></Input>
-              </Form.Item>
-              {/* GROUP ID */}
-              <Form.Item
-                label={
-                  <h2 style={{ fontSize: '1.2rem' }}>Mã nhóm</h2>
-                }
-                name={'maNhom'}
-              >
-                <Input
-                  disabled
-                  style={{ fontWeight: 'bolder' }}
-                  name="maNhom"
-                ></Input>
-              </Form.Item>
-              {/* PASSWORD */}
-              <Form.Item
-                help="Nhập mật khẩu mới nếu bạn muốn đổi mật khẩu"
-                rules={[
-                  {
-                    required: true,
-                    message: 'Hãy nhập mật khẩu',
-                  },
-                ]}
-                label={
-                  <h2 style={{ fontSize: '1.2rem' }}>Mật khẩu</h2>
-                }
-                name={'matKhau'}
-              >
-                <Input.Password name="matKhau"></Input.Password>
-              </Form.Item>
-              {/* EMAIL */}
-              <Form.Item
-                label={<h2 style={{ fontSize: '1.2rem' }}>Email</h2>}
-                name={'email'}
-              >
-                <Input name="email"></Input>
-              </Form.Item>
-              {/* PHONE NUMBER */}
-              <Form.Item
-                label={
-                  <h2 style={{ fontSize: '1.2rem' }}>
-                    Số điện thoại
-                  </h2>
-                }
-                name={'soDT'}
-              >
-                <Input name="soDT"></Input>
-              </Form.Item>
-              {/* KIND OF USER */}
-              <Form.Item
-                label={
-                  <h2 style={{ fontSize: '1.2rem' }}>
-                    Loại người dùng
-                  </h2>
-                }
-                name={'maLoaiNguoiDung'}
-              >
-                <Select
-                  disabled
-                  options={[
-                    { label: 'Khách hàng', value: 'KhachHang' },
-                    { label: 'Quản Trị', value: 'QuanTri' },
-                  ]}
-                  name="maLoaiNguoiDung"
-                ></Select>
-              </Form.Item>
-              {/* BUTTON SUBMIT */}
-              <Form.Item>
-                <Button
-                  htmlType="submit"
+              <div className="text-field">
+                <label htmlFor="taiKhoan">Tài khoản</label>
+                <input
                   style={{
-                    width: '50%',
-                    padding: '2rem 0',
-                    fontSize: '1.2rem',
-                    borderRadius: '10px',
-                    marginTop: '2rem',
-                    transform: 'translateX(50%)',
+                    backgroundColor: 'rgba(238,238,238,1)',
+                    cursor: 'no-drop',
                   }}
-                  type="primary"
+                  readOnly={true}
+                  defaultValue={taiKhoan}
+                  autoComplete="off"
+                  type="text"
+                  id="taiKhoan"
+                  {...register('taiKhoan')}
+                />
+              </div>
+              {/* GROUPID */}
+              <div className="text-field">
+                <label htmlFor="maNhom">Mã nhóm</label>
+                <input
+                  style={{
+                    backgroundColor: 'rgba(238,238,238,1)',
+                    cursor: 'no-drop',
+                  }}
+                  readOnly={true}
+                  defaultValue={maNhom}
+                  autoComplete="off"
+                  type="text"
+                  id="maNhom"
+                  {...register('maNhom')}
+                />
+              </div>
+              {/* PASSWORD */}
+              <div className="text-field">
+                <label htmlFor="matKhau">Mật khẩu</label>
+                <input
+                  defaultValue={matKhau}
+                  autoComplete="off"
+                  type="password"
+                  id="matKhau"
+                  {...register('matKhau')}
+                />
+                {errors.matKhau && (
+                  <p className="text-danger">
+                    Mật khẩu không được bỏ trống
+                  </p>
+                )}
+              </div>
+              {/* email */}
+              <div className="text-field">
+                <label htmlFor="email">Email</label>
+                <input
+                  defaultValue={email}
+                  autoComplete="off"
+                  type="text"
+                  id="email"
+                  {...register('email')}
+                />
+              </div>
+
+              {/* PHONE NUMBER */}
+              <div className="text-field">
+                <label htmlFor="soDT">Số điện thoại</label>
+                <input
+                  defaultValue={soDT}
+                  autoComplete="off"
+                  type="text"
+                  id="soDT"
+                  {...register('soDT')}
+                />
+              </div>
+
+              {/* KIND OF USER */}
+              <div className="text-field">
+                <label htmlFor="maLoaiNguoiDung">Mã người dùng</label>
+                <input
+                  style={{
+                    backgroundColor: 'rgba(238,238,238,1)',
+                    cursor: 'no-drop',
+                  }}
+                  readOnly={true}
+                  defaultValue={maLoaiNguoiDung}
+                  autoComplete="off"
+                  type="text"
+                  id="maLoaiNguoiDung"
+                  {...register('maLoaiNguoiDung')}
+                />
+              </div>
+
+              <button
+                type="submit"
+                style={{
+                  width: '50%',
+                  padding: '2rem 0',
+                  fontSize: '1.2rem',
+                  borderRadius: '10px',
+                  marginTop: '2rem',
+                  transform: 'translateX(50%)',
+                  backgroundColor: '#00c6ff',
+                  borderColor: '#00c6ff',
+                }}
+              >
+                <h2
+                  style={{
+                    color: 'white',
+                    marginBottom: '0',
+                    lineHeight: '5px',
+                  }}
                 >
-                  <h2
-                    style={{
-                      color: 'white',
-                      marginBottom: '0',
-                      lineHeight: '5px',
-                    }}
-                  >
-                    Cập nhật
-                  </h2>
-                </Button>
-              </Form.Item>
-            </Form>
+                  Cập nhật
+                </h2>
+              </button>
+            </form>
           </TabPane>
 
           {/* BOOKING HISTORY */}
@@ -263,7 +289,7 @@ export default function EditInformation() {
             tab={
               <h2 style={{ fontSize: '1.2rem' }}>Lịch sử đặt vé</h2>
             }
-            key="2"
+            key="1"
           >
             <List
               itemLayout="vertical"

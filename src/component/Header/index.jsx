@@ -32,9 +32,9 @@ export default function Header() {
             <h1
               onClick={() => {
                 navigate('/edit_information');
-                setTimeout(() => {
-                  window.location.reload();
-                }, 500);
+                // setTimeout(() => {
+                //   window.location.reload();
+                // }, 1000);
               }}
               className="update__info"
             >
@@ -82,9 +82,9 @@ export default function Header() {
             <h1
               onClick={() => {
                 navigate('/edit_information');
-                setTimeout(() => {
-                  window.location.reload();
-                }, 500);
+                // setTimeout(() => {
+                //   window.location.reload();
+                // }, 500);
               }}
               className="update__info"
             >
@@ -124,6 +124,7 @@ export default function Header() {
       onOk() {
         localStorage.clear();
         navigate('/');
+        window.location.reload();
       },
 
       onCancel() {},

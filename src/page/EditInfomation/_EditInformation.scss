@@ -37,3 +37,35 @@
     margin-left: 3rem;
   }
 }
+
+//for form
+.text-field {
+  position: relative;
+  margin-top: 3.5rem;
+}
+
+.text-field label {
+  display: inline-block;
+  font-weight: 600;
+  cursor: pointer;
+  position: absolute;
+  top: -22px;
+  left: -4px;
+  background-color: white;
+  padding: 1px 5px;
+  font-size: 1.2rem;
+  transform: translateY(-50%);
+  color: grey;
+}
+
+.text-field input {
+  padding: 15px;
+  display: block;
+  width: 100%;
+  font-size: 14px;
+  border: 1px solid grey;
+  border-radius: 4px;
+  background-color: transparent;
+  color: black;
+  font-size: 1.2rem;
+}

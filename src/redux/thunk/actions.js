@@ -182,10 +182,9 @@ export const userLoginAction = (userInfo, navigate) => {
       setTimeout(() => {
         navigate('/');
       }, 2500);
-      await dispatch(getUserInfoAction());
-      setTimeout(() => {
-        window.location.reload();
-      }, 2700);
+      // setTimeout(() => {
+      //   window.location.reload();
+      // }, 2700);
     } catch (error) {
       toast.error(error.response.data.content, {
         position: 'top-center',
@@ -214,8 +213,6 @@ export const getBoxOfficeListAction = (filmCode) => {
       dispatch(hideLoading());
     } catch (error) {
       dispatch(hideLoading());
-
-      console.log(error);
     }
   };
 };
@@ -513,9 +510,8 @@ export const getUserInfoAction = () => {
     try {
       const result = await http.post(getUserInfoURL);
 
-      console.log(result);
-
       await dispatch(getUserInfoEditPage(result.data.content));
+      console.log(result);
     } catch (error) {
       console.log(error);
       toast.error(error.response.data.content, {
