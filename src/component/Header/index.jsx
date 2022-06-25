@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Button,
   Radio,
@@ -268,6 +268,13 @@ export default function Header() {
       );
     }
   };
+  const scrollToTheater = () => {
+    window.scrollTo({
+      top: 2300,
+      behavior: 'smooth',
+    });
+  };
+
   return (
     <div className="header">
       <div className="name">
@@ -279,7 +286,14 @@ export default function Header() {
         <a className="" href="/">
           Trang chủ
         </a>
-        <a className="">Cụm rạp</a>
+        <a
+          onClick={() => {
+            scrollToTheater();
+          }}
+          className=""
+        >
+          Cụm rạp
+        </a>
         <a className="">Tin tức</a>
         <a className="">Liên hệ</a>
       </div>
