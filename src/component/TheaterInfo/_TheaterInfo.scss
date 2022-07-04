@@ -6,19 +6,10 @@
   @media screen and (max-width: 1204.44px) {
   }
   .theater__info {
-    text-align: center;
     font-size: $fs-xl;
     position: relative;
     margin-bottom: 4rem;
-    &::after {
-      content: '';
-      height: 0.188rem;
-      background-color: orange;
-      display: block;
-      width: 19%;
-      position: absolute;
-      left: 40.5%;
-    }
+    text-align: center;
   }
   .theater__info__calendar {
     transform: translateX(292px);
