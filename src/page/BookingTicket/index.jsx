@@ -20,6 +20,7 @@ import { booking } from '../../redux/reducers/seatReducer';
 import { calendarTheater } from '../../_core/models/boxOfficeCalendar';
 import { Tabs } from 'antd';
 import BookingTicketResult from '../BookingTicketResult';
+import useWindowResize from '../../utils/useWindowResize';
 const { TabPane } = Tabs;
 
 function BookingTicket(props) {
@@ -51,11 +52,12 @@ function BookingTicket(props) {
   const { bookingSeats } = useSelector(getBookingSeats);
 
   const dispatch = useDispatch();
+  const { width } = useWindowResize();
 
   useEffect(() => {
     const action = getBoxOfficeListAction(calendarCode);
     dispatch(action);
-  }, [dispatch]);
+  }, [dispatch, calendarCode]);
 
   const renderSeat = () => {
     // const { danhSachGhe } = filmInfo;
@@ -129,7 +131,7 @@ function BookingTicket(props) {
       <section className="booking__ticket">
         <div className="row booking__ticket__section">
           {/* SCREEN */}
-          <div className="col-9 booking__ticket__screen">
+          <div className="col-8 booking__ticket__screen">
             <div className="trapezoid">Màn hình</div>
             <div className="seats">{renderSeat()}</div>
             <div className="define">
@@ -175,7 +177,7 @@ function BookingTicket(props) {
             </div>
           </div>
           {/* PAY */}
-          <div className="col-3 booking__ticket__pay">
+          <div className="col-4 booking__ticket__pay">
             <div className="total">
               <h1 className="money text-center">
                 {bookingSeats
@@ -189,7 +191,7 @@ function BookingTicket(props) {
             <hr></hr>
             {/* FILM_INFO */}
             <div className="film_info">
-              <h1 className="film_info_name">Phim: {tenPhim} </h1>
+              <h1 className="film_info_name">Phim: {tenPhim}</h1>
               <h1 className="film_info_theater">Rạp: {tenCumRap}</h1>
               <h1 className="film_info_address">Địa chỉ: {diaChi}</h1>
               <h1 className="film_info_date">

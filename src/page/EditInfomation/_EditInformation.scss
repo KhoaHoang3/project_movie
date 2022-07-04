@@ -1,5 +1,24 @@
 .edit__info {
   min-height: 100vh;
+  .edit__info__tabs {
+    margin-bottom: 3rem;
+    @media screen and (max-width: 1358px) {
+      width: 1200px;
+    }
+    @media screen and (max-width: 1270px) {
+      width: 1100px;
+    }
+    @media screen and (max-width: 1168px) {
+      width: 1020px;
+    }
+    @media screen and (max-width: 1084px) {
+      width: 980px;
+    }
+    .infomation__tab {
+      max-width: 900px;
+    }
+  }
+
   h1 {
     margin-top: 10rem;
     font-size: 1.5rem;
@@ -35,6 +54,9 @@
     > .ant-tabs-content
     > .ant-tabs-tabpane {
     margin-left: 3rem;
+    @media screen and (max-width: 1100px) {
+      margin-left: 0.5rem;
+    }
   }
 }
 
@@ -42,6 +64,7 @@
 .text-field {
   position: relative;
   margin-top: 3.5rem;
+  max-width: 900px;
 }
 
 .text-field label {

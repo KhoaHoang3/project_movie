@@ -1,4 +1,10 @@
-.container {
+.container__theater__info {
+  margin: 0 auto;
+  // max-width: 1550px;
+  .ant-tabs {
+  }
+  @media screen and (max-width: 1204.44px) {
+  }
   .theater__info {
     text-align: center;
     font-size: $fs-xl;
@@ -9,9 +15,33 @@
       height: 0.188rem;
       background-color: orange;
       display: block;
-      width: 33%;
+      width: 19%;
       position: absolute;
-      left: 33.5%;
+      left: 40.5%;
+    }
+  }
+  .theater__info__calendar {
+    transform: translateX(292px);
+    width: 92rem;
+    @media screen and (max-width: 2050px) {
+      width: 83rem;
+      .row {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+    @media screen and (max-width: 1710.89px) {
+      width: 75rem;
+      transform: translateX(200px);
+    }
+    @media screen and (max-width: 1694.44px) {
+      width: 60rem;
+    }
+    @media screen and (max-width: 1654.44px) {
+      transform: translateX(150px);
+    }
+    @media screen and (max-width: 1489px) {
+      transform: translateX(-11.5px);
     }
   }
 }

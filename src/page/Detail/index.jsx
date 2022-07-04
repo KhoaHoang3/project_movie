@@ -63,7 +63,7 @@ export default function Detail() {
           }}
           to={'/login'}
         >
-          {moment(ngayChieuGioChieu).format('DD.MM.YYYY hh:mm A')}
+          {moment(ngayChieuGioChieu).format('DD/MM/YYYY hh:mm A')}
         </NavLink>
       );
     }
@@ -85,7 +85,7 @@ export default function Detail() {
   useEffect(() => {
     const action = getShowtimeEachFilmAction(maPhim);
     dispatch(action);
-  }, []);
+  }, [dispatch, maPhim]);
   return (
     <>
       <section className="header">
@@ -111,15 +111,7 @@ export default function Detail() {
             <div className="film__detail row">
               <div className="film__image col-4">
                 <div className="film__poster">
-                  <img
-                    style={{
-                      width: '120%',
-                      height: '34rem',
-                      borderRadius: '10px',
-                    }}
-                    src={`${hinhAnh}`}
-                    alt=""
-                  />
+                  <img src={`${hinhAnh}`} alt="" />
                 </div>
                 <div className="film__trailer">
                   <a

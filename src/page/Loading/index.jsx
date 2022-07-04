@@ -14,7 +14,7 @@ export default function Loading() {
             minHeight: '100vh',
             minWidth: '100vw',
             top: '0',
-            zIndex: '10000000',
+            zIndex: '1000',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',

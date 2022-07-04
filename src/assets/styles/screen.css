@@ -11,3 +11,27 @@
   -moz-filter: brightness(87%) saturate(91%) contrast(110%) invert(2%)
     drop-shadow(1px 14px 16px #000000);
 }
+
+@media screen and (max-width: 1320px) {
+  .trapezoid {
+    width: 56rem;
+  }
+}
+
+@media screen and (max-width: 1249px) {
+  .trapezoid {
+    width: 54rem;
+  }
+}
+
+@media screen and (max-width: 1110px) {
+  .trapezoid {
+    width: 50rem;
+  }
+}
+
+@media screen and (max-width: 1080px) {
+  .trapezoid {
+    width: 46rem;
+  }
+}

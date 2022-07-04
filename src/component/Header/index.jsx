@@ -118,6 +118,78 @@ export default function Header() {
       ]}
     />
   );
+  const RDmenu = (
+    <Menu
+      items={[
+        // Home Page
+        {
+          label: (
+            <NavLink rel="noopener noreferrer" to={'/'}>
+              Trang chủ
+            </NavLink>
+          ),
+          key: '0',
+          danger: true,
+        },
+        //Theater
+        {
+          label: (
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.aliyun.com"
+            >
+              Cụm rạp
+            </a>
+          ),
+          key: '1',
+          danger: true,
+        },
+        //News
+        {
+          label: (
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.aliyun.com"
+            >
+              Tin tức
+            </a>
+          ),
+          key: '2',
+          danger: true,
+        },
+        // Contact
+        {
+          label: (
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.aliyun.com"
+            >
+              Liên hệ
+            </a>
+          ),
+          key: '3',
+          danger: true,
+        },
+        {
+          type: 'divider',
+        },
+        // login
+        {
+          label: <NavLink to={'/login'}>Đăng nhập</NavLink>,
+          key: '4',
+          danger: true,
+        },
+        {
+          label: <NavLink to={'/register'}>Đăng ký</NavLink>,
+          key: '5',
+          danger: true,
+        },
+      ]}
+    />
+  );
   const showConfirm = () => {
     confirm({
       title: 'Bạn vẫn muốn đăng xuất khỏi tài khoản?',
@@ -149,7 +221,7 @@ export default function Header() {
             <Dropdown
               overlayStyle={{ zIndex: '11' }}
               overlay={adminMenu}
-              trigger={['hover']}
+              trigger={['click']}
             >
               <a onClick={(e) => e.preventDefault()}>
                 <Space>
@@ -180,23 +252,6 @@ export default function Header() {
                 </Space>
               </a>
             </Dropdown>
-            {/* <div className="user">
-              <h1
-                style={{ fontSize: '1.2rem', marginRight: '1.2rem' }}
-                className="text-white"
-              >
-                Xin chào, {user.hoTen} !
-              </h1>
-            </div> */}
-            {/* <button
-              style={{ fontSize: '1.2rem' }}
-              onClick={() => {
-                showConfirm();
-              }}
-              className="logout__button"
-            >
-              Đăng xuất
-            </button> */}
           </div>
         );
       } else if (user.maLoaiNguoiDung === 'KhachHang') {
@@ -205,7 +260,7 @@ export default function Header() {
             <Dropdown
               overlayStyle={{ zIndex: '11' }}
               overlay={userMenu}
-              trigger={['hover']}
+              trigger={['click']}
             >
               <a onClick={(e) => e.preventDefault()}>
                 <Space>
@@ -242,7 +297,7 @@ export default function Header() {
       }
     } else {
       return (
-        <div>
+        <div className="logout__section">
           <NavLink to={'/register'}>
             <button
               style={{ fontSize: '1.2rem' }}
@@ -264,10 +319,25 @@ export default function Header() {
               Đăng nhập
             </button>
           </NavLink>
+
+          <Dropdown
+            trigger={['click']}
+            className="dropdown"
+            overlay={RDmenu}
+            placement="bottomRight"
+          >
+            <i
+              onClick={(e) => {
+                e.preventDefault();
+              }}
+              className="navigation fa fa-bars"
+            ></i>
+          </Dropdown>
         </div>
       );
     }
   };
+
   const scrollToTheater = () => {
     window.scrollTo({
       top: 2300,
@@ -276,30 +346,31 @@ export default function Header() {
   };
 
   return (
-    <div className="header">
-      <div className="name">
-        <h1>
-          <VideoCameraOutlined style={{ fontSize: 80 }} />
-        </h1>
-      </div>
-      <div className="nav_bar">
-        <a className="" href="/">
-          Trang chủ
-        </a>
-        <a
-          onClick={() => {
-            scrollToTheater();
-          }}
-          className=""
-        >
-          Cụm rạp
-        </a>
-        <a className="">Tin tức</a>
-        <a className="">Liên hệ</a>
-      </div>
-      <div className="buttons">
-        {renderUI()}
-        {/* <NavLink to={'/register'}>
+    <div className="container">
+      <div className="header">
+        <div className="name">
+          <h1>
+            <VideoCameraOutlined style={{ fontSize: 80 }} />
+          </h1>
+        </div>
+        <div className="nav_bar">
+          <a className="" href="/">
+            Trang chủ
+          </a>
+          <a
+            onClick={() => {
+              scrollToTheater();
+            }}
+            className=""
+          >
+            Cụm rạp
+          </a>
+          <a className="">Tin tức</a>
+          <a className="">Liên hệ</a>
+        </div>
+        <div className="buttons">
+          {renderUI()}
+          {/* <NavLink to={'/register'}>
           <button
             className="register__button"
             type="transparent"
@@ -318,6 +389,7 @@ export default function Header() {
             Đăng nhập
           </button>
         </NavLink> */}
+        </div>
       </div>
     </div>
   );

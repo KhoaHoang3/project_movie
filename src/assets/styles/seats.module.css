@@ -68,3 +68,145 @@
   background-color: white;
   border: blue 3px solid;
 }
+
+@media screen and (max-width: 1722.5px) {
+  .seats {
+    height: 49px;
+    width: 49px;
+  }
+}
+
+@media screen and (max-width: 1697.5px) {
+  .seats {
+    height: 48px;
+    width: 48px;
+  }
+}
+
+@media screen and (max-width: 1673.5px) {
+  .seats {
+    height: 47px;
+    width: 47px;
+  }
+}
+
+@media screen and (max-width: 1650.5px) {
+  .seats {
+    height: 46px;
+    width: 46px;
+  }
+}
+
+@media screen and (max-width: 1626px) {
+  .seats {
+    height: 45px;
+    width: 45px;
+  }
+}
+@media screen and (max-width: 1602px) {
+  .seats {
+    height: 44px;
+    width: 44px;
+  }
+}
+
+@media screen and (max-width: 1579px) {
+  .seats {
+    height: 43px;
+    width: 43px;
+  }
+}
+
+@media screen and (max-width: 1383px) {
+  .seats {
+    height: 42px;
+    width: 42px;
+  }
+}
+@media screen and (max-width: 1360px) {
+  .seats {
+    height: 41px;
+    width: 41px;
+  }
+}
+
+@media screen and (max-width: 1340px) {
+  .seats {
+    height: 40px;
+    width: 40px;
+  }
+}
+
+@media screen and (max-width: 1320px) {
+  .seats {
+    height: 39px;
+    width: 39px;
+  }
+}
+
+@media screen and (max-width: 1294px) {
+  .seats {
+    height: 38px;
+    width: 38px;
+  }
+}
+
+@media screen and (max-width: 1274px) {
+  .seats {
+    height: 37.5px;
+    width: 37.5px;
+  }
+}
+
+@media screen and (max-width: 1263px) {
+  .seats {
+    height: 37px;
+    width: 37px;
+  }
+}
+@media screen and (max-width: 1253px) {
+  .seats {
+    height: 36.5px;
+    width: 36.5px;
+  }
+}
+
+@media screen and (max-width: 1240px) {
+  .seats {
+    height: 36px;
+    width: 36px;
+  }
+}
+
+@media screen and (max-width: 1229px) {
+  .seats {
+    height: 35.5px;
+    width: 35.5px;
+  }
+}
+
+@media screen and (max-width: 1219px) {
+  .seats {
+    height: 35px;
+    width: 35px;
+    margin: 0.55rem;
+  }
+}
+
+@media screen and (max-width: 1176px) {
+  .seats {
+    margin: 0.45rem;
+  }
+}
+
+@media screen and (max-width: 1110px) {
+  .seats {
+    margin: 0.4rem;
+  }
+}
+
+@media screen and (max-width: 1080px) {
+  .seats {
+    margin: 0.35rem;
+  }
+}

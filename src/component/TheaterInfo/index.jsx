@@ -18,6 +18,8 @@ import {
   getDateAndTime,
   getFilmCode,
 } from '../../redux/reducers/getBoxOfficeReducer';
+import useWindowSize from '../../utils/useWindowResize';
+import useWindowResize from '../../utils/useWindowResize';
 const { TabPane } = Tabs;
 
 function TheaterInfo() {
@@ -40,12 +42,6 @@ function TheaterInfo() {
   useEffect(() => {
     const actionThunk = getTheaterShowtimeInfoAction();
     dispatch(actionThunk);
-  }, [dispatch]);
-
-  //get box office list info
-  useEffect(() => {
-    const action = getBoxOfficeListAction(calendarCode);
-    dispatch(action);
   }, [dispatch]);
 
   // check user login or not
@@ -79,17 +75,19 @@ function TheaterInfo() {
           }}
           to={'/login'}
         >
-          {moment(ngayChieuGioChieu).format('DD.MM.YYYY hh:mm A')}
+          {moment(ngayChieuGioChieu).format('DD/MM/YYYY hh:mm A')}
         </NavLink>
       );
     }
   };
+  const { width } = useWindowResize();
+  console.log('width', width);
 
   return (
-    <div className="container">
+    <div className="container__theater__info">
       <h1 className="theater__info">THÔNG TIN CÁC RẠP CHIẾU</h1>
       <Tabs
-        style={{ width: '95rem', borderRadius: '2rem' }}
+        className="theater__info__calendar"
         tabPosition={tabPosition}
       >
         {theaterShowtime.map((item, index) => {
@@ -99,9 +97,8 @@ function TheaterInfo() {
               tab={
                 <img
                   style={{
-                    width: '5rem',
-                    height: '5rem',
-                    borderRadius: '50%',
+                    width: '3rem',
+                    height: '3rem',
                   }}
                   src={item.logo}
                 ></img>

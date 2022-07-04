@@ -36,9 +36,10 @@ export default function Carouselll() {
     );
   });
   return (
-    <div>
+    <div className="">
       <>
         <Swiper
+          className="swiper__carousel"
           navigation={true}
           modules={[Navigation, Autoplay, EffectFade, Pagination]}
           autoplay={{
@@ -46,7 +47,7 @@ export default function Carouselll() {
             disableOnInteraction: false,
           }}
           effect={'fade'}
-          style={{ height: 1200 }}
+          // style={{ height: 1200 }}
         >
           {/* FILM - 1 */}
           {bannerFilms.slice(0, 1).map((item, index) => {

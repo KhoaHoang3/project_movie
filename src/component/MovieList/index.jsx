@@ -45,14 +45,39 @@ export default function MovieList() {
 
   const settings = {
     className: 'center',
-    dots: true,
-    centerMode: true,
-    infinite: true,
     centerPadding: '180px',
-    slidesToShow: 1,
+    slidesToShow: 3,
     speed: 400,
     rows: 2,
-    slidesPerRow: 3,
+    slidesPerRow: 1,
+    responsive: [
+      {
+        breakpoint: 1360,
+        settings: {
+          slidesToShow: 3,
+          slidesPerRow: 1,
+          rows: 2,
+          dots: true,
+        },
+      },
+
+      {
+        breakpoint: 1275,
+        settings: {
+          slidesToShow: 1,
+          slidesPerRow: 3,
+          rows: 2,
+          dots: true,
+        },
+      },
+      // {
+      //   breakpoint: 1023,
+      //   settings: {
+      //     slidesToShow: 2,
+      //     slidesToScroll: 2,
+      //   },
+      // },
+    ],
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
   };
@@ -93,83 +118,56 @@ export default function MovieList() {
       <div className="tab-content" id="pills-tabContent">
         {/* CURRENT MOVIES */}
         <div
-          className="tab-pane fade show active"
+          className="tab-pane fade show active tab-content-movies"
           id="current_movies"
         >
-          <div>
+          <div className="">
             <Slider {...settings}>
-              {listFilms
-                .filter((film) => film.dangChieu === true)
-                .map((item, index) => {
-                  return (
-                    <div key={index} className="wrapper">
-                      <div className="card">
-                        <img
-                          width={380}
-                          height={400}
-                          src={item.hinhAnh}
-                          alt=""
-                        />
-                        <div className="descriptions">
-                          <h1>{item.tenPhim}</h1>
-                          {item.moTa.length > 300 ? (
-                            <p>{item.moTa.slice(0, 300)}...</p>
-                          ) : (
-                            <p>{item.moTa}</p>
-                          )}
-                          {/* <button type="button">
-                            <YoutubeOutlined
-                              style={{
-                                fontSize: 40,
-                                paddingRight: '10px',
-                              }}
-                            />
-                            Xem trailer
-                          </button> */}
+              {listFilms.map((item, index) => {
+                return (
+                  <div key={index} className="wrapper">
+                    <div className="card">
+                      <img
+                        width={380}
+                        height={400}
+                        src={item.hinhAnh}
+                        alt=""
+                      />
+                      <div className="descriptions">
+                        <h1>{item.tenPhim}</h1>
+                        {item.moTa.length > 150 ? (
+                          <p>{item.moTa.slice(0, 150)}...</p>
+                        ) : (
+                          <p>{item.moTa}</p>
+                        )}
 
-                          <NavLink to={`/detail/${item.maPhim}`}>
-                            <button
-                              onClick={() => {
-                                dispatch({
-                                  type: 'FILM_DETAIL',
-                                  data: item,
-                                });
-                              }}
-                              className="booking"
-                            >
-                              Đặt vé
-                            </button>
-                          </NavLink>
-                        </div>
+                        <NavLink to={`/detail/${item.maPhim}`}>
+                          <button
+                            onClick={() => {
+                              dispatch({
+                                type: 'FILM_DETAIL',
+                                data: item,
+                              });
+                            }}
+                            className="booking"
+                          >
+                            Đặt vé
+                          </button>
+                        </NavLink>
                       </div>
                     </div>
-
-                    // <div key={index} className="list">
-                    //   <div className="item">
-                    //     <div className="content">
-                    //       <div className="image">
-                    //         <img
-                    //           width={380}
-                    //           height={400}
-                    //           src={item.hinhAnh}
-                    //           alt=""
-                    //         />
-                    //       </div>
-                    //       <div className="card-body">
-                    //         <p>Name: {item.tenPhim}</p>
-                    //         <p>Premiere date: {item.ngayKhoiChieu}</p>
-                    //       </div>
-                    //     </div>
-                    //   </div>
-                    // </div>
-                  );
-                })}
+                  </div>
+                );
+              })}
             </Slider>
           </div>
         </div>
 
         {/* UPCOMING MOVIES */}
-        <div className="tab-pane fade" id="upcoming_movies">
+        <div
+          className="tab-pane fade tab-content-movies"
+          id="upcoming_movies"
+        >
           <div>
             <Slider {...settings}>
               {listFilms
@@ -186,8 +184,8 @@ export default function MovieList() {
                         />
                         <div className="descriptions">
                           <h1>{item.tenPhim}</h1>
-                          {item.moTa.length > 300 ? (
-                            <p>{item.moTa.slice(0, 300)}...</p>
+                          {item.moTa.length > 150 ? (
+                            <p>{item.moTa.slice(0, 150)}...</p>
                           ) : (
                             <p>{item.moTa}</p>
                           )}

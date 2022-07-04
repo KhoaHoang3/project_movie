@@ -128,8 +128,8 @@ export default function Admin(props) {
           style={{ fontSize: '1.2rem' }}
           theme="dark"
           mode="inline"
-          selectedKeys={location.pathname}
-          defaultSelectedKeys={location.pathname}
+          selectedKeys={[location.pathname]}
+          defaultSelectedKeys={[location.pathname]}
           items={[
             // USER_MANAGEMENT
             {

@@ -1,11 +1,17 @@
 .booking__ticket {
   .booking__ticket__section {
+    // @media screen and (max-width: 1528.5px) {
+    //   display: block;
+    // }
     .booking__ticket__screen {
       margin-bottom: 3rem;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
+      @media screen and (max-width: 1722.5px) {
+        max-width: 75%;
+      }
       .trapezoid {
         text-align: center;
         font-size: $fs-md;
@@ -20,9 +26,19 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        @media screen and (max-width: 1160px) {
+          transform: translateX(30px);
+        }
+        @media screen and (max-width: 1122px) {
+          display: block;
+          margin-bottom: 0.2rem;
+        }
         .normal__seat {
           display: flex;
           margin-right: 1.5rem;
+          @media screen and (max-width: 1122px) {
+            margin-bottom: 0.4rem;
+          }
           .normal__seat__title {
             font-size: 1rem;
             transform: translateY(28%);
@@ -32,6 +48,9 @@
         .vip__seat {
           display: flex;
           margin-right: 1.5rem;
+          @media screen and (max-width: 1122px) {
+            margin-bottom: 0.4rem;
+          }
           .vip__seat__title {
             font-size: 1rem;
             transform: translateY(28%);
@@ -41,6 +60,9 @@
         .booking__seat {
           display: flex;
           margin-right: 1.5rem;
+          @media screen and (max-width: 1122px) {
+            margin-bottom: 0.4rem;
+          }
           .booking__seat__title {
             font-size: 1rem;
             transform: translateY(28%);
@@ -50,6 +72,9 @@
         .booked__seat {
           display: flex;
           margin-right: 1.5rem;
+          @media screen and (max-width: 1122px) {
+            margin-bottom: 0.4rem;
+          }
           .booked__seat__title {
             font-size: 1rem;
             transform: translateY(28%);
@@ -59,6 +84,7 @@
         .user__booking__seat {
           display: flex;
           margin-right: 1.5rem;
+
           .user__booking__seat__title {
             font-size: 1rem;
             transform: translateY(28%);
@@ -70,7 +96,47 @@
     .booking__ticket__pay {
       height: 750px;
       width: 20rem;
-
+      @media screen and (max-width: 1569.5px) {
+        // padding: 0;
+        max-width: 33%;
+        // transform: translateX(180%);
+      }
+      @media screen and (max-width: 1561px) {
+        max-width: 32%;
+      }
+      @media screen and (max-width: 1539px) {
+        max-width: 31%;
+      }
+      @media screen and (max-width: 1517px) {
+        max-width: 30%;
+      }
+      @media screen and (max-width: 1497.5px) {
+        max-width: 29%;
+      }
+      @media screen and (max-width: 1473.5px) {
+        max-width: 28.5%;
+      }
+      @media screen and (max-width: 1463.5px) {
+        max-width: 28%;
+      }
+      @media screen and (max-width: 1452.5px) {
+        max-width: 27.5%;
+      }
+      @media screen and (max-width: 1442px) {
+        max-width: 27%;
+      }
+      @media screen and (max-width: 1432px) {
+        max-width: 26.5%;
+      }
+      @media screen and (max-width: 1422px) {
+        max-width: 25%;
+      }
+      @media screen and (max-width: 1412px) {
+        max-width: 24.5%;
+      }
+      @media screen and (max-width: 1402px) {
+        max-width: 24%;
+      }
       .total {
         .money {
           font-size: 2.5rem;
@@ -126,6 +192,12 @@
           -webkit-transform-style: preserve-3d;
           -moz-transform-style: preserve-3d;
           transform-style: preserve-3d;
+        }
+        @media screen and (max-width: 1539px) {
+          margin-top: 12rem;
+        }
+        @media screen and (max-width: 1398.5px) {
+          margin-top: 5rem;
         }
       }
     }

@@ -247,7 +247,15 @@ export const bookingTicketAction = (maLichChieu, danhSachVe) => {
     } catch (error) {
       dispatch(hideLoading());
 
-      console.log(error);
+      toast.error(error.response.data.content, {
+        position: 'top-right',
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
 };
@@ -511,6 +519,7 @@ export const getUserInfoAction = () => {
       const result = await http.post(getUserInfoURL);
 
       await dispatch(getUserInfoEditPage(result.data.content));
+      console.log(result);
       dispatch(hideLoading());
     } catch (error) {
       dispatch(hideLoading());

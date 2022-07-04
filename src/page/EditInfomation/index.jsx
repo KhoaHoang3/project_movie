@@ -28,34 +28,11 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
+import { memo } from 'react';
 
 const { TabPane } = Tabs;
 
-export default function EditInformation() {
-  // const schemaValidation = yup.object().shape({
-  //   hoTen: yup.string().trim().required('Họ tên không được bỏ trống'),
-  //   matKhau: yup.string().required('Mật khẩu không được bỏ trống'),
-  //   email: yup
-  //     .string()
-  //     .trim()
-  //     .required('Email không được bỏ trống')
-  //     .matches(
-  //       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-  //       'Email không đúng định dạng, nhập lại Email'
-  //     ),
-  //   taiKhoan: yup.string().trim().required(),
-  //   maNhom: yup.string().trim().required(),
-  //   soDT: yup
-  //     .string()
-  //     .trim()
-  //     .matches(/^[0-9]+$/, 'Số điện thoại phải là chữ số'),
-  //   maLoaiNguoiDung: yup.string().trim().required(),
-  // });
-  // const { register, handleSubmit, formState } = useForm({
-  //   mode: 'all',
-  //   resolver: yupResolver(schemaValidation),
-  // });
-  // const { errors } = formState;
+function EditInformation() {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
   const { userInfo } = useSelector(getUserInfoEditPage);
@@ -69,6 +46,7 @@ export default function EditInformation() {
     maNhom,
   } = userInfo;
   const { thongTinDatVe } = userInfo;
+  console.log(userInfo);
 
   const data = thongTinDatVe.map((item) => ({
     title: (
@@ -171,11 +149,11 @@ export default function EditInformation() {
       <section className="edit__info container">
         <h1>Cài đặt tài khoản</h1>
         <hr />
-        <Tabs tabPosition={'left'}>
+        <Tabs className="edit__info__tabs" tabPosition={'left'}>
           {/* EDIT INFORMATION */}
           <TabPane
+            className="infomation__tab"
             defaultActiveKey="0"
-            style={{ marginRight: '1.2rem', width: '900px' }}
             tab={
               <h2 style={{ fontSize: '1.2rem' }}>
                 Thông tin tài khoản
@@ -393,3 +371,5 @@ export default function EditInformation() {
     </div>
   );
 }
+
+export default memo(EditInformation);

@@ -26,91 +26,161 @@
     justify-content: center;
     align-items: center;
     margin-top: 2rem;
-    .tab-pane {
-      width: 100rem;
-      .card {
-        flex: 1;
-        flex-basis: 18.75px;
-        flex-grow: 0;
-        height: 28.75rem;
-        margin: 1rem;
-        background: #fff;
-        border: 2px solid #fff;
-        box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.5);
-        cursor: pointer;
-        transition: all 0.5s cubic-bezier(0.8, 0.5, 0.2, 1.4);
-        overflow: hidden;
-        position: relative;
+
+    .tab-content-movies {
+      width: 98rem;
+
+      @media screen and (max-width: 1360px) {
+        width: 80rem !important;
       }
-      .card img {
-        width: 100%;
-        height: 100%;
-        transition: all 0.5s cubic-bezier(0.8, 0.5, 0.2, 1.4);
+      @media screen and (max-width: 1282.5px) {
+        width: 80rem !important;
       }
-      .descriptions {
-        position: absolute;
-        top: 0px;
-        left: 0px;
-        background-color: rgba(255, 255, 255, 0.7);
-        width: 100%;
-        height: 100%;
-        transition: all 0.7s ease-in-out;
-        padding: 20px;
-        box-sizing: border-box;
-        clip-path: circle(0% at 100% 100%);
-      }
-      .card:hover .descriptions {
-        left: 0px;
-        transition: all 0.7s ease-in-out;
-        clip-path: circle(75%);
-      }
-      .card:hover {
-        transition: all 0.5s cubic-bezier(0.8, 0.5, 0.2, 1.4);
-        box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
-        transform: scale(0.97);
-      }
-      .card:hover img {
-        transition: all 0.5s cubic-bezier(0.8, 0.5, 0.2, 1.4);
-        transform: scale(1.6) rotate(20deg);
-        filter: blur(3px);
-      }
-      .card h1 {
-        color: #ff3838;
-        margin: 0px;
-        font-size: 1.3rem;
-      }
-      .card p {
-        line-height: 2rem;
-        height: 70%;
-        font-size: $fs-sm;
-      }
-      .card button {
-        padding: 0.8rem 1.5rem;
-        cursor: pointer;
-        border-style: none;
-        background-color: #ff3838;
-        color: #fff;
-        font-size: 1.2rem;
-        outline: none;
-        box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.4);
-        transition: all 0.5s ease-in-out;
-      }
-      .card button:hover {
-        transform: scale(0.95) translateX(-5px);
-        transition: all 0.5s ease-in-out;
+      @media screen and (max-width: 1080.5px) {
+        width: 75rem !important;
       }
 
-      .card .booking {
-        padding: 1rem 2rem;
-        width: 100%;
-        outline: none;
-        box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.4);
-        transition: all 0.5s ease-in-out;
-        background-color: #1da0f1;
-        color: #fff;
-        &:hover {
-          transform: scale(0.95) translateX(-5px);
+      .wrapper {
+        // width: 26% !important;
+        // @media screen and (max-width: 1408px) {
+        //   width: 25% !important;
+
+        @media screen and (max-width: 1370px) {
+          width: 25% !important;
+        }
+        @media screen and (max-width: 1275px) {
+          width: 28% !important;
+        }
+
+        .card {
+          flex: 1;
+          flex-basis: 18.75px;
+          flex-grow: 0;
+          height: 35.75rem;
+          width: 30rem;
+          margin: 1.5rem;
+          background: #fff;
+          border: 2px solid #fff;
+          box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.5);
+          cursor: pointer;
+          transition: all 0.5s cubic-bezier(0.8, 0.5, 0.2, 1.4);
+          overflow: hidden;
+          position: relative;
+          @media screen and (max-width: 1562px) {
+            margin: 0.5rem;
+          }
+          @media screen and (max-width: 1479.5px) {
+            width: 27.5rem;
+            height: 32rem;
+            transform: translateX(13px);
+          }
+          @media screen and (max-width: 1440px) {
+            width: 28rem;
+            margin: 1rem;
+          }
+          @media screen and (max-width: 1408px) {
+            width: 27.5rem;
+            height: 30rem;
+          }
+
+          @media screen and (max-width: 1361px) {
+            width: 25.5rem;
+            height: 30rem;
+          }
+          @media screen and (max-width: 1353.5px) {
+            transform: translateX(-10px);
+          }
+          @media screen and (max-width: 1337.5px) {
+            transform: translateX(-10px);
+          }
+
+          @media screen and (max-width: 1282.5px) {
+            width: 21rem;
+            height: 27rem;
+          }
+
+          @media screen and (max-width: 1276.85px) {
+            width: 21rem;
+            height: 27rem;
+            transform: translateX(104px);
+          }
+          @media screen and (max-width: 1080.5px) {
+            width: 18.5rem;
+            transform: translateX(108px);
+          }
+        }
+        .card img {
+          width: 100%;
+          height: 100%;
+          transition: all 0.5s cubic-bezier(0.8, 0.5, 0.2, 1.4);
+        }
+        .descriptions {
+          position: absolute;
+          top: 0px;
+          left: 0px;
+          background-color: rgba(255, 255, 255, 0.7);
+          width: 100%;
+          height: 100%;
+          transition: all 0.7s ease-in-out;
+          padding: 20px;
+          box-sizing: border-box;
+          clip-path: circle(0% at 100% 100%);
+        }
+        .card:hover .descriptions {
+          left: 0px;
+          transition: all 0.7s ease-in-out;
+          clip-path: circle(75%);
+        }
+        .card:hover {
+          transition: all 0.5s cubic-bezier(0.8, 0.5, 0.2, 1.4);
+          box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
+          // transform: scale(0.97);
+        }
+        .card:hover img {
+          transition: all 0.5s cubic-bezier(0.8, 0.5, 0.2, 1.4);
+          transform: scale(1.6) rotate(20deg);
+          filter: blur(3px);
+        }
+        .card h1 {
+          color: #ff3838;
+          margin: 0px;
+          font-size: 1.3rem;
+        }
+        .card p {
+          line-height: 2rem;
+          height: 70%;
+          font-size: $fs-sm;
+        }
+        .card button {
+          padding: 0.8rem 1.5rem;
+          cursor: pointer;
+          border-style: none;
+          background-color: #ff3838;
+          color: #fff;
+          font-size: 1.2rem;
+          outline: none;
+          box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.4);
           transition: all 0.5s ease-in-out;
+          @media screen and (max-width: 1282.5px) {
+            transform: translateY(-30px);
+          }
+          @media screen and (max-width: 1276.86px) {
+            transform: translateY(-30px);
+          }
+        }
+
+        .card .booking {
+          padding: 1rem 2rem;
+          width: 100%;
+          outline: none;
+          box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.4);
+          transition: all 0.5s;
+          background-color: #1da0f1;
+          opacity: 0.7;
+          color: #fff;
+          &:hover {
+            opacity: 1;
+          }
         }
       }
 
@@ -196,36 +266,121 @@
         line-height: 20px;
         padding-left: 5px;
       }
-
-      @keyframes youtubeAnim {
-        0%,
-        100% {
-          color: #c9110f;
-        }
-        50% {
-          color: #ff0000;
-        }
-      }
     }
   }
 }
 
 //for arrow next and prev
 .slick-prev {
-  left: -5% !important;
+  left: -1.2% !important;
+  transform: translateY(-100%) !important;
+
   z-index: 1;
   &::before {
     font-size: 50px !important;
-    color: grey !important;
+    color: orange !important;
   }
+  @media screen and (max-width: 1608.89px) {
+    left: 0.2% !important;
+  }
+  @media screen and (max-width: 1510px) {
+    left: 0.2% !important;
+  }
+  @media screen and (max-width: 1480.56px) {
+    left: 1.5% !important;
+  }
+  @media screen and (max-width: 1378.89px) {
+    left: 5.5% !important;
+  }
+  @media screen and (max-width: 1360.89px) {
+    left: -1.5% !important;
+  }
+  @media screen and (max-width: 1286.56px) {
+    left: 1.5% !important;
+  }
+  @media screen and (max-width: 1275.86px) {
+    left: 5% !important;
+  }
+  @media screen and (max-width: 1080.5px) {
+    left: 6.5% !important;
+  }
+
+  // @media screen and (max-width: 1180.44px) {
+  //   left: 10.5% !important;
+  // }
+  // @media screen and (max-width: 1086.67px) {
+  //   left: 16.5% !important;
+  // }
+  // @media screen and (max-width: 994.44px) {
+  //   left: 19.5% !important;
+  // }
+  // @media screen and (max-width: 888.89px) {
+  //   left: 22.5% !important;
+  // }
+  // @media screen and (max-width: 801.1px) {
+  //   left: 25.5% !important;
+  // }
+  // @media screen and (max-width: 703.33px) {
+  //   left: 28.5% !important;
+  // }
+  // @media screen and (max-width: 600px) {
+  //   left: 31.5% !important;
+  // }
 }
 .slick-next {
-  right: -3.5% !important;
+  right: 0.5% !important;
+  transform: translateY(-100%) !important;
   z-index: 1;
   &::before {
     font-size: 50px !important;
-    color: grey !important;
+    color: orange !important;
   }
+  @media screen and (max-width: 1608.89px) {
+    right: 2% !important;
+  }
+  @media screen and (max-width: 1510px) {
+    right: 2.2% !important;
+  }
+  @media screen and (max-width: 1480.56px) {
+    right: 3.5% !important;
+  }
+  @media screen and (max-width: 1378.89px) {
+    right: 7.5% !important;
+  }
+  @media screen and (max-width: 1360.89px) {
+    right: 0.5% !important;
+  }
+  @media screen and (max-width: 1286.56px) {
+    right: 3.5% !important;
+  }
+  @media screen and (max-width: 1275.86px) {
+    right: 6.5% !important;
+  }
+  @media screen and (max-width: 1080.5px) {
+    right: 7.8% !important;
+  }
+
+  // @media screen and (max-width: 1180.44px) {
+  //   right: 13% !important;
+  // }
+  // @media screen and (max-width: 1086.67px) {
+  //   right: 18.5% !important;
+  // }
+  // @media screen and (max-width: 994.44px) {
+  //   right: 21.5% !important;
+  // }
+  // @media screen and (max-width: 888.89px) {
+  //   right: 24.5% !important;
+  // }
+  // @media screen and (max-width: 801.11px) {
+  //   right: 27.5% !important;
+  // }
+  // @media screen and (max-width: 703.33px) {
+  //   right: 30.5% !important;
+  // }
+  // @media screen and (max-width: 600px) {
+  //   right: 33.5% !important;
+  // }
 }
 
 // for slickdot
@@ -249,3 +404,16 @@
     background: transparent !important;
   }
 }
+
+//for tab pane contain movie list
+@media (max-width: 1545px) {
+  .movie_tabs .tab-content .tab-content-movies {
+    width: 93.5rem;
+  }
+}
+
+// @media (max-width: 1440px) {
+//   .movie_tabs .tab-content .tab-content-movies {
+//     width: 9.5rem;
+//   }
+// }

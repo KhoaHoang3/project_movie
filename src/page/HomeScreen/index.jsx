@@ -17,11 +17,20 @@ export default function HomeScreen(props) {
         setShowBtn(false);
       }
     });
+    return () => {
+      window.removeEventListener('scroll', () => {
+        if (window.scrollY > 700) {
+          setShowBtn(true);
+        } else {
+          setShowBtn(false);
+        }
+      });
+    };
   }, []);
 
   const goToTop = () => {
     window.scrollTo({
-      top: 10,
+      top: 0,
       behavior: 'smooth',
     });
   };
@@ -53,10 +62,8 @@ export default function HomeScreen(props) {
       </section>
 
       <section className="movies">
-        <div className="background__image">
-          <div className="background__black">
-            <MovieList />
-          </div>
+        <div className="container">
+          <MovieList />
         </div>
       </section>
 
@@ -69,7 +76,8 @@ export default function HomeScreen(props) {
       </section>
       {showBtn && (
         <a
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault();
             goToTop();
           }}
           className="return-to-top"
