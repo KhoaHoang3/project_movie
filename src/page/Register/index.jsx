@@ -220,7 +220,7 @@ function Register() {
             </div>
 
             <button type="submit" className="submit__button">
-              Gửi
+              Đăng ký
             </button>
           </form>
         </div>

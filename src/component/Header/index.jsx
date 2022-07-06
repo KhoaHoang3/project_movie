@@ -299,25 +299,42 @@ export default function Header() {
       return (
         <div className="logout__section">
           <NavLink to={'/register'}>
-            <button
+            <div className="register__button">
+              <a
+                href="#"
+                className="btn btn-sm animated-button thar-one"
+              >
+                Đăng ký
+              </a>
+            </div>
+
+            {/* <button
               style={{ fontSize: '1.2rem' }}
               className="register__button"
               type="transparent"
               shape="round"
             >
               Đăng ký
-            </button>
+            </button> */}
           </NavLink>
 
           <NavLink to={'/login'}>
-            <button
+            <div className="login__button">
+              <a
+                href="#"
+                className="btn btn-sm animated-button thar-one"
+              >
+                Đăng nhập
+              </a>
+            </div>
+            {/* <button
               style={{ fontSize: '1.2rem' }}
               className="login__button"
               type="transparent"
               shape="round"
             >
               Đăng nhập
-            </button>
+            </button> */}
           </NavLink>
 
           <Dropdown

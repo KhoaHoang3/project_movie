@@ -52,6 +52,16 @@ export default function MovieList() {
     slidesPerRow: 1,
     responsive: [
       {
+        breakpoint: 1367,
+        settings: {
+          slidesToShow: 3,
+          slidesPerRow: 1,
+          rows: 2,
+          // centerMode: true,
+          dots: true,
+        },
+      },
+      {
         breakpoint: 1360,
         settings: {
           slidesToShow: 3,
@@ -121,7 +131,7 @@ export default function MovieList() {
           className="tab-pane fade show active tab-content-movies"
           id="current_movies"
         >
-          <div className="">
+          <div className="movies__list">
             <Slider {...settings}>
               {listFilms.map((item, index) => {
                 return (
@@ -168,7 +178,7 @@ export default function MovieList() {
           className="tab-pane fade tab-content-movies"
           id="upcoming_movies"
         >
-          <div>
+          <div className="movies__list">
             <Slider {...settings}>
               {listFilms
                 .filter((film) => film.dangChieu === false)

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Footer from '../../component/Footer';
 import Header from '../../component/Header';
-import { Tag, Rate } from 'antd';
+import { Tag, Rate, Collapse } from 'antd';
 import { CustomCard } from '@tsamantanis/react-glassmorphism';
 import '@tsamantanis/react-glassmorphism/dist/index.css';
 import { Tabs, Radio, Space } from 'antd';
@@ -23,6 +23,7 @@ import {
 import $ from 'jquery';
 
 const { TabPane } = Tabs;
+const { Panel } = Collapse;
 
 export default function Detail() {
   //stop video modal
@@ -170,177 +171,163 @@ export default function Detail() {
                 style={{
                   width: '125rem',
                   backgroundColor: 'white',
-                  borderRadius: '2rem',
+                  borderRadius: '5px',
                 }}
               >
                 {/* CALENDAR */}
-                <TabPane
-                  style={{
-                    fontSize: '2rem',
-                  }}
-                  tab={
-                    <h1 style={{ fontSize: '1.5rem' }}>Lịch chiếu</h1>
-                  }
-                  key="1"
-                >
-                  <Tabs tabPosition={'left'}>
-                    {calendar.heThongRapChieu?.map((item, index) => {
-                      return (
-                        <TabPane
-                          tab={
-                            <div className="">
-                              <img
-                                style={{
-                                  width: '4.125rem',
-                                  height: '4.125rem',
-                                }}
-                                src={item.logo}
-                              ></img>
-                            </div>
-                          }
-                          key={index}
-                        >
-                          {item.cumRapChieu?.map((theater, index) => {
-                            return (
-                              <div
-                                key={index}
-                                className="d-flex mb-5"
-                              >
-                                <img
-                                  src={theater.hinhAnh}
-                                  style={{
-                                    width: '6.5rem',
-                                    height: '7.5rem',
-                                  }}
-                                  alt=""
-                                />
-                                <div className="name_address ml-3">
-                                  <p
-                                    style={{
-                                      fontSize: '1.2rem',
-                                      fontWeight: 'bold',
-                                    }}
-                                  >
-                                    {theater.tenCumRap}
-                                  </p>
-                                  <p style={{ fontSize: '1.2rem' }}>
-                                    Địa chỉ:{' '}
-                                    <span>{theater.diaChi}</span>
-                                  </p>
-                                  <p style={{ fontSize: '1.2rem' }}>
-                                    Ngày - giờ chiếu: (click vào ngày
-                                    giờ bạn muốn để đặt vé)
-                                  </p>
-                                  <div className="row">
-                                    {theater.lichChieuPhim
-                                      .slice(0, 12)
-                                      ?.map((film, index) => {
-                                        return (
-                                          <div
-                                            key={index}
-                                            className="col-2 mb-3"
-                                          >
-                                            <Tag
-                                              style={{
-                                                marginRight: '10rem',
-                                                marginBottom:
-                                                  '1.5rem',
-                                              }}
-                                              color="green"
-                                            >
-                                              {renderCalendar(
-                                                film.maLichChieu,
-                                                film.ngayChieuGioChieu
-                                              )}
-                                            </Tag>
-                                          </div>
-                                        );
-                                      })}
-                                  </div>
-                                </div>
-                              </div>
-                            );
-                          })}
-                        </TabPane>
-                      );
-                    })}
-                  </Tabs>
-                </TabPane>
-              </Tabs>
-              {/* <Tabs
-                style={{ width: '96.875rem' }}
-                tabPosition={'left'}
-              >
                 {calendar.heThongRapChieu?.map((item, index) => {
                   return (
                     <TabPane
+                      key={index}
                       tab={
                         <img
                           style={{
-                            width: '3.125rem',
-                            height: '3.125rem',
+                            width: '4rem',
+                            height: '4rem',
+                            borderRadius: '10px',
                           }}
                           src={item.logo}
                         ></img>
                       }
-                      key={index}
                     >
-                      <Tabs tabPosition="left">
+                      <Collapse accordion>
                         {item.cumRapChieu?.map((theater, index) => {
                           return (
-                            <TabPane
-                              tab={
-                                <div className="d-flex text-left">
-                                  <div className="image">
+                            <Panel
+                              key={index}
+                              header={
+                                <div className="d-flex justify-content-center">
+                                  <div className="image-1">
                                     <img
                                       style={{
-                                        width: '3.125rem',
-                                        height: '3.125rem',
+                                        width: 120,
+                                        height: 130,
+                                        borderRadius: ' 10px',
                                       }}
                                       src={theater.hinhAnh}
                                     ></img>
                                   </div>
-                                  <div className="name_address ml-3">
-                                    <p>{theater.tenCumRap}</p>
-                                    <p>{theater.diaChi}</p>
+
+                                  <div className="address text-left ml-3 d-flex flex-column justify-content-center">
+                                    <p
+                                      style={{ fontSize: '1.2rem' }}
+                                      className="font-weight-bold"
+                                    ></p>
+
+                                    {item.maHeThongRap ===
+                                    'BHDStar' ? (
+                                      <p
+                                        style={{
+                                          fontWeight: 'bolder',
+                                          fontSize: '1.2rem',
+                                          color: 'green',
+                                        }}
+                                      >
+                                        {theater.tenCumRap}
+                                      </p>
+                                    ) : item.maHeThongRap ===
+                                      'CGV' ? (
+                                      <p
+                                        style={{
+                                          fontWeight: 'bolder',
+
+                                          fontSize: '1.2rem',
+                                          color: 'red',
+                                        }}
+                                      >
+                                        {theater.tenCumRap}
+                                      </p>
+                                    ) : item.maHeThongRap ===
+                                      'CineStar' ? (
+                                      <p
+                                        style={{
+                                          fontWeight: 'bolder',
+
+                                          fontSize: '1.2rem',
+                                          color: 'purple',
+                                        }}
+                                      >
+                                        {theater.tenCumRap}
+                                      </p>
+                                    ) : item.maHeThongRap ===
+                                      'Galaxy' ? (
+                                      <p
+                                        style={{
+                                          fontWeight: 'bolder',
+
+                                          fontSize: '1.2rem',
+                                          color: 'orange',
+                                        }}
+                                      >
+                                        {theater.tenCumRap}
+                                      </p>
+                                    ) : item.maHeThongRap ===
+                                      'LotteCinima' ? (
+                                      <p
+                                        style={{
+                                          fontWeight: 'bolder',
+
+                                          fontSize: '1.2rem',
+                                          color: 'red',
+                                        }}
+                                      >
+                                        {theater.tenCumRap}
+                                      </p>
+                                    ) : item.maHeThongRap ===
+                                      'MegaGS' ? (
+                                      <p
+                                        style={{
+                                          fontWeight: 'bolder',
+
+                                          fontSize: '1.2rem',
+                                          color: '#eeb730',
+                                        }}
+                                      >
+                                        {theater.tenCumRap}
+                                      </p>
+                                    ) : (
+                                      ''
+                                    )}
+                                    <p style={{ fontSize: '1.2rem' }}>
+                                      {theater.diaChi}
+                                    </p>
                                   </div>
                                 </div>
                               }
-                              key={index}
                             >
-                              <div className="row">
-                                {theater.lichChieuPhim?.map(
-                                  (film, index) => {
+                              <div className="">
+                                <p style={{ fontSize: '1.5rem' }}>
+                                  Ngày, giờ chiếu (click vào ngày giờ
+                                  bạn muốn để đặt vé):
+                                </p>
+                                {theater.lichChieuPhim
+                                  .slice(0, 6)
+                                  .map((film, index) => {
                                     return (
-                                      <div
-                                        className="col-2 mb-3"
-                                        key={index}
-                                      >
-                                        <Tag color="green">
-                                          <p>Rạp: {film.tenRap}</p>
-                                          <p>
-                                            Thời lượng:{' '}
-                                            {film.thoiLuong} phút
-                                          </p>
-                                          <p>
-                                            Giá vé:{' '}
-                                            {film.giaVe.toLocaleString()}{' '}
-                                            đồng
-                                          </p>
+                                      <div key={index} className="">
+                                        <Tag
+                                          style={{
+                                            marginBottom: '1.5rem',
+                                          }}
+                                          color="green"
+                                        >
+                                          {renderCalendar(
+                                            film.maLichChieu,
+                                            film.ngayChieuGioChieu
+                                          )}
                                         </Tag>
                                       </div>
                                     );
-                                  }
-                                )}
+                                  })}
                               </div>
-                            </TabPane>
+                            </Panel>
                           );
                         })}
-                      </Tabs>
+                      </Collapse>
                     </TabPane>
                   );
                 })}
-              </Tabs> */}
+              </Tabs>
             </div>
           </CustomCard>
         </div>

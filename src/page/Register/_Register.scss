@@ -13,7 +13,7 @@
   .background__form {
     padding: 3rem 0;
     background-color: white;
-    width: 50%;
+    width: 40%;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -23,23 +23,12 @@
       width: 50%;
     }
     @media screen and (max-width: 1275px) {
-      width: 55%;
+      width: 60%;
     }
-    @media screen and (max-width: 1000px) {
+    @media screen and (max-width: 1080px) {
       width: 65%;
     }
-    @media screen and (max-width: 850px) {
-      width: 75%;
-    }
-    @media screen and (max-width: 770px) {
-      width: 85%;
-    }
-    @media screen and (max-width: 650px) {
-      width: 98%;
-    }
-    @media screen and (max-width: 505px) {
-      width: 100%;
-    }
+
     .register__name {
       color: #825af9;
       font-size: 1.6rem;
@@ -49,7 +38,8 @@
       .text-field {
         position: relative;
         margin-top: 2rem;
-        transform: translateX(25%);
+        left: 24%;
+        // transform: translateX(34%);
       }
       .password_input {
         position: relative;
@@ -71,7 +61,7 @@
         .eye_icon {
           color: black;
           font-size: 2.5rem;
-          position: fixed;
+          position: absolute;
           left: 45%;
           top: -22%;
           opacity: 0.5;
@@ -112,20 +102,19 @@
         font-family: 'Poppins', sans-serif;
         color: white;
         padding: 15px 30px;
-        width: 200px;
         border-radius: 4px;
         background-color: var(--color);
         cursor: pointer;
         font-weight: 500;
         outline: none;
         border: none;
-        font-size: 16px;
+        font-size: 1.2rem;
         -webkit-transform-style: preserve-3d;
         -moz-transform-style: preserve-3d;
         transform-style: preserve-3d;
         transition: all 0.2s;
         width: 50%;
-        transform: translateX(50%);
+        transform: translateX(48%);
         margin-top: 2rem;
         opacity: 0.8;
       }
