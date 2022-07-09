@@ -205,8 +205,14 @@
   }
 }
 
-@media screen and (max-width: 1080px) {
+@media screen and (max-width: 1080.5px) {
   .seats {
     margin: 0.35rem;
+  }
+}
+
+@media screen and (max-width: 1024.5px) {
+  .seats {
+    margin: 0.3rem;
   }
 }
