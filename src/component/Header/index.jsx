@@ -23,6 +23,7 @@ import {
   displayLoading,
   hideLoading,
 } from '../../redux/reducers/loadingReducer';
+import Logo from '../../assets/img/logo-01.png';
 const { Option } = Select;
 const { confirm } = Modal;
 
@@ -118,78 +119,66 @@ export default function Header() {
       ]}
     />
   );
-  const RDmenu = (
-    <Menu
-      items={[
-        // Home Page
-        {
-          label: (
-            <NavLink rel="noopener noreferrer" to={'/'}>
-              Trang chủ
-            </NavLink>
-          ),
-          key: '0',
-          danger: true,
-        },
-        //Theater
-        {
-          label: (
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://www.aliyun.com"
-            >
-              Cụm rạp
-            </a>
-          ),
-          key: '1',
-          danger: true,
-        },
-        //News
-        {
-          label: (
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://www.aliyun.com"
-            >
-              Tin tức
-            </a>
-          ),
-          key: '2',
-          danger: true,
-        },
-        // Contact
-        {
-          label: (
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://www.aliyun.com"
-            >
-              Liên hệ
-            </a>
-          ),
-          key: '3',
-          danger: true,
-        },
-        {
-          type: 'divider',
-        },
-        // login
-        {
-          label: <NavLink to={'/login'}>Đăng nhập</NavLink>,
-          key: '4',
-          danger: true,
-        },
-        {
-          label: <NavLink to={'/register'}>Đăng ký</NavLink>,
-          key: '5',
-          danger: true,
-        },
-      ]}
-    />
-  );
+  // const RDmenu = (
+  //   <Menu
+  //     items={[
+  //       // Home Page
+  //       {
+  //         label: (
+  //           <NavLink rel="noopener noreferrer" to={'/'}>
+  //             Trang chủ
+  //           </NavLink>
+  //         ),
+  //         key: '0',
+  //         danger: true,
+  //       },
+  //       //Theater
+  //       {
+  //         label: (
+  //           <a target="_blank" rel="noopener noreferrer">
+  //             Cụm rạp
+  //           </a>
+  //         ),
+  //         key: '1',
+  //         danger: true,
+  //       },
+  //       //News
+  //       {
+  //         label: (
+  //           <a target="_blank" rel="noopener noreferrer">
+  //             Tin tức
+  //           </a>
+  //         ),
+  //         key: '2',
+  //         danger: true,
+  //       },
+  //       // Contact
+  //       {
+  //         label: (
+  //           <a target="_blank" rel="noopener noreferrer">
+  //             Liên hệ
+  //           </a>
+  //         ),
+  //         key: '3',
+  //         danger: true,
+  //       },
+  //       {
+  //         type: 'divider',
+  //       },
+  //       // login
+  //       {
+  //         label: <NavLink to={'/login'}>Đăng nhập</NavLink>,
+  //         key: '4',
+  //         danger: true,
+  //       },
+  //       {
+  //         label: <NavLink to={'/register'}>Đăng ký</NavLink>,
+  //         key: '5',
+  //         danger: true,
+  //       },
+  //     ]}
+  //   />
+  // );
   const showConfirm = () => {
     confirm({
       title: 'Bạn vẫn muốn đăng xuất khỏi tài khoản?',
@@ -314,7 +303,7 @@ export default function Header() {
             </div>
           </NavLink>
 
-          <Dropdown
+          {/* <Dropdown
             trigger={['click']}
             className="dropdown"
             overlay={RDmenu}
@@ -326,7 +315,7 @@ export default function Header() {
               }}
               className="navigation fa fa-bars"
             ></i>
-          </Dropdown>
+          </Dropdown> */}
         </div>
       );
     }
@@ -343,9 +332,13 @@ export default function Header() {
     <div className="container">
       <div className="header">
         <div className="name">
-          <h1>
-            <VideoCameraOutlined style={{ fontSize: 80 }} />
-          </h1>
+          <img
+            onClick={() => {
+              navigate('/');
+            }}
+            src={Logo}
+            alt=""
+          />
         </div>
         <div className="nav_bar">
           <a className="" href="/">
@@ -362,28 +355,7 @@ export default function Header() {
           <a className="">Tin tức</a>
           <a className="">Liên hệ</a>
         </div>
-        <div className="buttons">
-          {renderUI()}
-          {/* <NavLink to={'/register'}>
-          <button
-            className="register__button"
-            type="transparent"
-            shape="round"
-          >
-            Đăng ký
-          </button>
-        </NavLink>
-
-        <NavLink to={'/login'}>
-          <button
-            className="login__button"
-            type="transparent"
-            shape="round"
-          >
-            Đăng nhập
-          </button>
-        </NavLink> */}
-        </div>
+        <div className="buttons">{renderUI()}</div>
       </div>
     </div>
   );

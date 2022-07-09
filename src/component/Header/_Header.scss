@@ -10,13 +10,17 @@
   width: 100%;
   background-color: white;
   box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
-  @media screen and (max-width: 1023.98px) {
+  @media screen and (max-width: 1024.5px) {
     justify-content: space-between;
   }
   .name {
-    h1 {
-      color: red;
-      margin-right: 5rem;
+    img {
+      height: 80px;
+      width: 200px;
+      cursor: pointer;
+      @media screen and (max-width: 1024.5px) {
+        width: 150px;
+      }
     }
   }
   .nav_bar {
@@ -24,9 +28,13 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    right: -124px;
-    @media screen and (max-width: 1023.98px) {
-      display: none;
+    right: -65px;
+    @media screen and (max-width: 1152.5px) {
+      right: -48px;
+    }
+    @media screen and (max-width: 1024.5px) {
+      // display: none;
+      right: -44px;
     }
 
     a {
@@ -59,17 +67,12 @@
 
     .register__button {
       padding: 0.8rem 0.5rem;
-
       @media screen and (max-width: 1024.5px) {
-        display: none;
+        padding: 0.8rem 0rem;
       }
     }
     .login__button {
       padding: 0.8rem 1rem;
-
-      @media screen and (max-width: 1024.5px) {
-        display: none;
-      }
     }
   }
 }
@@ -82,11 +85,21 @@
   position: relative;
   right: -90px;
   display: flex;
-  @media screen and (max-width: 1280.5px) {
-    right: -70px;
+  @media screen and (max-width: 1366.5px) {
+    right: -65px;
   }
+  @media screen and (max-width: 1280.5px) {
+    right: -65px;
+  }
+
   @media screen and (max-width: 1152.5px) {
     right: -60px;
+  }
+  @media screen and (max-width: 1080.5px) {
+    right: -44px;
+  }
+  @media screen and (max-width: 1024.5px) {
+    right: -30px;
   }
   .user h1 {
     font-size: 1.2rem;
@@ -176,7 +189,7 @@
     }
   }
 
-  @media screen and (max-width: 1023.98px) {
+  @media screen and (max-width: 1024.5px) {
     .ant-dropdown-menu {
       position: relative;
       top: 15px;
@@ -196,12 +209,12 @@
   .navigation {
     display: none;
     font-size: 3rem;
-    @media screen and (max-width: 1023.98px) {
-      display: block;
-      position: relative;
-      right: 80px;
-      cursor: pointer;
-    }
+    // @media screen and (max-width: 1024.5px) {
+    //   display: block;
+    //   position: relative;
+    //   right: 80px;
+    //   cursor: pointer;
+    // }
   }
 }
 

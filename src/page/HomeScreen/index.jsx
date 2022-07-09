@@ -11,7 +11,7 @@ export default function HomeScreen(props) {
 
   useEffect(() => {
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 700) {
+      if (window.scrollY > 1280) {
         setShowBtn(true);
       } else {
         setShowBtn(false);
@@ -19,7 +19,7 @@ export default function HomeScreen(props) {
     });
     return () => {
       window.removeEventListener('scroll', () => {
-        if (window.scrollY > 700) {
+        if (window.scrollY > 1280) {
           setShowBtn(true);
         } else {
           setShowBtn(false);

@@ -21,6 +21,13 @@ Admin account to test functions for admin
 <br> Account: bbb123
 <br> Password: bbb123
 </p>
+<p>
+After you login as admin, click on your name at the top right at the corner
+</p>
+<img src = './src/assets/img/admin.JPG'>
+<p>
+And click 'Go to admin page' to test functions for admin
+</p>
 
 [View Demo](http://cyber-movies-project.surge.sh/)
 

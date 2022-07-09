@@ -14,21 +14,20 @@
   top: 92%;
   left: 96%;
   background-color: orange;
-  width: 60px;
-  height: 60px;
-  border-radius: 35px;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  @media screen and (max-width: 1024.5px) {
+    left: 94%;
+  }
 
   i {
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     margin: 0;
     color: white;
     position: relative;
-    left: 14px;
-    top: 13px;
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -ms-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
+    left: 10px;
+    top: 10px;
     transition: all 0.3s ease;
   }
   &:hover i {

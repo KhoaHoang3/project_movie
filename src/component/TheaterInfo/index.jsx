@@ -86,7 +86,7 @@ function TheaterInfo() {
   return (
     <div className="container__theater__info">
       <h1 className="theater__info">THÔNG TIN CÁC RẠP CHIẾU</h1>
-      {width > 1345 ? (
+      {width > 1366.5 ? (
         <Tabs
           className="theater__info__calendar"
           tabPosition={tabPosition}
