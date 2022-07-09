@@ -233,13 +233,7 @@ export default function Header() {
                     src={`https://joeschmoe.io/api/v1/${user.hoTen}`}
                   />
                   <div className="user">
-                    <h1
-                      style={{
-                        fontSize: '1.2rem',
-                        marginRight: '1.2rem',
-                      }}
-                      className="text-dark"
-                    >
+                    <h1 className="text-dark">
                       Xin chào, {user.hoTen} !
                     </h1>
                   </div>
@@ -307,15 +301,6 @@ export default function Header() {
                 Đăng ký
               </a>
             </div>
-
-            {/* <button
-              style={{ fontSize: '1.2rem' }}
-              className="register__button"
-              type="transparent"
-              shape="round"
-            >
-              Đăng ký
-            </button> */}
           </NavLink>
 
           <NavLink to={'/login'}>
@@ -327,14 +312,6 @@ export default function Header() {
                 Đăng nhập
               </a>
             </div>
-            {/* <button
-              style={{ fontSize: '1.2rem' }}
-              className="login__button"
-              type="transparent"
-              shape="round"
-            >
-              Đăng nhập
-            </button> */}
           </NavLink>
 
           <Dropdown

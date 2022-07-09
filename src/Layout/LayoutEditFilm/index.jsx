@@ -58,7 +58,6 @@ function FormEditFilm({ drawer, closeDrawer }) {
       ngayKhoiChieu,
       maPhim,
     } = values;
-    console.log(values);
     const newNgayKC = moment(ngayKhoiChieu).format('DD/MM/YYYY');
     const formData = new FormData();
     for (let key in values) {

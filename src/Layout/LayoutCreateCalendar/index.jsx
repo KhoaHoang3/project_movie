@@ -40,11 +40,6 @@ export default function FormCreateCalendar({
   // };
   const dispatch = useDispatch();
   const onFinish = (values) => {
-    console.log('VALUES', values);
-    console.log(
-      'dateTime',
-      moment(values.ngayGioKhoiChieu).format('DD/MM/YYYY hh:mm:ss')
-    );
     const { maPhim, ngayGioKhoiChieu, maRap, giaVe } = values;
     const ngayChieuGioChieu = moment(ngayGioKhoiChieu).format(
       'DD/MM/YYYY hh:mm:ss'
@@ -70,8 +65,6 @@ export default function FormCreateCalendar({
   const changeMoney = (value) => {
     console.log('money', value);
   };
-  console.log('HTR', theater.theaterSystem);
-  console.log('cumRap', theater.theater);
 
   useEffect(() => {
     async function callTheaterSystemApi() {

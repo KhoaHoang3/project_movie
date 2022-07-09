@@ -195,8 +195,6 @@ function TheaterInfo() {
                               )}
                               <p
                                 style={{
-                                  fontWeight: 'bolder',
-
                                   fontSize: '1rem',
                                 }}
                               >

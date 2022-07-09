@@ -212,7 +212,6 @@ export default function UserManagement() {
             <Tooltip key={'1'} placement="top" title="Xóa người dùng">
               <Button
                 onClick={() => {
-                  console.log(record);
                   let user = {};
                   if (localStorage.getItem('USER_LOGIN')) {
                     user = JSON.parse(
@@ -249,7 +248,6 @@ export default function UserManagement() {
             >
               <Button
                 onClick={() => {
-                  console.log(record);
                   dispatch(getUserInfoEdit(record));
                   setVisible(true);
                 }}

@@ -47,8 +47,9 @@ export default function MovieList() {
     className: 'center',
     centerPadding: '180px',
     slidesToShow: 3,
-    speed: 400,
+    speed: 500,
     rows: 2,
+    dots: true,
     slidesPerRow: 1,
     responsive: [
       {

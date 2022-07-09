@@ -166,167 +166,192 @@ export default function Detail() {
             </div>
             <div className="tabs">
               <Tabs
-                defaultActiveKey="1"
-                centered
                 style={{
                   width: '125rem',
                   backgroundColor: 'white',
                   borderRadius: '5px',
                 }}
+                defaultActiveKey="1"
+                centered
               >
-                {/* CALENDAR */}
-                {calendar.heThongRapChieu?.map((item, index) => {
-                  return (
-                    <TabPane
-                      key={index}
-                      tab={
-                        <img
-                          style={{
-                            width: '4rem',
-                            height: '4rem',
-                            borderRadius: '10px',
-                          }}
-                          src={item.logo}
-                        ></img>
-                      }
-                    >
-                      <Collapse accordion>
-                        {item.cumRapChieu?.map((theater, index) => {
-                          return (
-                            <Panel
-                              key={index}
-                              header={
-                                <div className="d-flex justify-content-center">
-                                  <div className="image-1">
-                                    <img
-                                      style={{
-                                        width: 120,
-                                        height: 130,
-                                        borderRadius: ' 10px',
-                                      }}
-                                      src={theater.hinhAnh}
-                                    ></img>
-                                  </div>
+                <TabPane
+                  tab={
+                    <h1 style={{ fontSize: '1.2rem' }}>
+                      Thông tin lịch chiếu các rạp
+                    </h1>
+                  }
+                  key="1"
+                >
+                  <Tabs defaultActiveKey="1" centered>
+                    {/* CALENDAR */}
+                    {calendar.heThongRapChieu?.map((item, index) => {
+                      return (
+                        <TabPane
+                          key={index}
+                          tab={
+                            <img
+                              style={{
+                                width: '4rem',
+                                height: '4rem',
+                                borderRadius: '10px',
+                              }}
+                              src={item.logo}
+                            ></img>
+                          }
+                        >
+                          <Collapse accordion>
+                            {item.cumRapChieu?.map(
+                              (theater, index) => {
+                                return (
+                                  <Panel
+                                    key={index}
+                                    header={
+                                      <div className="d-flex justify-content-center">
+                                        <div className="image-1">
+                                          <img
+                                            style={{
+                                              width: 120,
+                                              height: 130,
+                                              borderRadius: ' 10px',
+                                            }}
+                                            src={theater.hinhAnh}
+                                          ></img>
+                                        </div>
 
-                                  <div className="address text-left ml-3 d-flex flex-column justify-content-center">
-                                    <p
-                                      style={{ fontSize: '1.2rem' }}
-                                      className="font-weight-bold"
-                                    ></p>
+                                        <div className="address text-left ml-3 d-flex flex-column justify-content-center">
+                                          <p
+                                            style={{
+                                              fontSize: '1.2rem',
+                                            }}
+                                            className="font-weight-bold"
+                                          ></p>
 
-                                    {item.maHeThongRap ===
-                                    'BHDStar' ? (
-                                      <p
-                                        style={{
-                                          fontWeight: 'bolder',
-                                          fontSize: '1.2rem',
-                                          color: 'green',
-                                        }}
-                                      >
-                                        {theater.tenCumRap}
-                                      </p>
-                                    ) : item.maHeThongRap ===
-                                      'CGV' ? (
-                                      <p
-                                        style={{
-                                          fontWeight: 'bolder',
+                                          {item.maHeThongRap ===
+                                          'BHDStar' ? (
+                                            <p
+                                              style={{
+                                                fontWeight: 'bolder',
+                                                fontSize: '1.2rem',
+                                                color: 'green',
+                                              }}
+                                            >
+                                              {theater.tenCumRap}
+                                            </p>
+                                          ) : item.maHeThongRap ===
+                                            'CGV' ? (
+                                            <p
+                                              style={{
+                                                fontWeight: 'bolder',
 
-                                          fontSize: '1.2rem',
-                                          color: 'red',
-                                        }}
-                                      >
-                                        {theater.tenCumRap}
-                                      </p>
-                                    ) : item.maHeThongRap ===
-                                      'CineStar' ? (
-                                      <p
-                                        style={{
-                                          fontWeight: 'bolder',
+                                                fontSize: '1.2rem',
+                                                color: 'red',
+                                              }}
+                                            >
+                                              {theater.tenCumRap}
+                                            </p>
+                                          ) : item.maHeThongRap ===
+                                            'CineStar' ? (
+                                            <p
+                                              style={{
+                                                fontWeight: 'bolder',
 
-                                          fontSize: '1.2rem',
-                                          color: 'purple',
-                                        }}
-                                      >
-                                        {theater.tenCumRap}
-                                      </p>
-                                    ) : item.maHeThongRap ===
-                                      'Galaxy' ? (
-                                      <p
-                                        style={{
-                                          fontWeight: 'bolder',
+                                                fontSize: '1.2rem',
+                                                color: 'purple',
+                                              }}
+                                            >
+                                              {theater.tenCumRap}
+                                            </p>
+                                          ) : item.maHeThongRap ===
+                                            'Galaxy' ? (
+                                            <p
+                                              style={{
+                                                fontWeight: 'bolder',
 
-                                          fontSize: '1.2rem',
-                                          color: 'orange',
-                                        }}
-                                      >
-                                        {theater.tenCumRap}
-                                      </p>
-                                    ) : item.maHeThongRap ===
-                                      'LotteCinima' ? (
-                                      <p
-                                        style={{
-                                          fontWeight: 'bolder',
+                                                fontSize: '1.2rem',
+                                                color: 'orange',
+                                              }}
+                                            >
+                                              {theater.tenCumRap}
+                                            </p>
+                                          ) : item.maHeThongRap ===
+                                            'LotteCinima' ? (
+                                            <p
+                                              style={{
+                                                fontWeight: 'bolder',
 
-                                          fontSize: '1.2rem',
-                                          color: 'red',
-                                        }}
-                                      >
-                                        {theater.tenCumRap}
-                                      </p>
-                                    ) : item.maHeThongRap ===
-                                      'MegaGS' ? (
-                                      <p
-                                        style={{
-                                          fontWeight: 'bolder',
+                                                fontSize: '1.2rem',
+                                                color: 'red',
+                                              }}
+                                            >
+                                              {theater.tenCumRap}
+                                            </p>
+                                          ) : item.maHeThongRap ===
+                                            'MegaGS' ? (
+                                            <p
+                                              style={{
+                                                fontWeight: 'bolder',
 
-                                          fontSize: '1.2rem',
-                                          color: '#eeb730',
-                                        }}
-                                      >
-                                        {theater.tenCumRap}
-                                      </p>
-                                    ) : (
-                                      ''
-                                    )}
-                                    <p style={{ fontSize: '1.2rem' }}>
-                                      {theater.diaChi}
-                                    </p>
-                                  </div>
-                                </div>
-                              }
-                            >
-                              <div className="">
-                                <p style={{ fontSize: '1.5rem' }}>
-                                  Ngày, giờ chiếu (click vào ngày giờ
-                                  bạn muốn để đặt vé):
-                                </p>
-                                {theater.lichChieuPhim
-                                  .slice(0, 6)
-                                  .map((film, index) => {
-                                    return (
-                                      <div key={index} className="">
-                                        <Tag
-                                          style={{
-                                            marginBottom: '1.5rem',
-                                          }}
-                                          color="green"
-                                        >
-                                          {renderCalendar(
-                                            film.maLichChieu,
-                                            film.ngayChieuGioChieu
+                                                fontSize: '1.2rem',
+                                                color: '#eeb730',
+                                              }}
+                                            >
+                                              {theater.tenCumRap}
+                                            </p>
+                                          ) : (
+                                            ''
                                           )}
-                                        </Tag>
+                                          <p
+                                            style={{
+                                              fontSize: '1.2rem',
+                                            }}
+                                          >
+                                            {theater.diaChi}
+                                          </p>
+                                        </div>
                                       </div>
-                                    );
-                                  })}
-                              </div>
-                            </Panel>
-                          );
-                        })}
-                      </Collapse>
-                    </TabPane>
-                  );
-                })}
+                                    }
+                                  >
+                                    <div className="">
+                                      <p
+                                        style={{ fontSize: '1.5rem' }}
+                                      >
+                                        Ngày, giờ chiếu (click vào
+                                        ngày giờ bạn muốn để đặt vé):
+                                      </p>
+                                      {theater.lichChieuPhim
+                                        .slice(0, 6)
+                                        .map((film, index) => {
+                                          return (
+                                            <div
+                                              key={index}
+                                              className=""
+                                            >
+                                              <Tag
+                                                style={{
+                                                  marginBottom:
+                                                    '1.5rem',
+                                                }}
+                                                color="green"
+                                              >
+                                                {renderCalendar(
+                                                  film.maLichChieu,
+                                                  film.ngayChieuGioChieu
+                                                )}
+                                              </Tag>
+                                            </div>
+                                          );
+                                        })}
+                                    </div>
+                                  </Panel>
+                                );
+                              }
+                            )}
+                          </Collapse>
+                        </TabPane>
+                      );
+                    })}
+                  </Tabs>
+                </TabPane>
               </Tabs>
             </div>
           </CustomCard>
